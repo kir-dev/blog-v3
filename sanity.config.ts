@@ -3,14 +3,9 @@
  */
 
 import { visionTool } from '@sanity/vision'
-import { defineConfig } from 'sanity'
+import { defineConfig, SanityDocument } from 'sanity'
 import { deskTool } from 'sanity/desk'
-import {
-  defineUrlResolver,
-  Iframe,
-  IframeOptions,
-} from 'sanity-plugin-iframe-pane'
-import { previewUrl } from 'sanity-plugin-iframe-pane/preview-url'
+import { Iframe, IframeOptions } from 'sanity-plugin-iframe-pane'
 
 // see https://www.sanity.io/docs/api-versioning for how versioning works
 import {
@@ -21,12 +16,15 @@ import {
 } from '~/lib/sanity.api'
 import { schema } from '~/schemas'
 
+// Customise this function to show the correct URL based on the current document
+function getPreviewUrl(doc: SanityDocument) {
+  return doc?.slug?.['current']
+    ? `${window.location.host}/${doc.slug['current']}`
+    : `${window.location.host}`
+}
+
 const iframeOptions = {
-  url: defineUrlResolver({
-    base: '/api/draft',
-    requiresSlug: ['post'],
-  }),
-  urlSecretId: previewSecretId,
+  url: (doc: SanityDocument) => getPreviewUrl(doc),
   reload: { button: true },
 } satisfies IframeOptions
 
@@ -53,12 +51,6 @@ export default defineConfig({
           S.view.component(Iframe).options(iframeOptions).title('Preview'),
         ])
       },
-    }),
-    // Add the "Open preview" action
-    previewUrl({
-      base: '/api/draft',
-      requiresSlug: ['post'],
-      urlSecretId: previewSecretId,
     }),
     // Vision lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin
