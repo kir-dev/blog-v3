@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import slugify from 'slugify'
 
 export default defineType({
   name: 'post',
@@ -14,10 +15,17 @@ export default defineType({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
-      validation: (Rule) => Rule.required(),
+      validation: (rule) => rule.required(),
       options: {
         source: 'title',
-        maxLength: 96,
+        slugify: (input) =>
+          new Date().toISOString().slice(0, 10) +
+          '-' +
+          slugify(input, {
+            lower: true,
+            strict: true,
+            locale: 'hu',
+          }).slice(0, 200),
       },
     }),
     defineField({
