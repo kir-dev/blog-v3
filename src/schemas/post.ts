@@ -35,6 +35,11 @@ export default defineType({
       rows: 4,
     }),
     defineField({
+      name: 'author',
+      title: 'Author (PéK username)',
+      type: 'string',
+    }),
+    defineField({
       name: 'mainImage',
       title: 'Main image',
       type: 'image',

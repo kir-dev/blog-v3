@@ -36,9 +36,15 @@ export default function PostPreview({ post }: { post: Post }) {
       />
       <CardFooter className="absolute bg-black/60 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
         <div className="flex flex-grow gap-2 items-center">
-          <Avatar src="https://i.pravatar.cc/150?u=a042581f4e29026024d" />
+          <Avatar
+            src={`https://pek.sch.bme.hu/photos/${post.author}`}
+            name={post.author}
+            showFallback
+          />
           <div className="flex flex-col">
-            <p className="text-tiny text-white/60">{`berenteb`}</p>
+            <p className="text-tiny text-white/60">
+              {post.author ?? `by anon`}
+            </p>
             <p className="text-tiny text-white/60">
               {formatDate(post._createdAt)}
             </p>
