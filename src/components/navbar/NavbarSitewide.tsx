@@ -29,7 +29,7 @@ import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
 import { Route } from '~/utils/routes'
 
-import { LogoAnimated } from '../LogoAnimated'
+import { LogoAnimated } from '../svg-components/LogoAnimated'
 import SearchButton from './SearchButton'
 
 export interface Props {

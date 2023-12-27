@@ -24,7 +24,7 @@ html {
   scroll-behavior: smooth;
 }
 
-#kir-dev-svg path {
+html #kir-dev-svg path {
   stroke: black;
   fill: black;
   stroke-width: 1;
