@@ -7761,6 +7761,7 @@ __metadata:
     "@sanity/client": "npm:6.10.0"
     "@sanity/code-input": "npm:^4.1.2"
     "@sanity/demo": "npm:1.0.2"
+    "@sanity/preview-url-secret": "npm:^1.4.0"
     "@sanity/vision": "npm:3.23.4"
     "@tailwindcss/typography": "npm:0.5.10"
     "@types/react": "npm:18.2.45"
