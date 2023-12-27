@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useLiveQuery } from 'next-sanity/preview'
 
 import Container from '~/components/Container'
+import Layout from '~/components/Layout'
 import PostPreview from '~/components/PostPreview'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
@@ -32,7 +33,7 @@ export default function BlogPage(
 ) {
   const [posts] = useLiveQuery<Post[]>(props.posts, postsQuery)
   return (
-    <Container>
+    <Layout>
       <h1 className="text-4xl font-bold my-16">Legújabb posztjaink</h1>
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {posts.map((post) => (
@@ -42,6 +43,6 @@ export default function BlogPage(
       <div className="flex text-xl justify-end mt-6">
         <Link href="/archive">Még több...</Link>
       </div>
-    </Container>
+    </Layout>
   )
 }

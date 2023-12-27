@@ -1,6 +1,7 @@
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 
 import Container from '~/components/Container'
+import Layout from '~/components/Layout'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 import { getPosts, type Post } from '~/lib/sanity.queries'
@@ -27,8 +28,8 @@ export default function IndexPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
   return (
-    <Container>
+    <Layout>
       <section></section>
-    </Container>
+    </Layout>
   )
 }

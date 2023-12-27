@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useLiveQuery } from 'next-sanity/preview'
 
 import Container from '~/components/Container'
+import Layout from '~/components/Layout'
 import PostCodeBlock from '~/components/post-components/PostCodeBlock'
 import PostImage from '~/components/post-components/PostImage'
 import { readToken } from '~/lib/sanity.api'
@@ -54,7 +55,7 @@ export default function ProjectSlugRoute(
   })
 
   return (
-    <Container>
+    <Layout>
       <section className="post">
         {post.mainImage ? (
           <Image
@@ -79,7 +80,7 @@ export default function ProjectSlugRoute(
           </div>
         </div>
       </section>
-    </Container>
+    </Layout>
   )
 }
 

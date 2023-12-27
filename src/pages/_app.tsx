@@ -87,11 +87,7 @@ export default function App({
                 <Component {...pageProps} />
               </PreviewProvider>
             ) : (
-              <div className="d-flex flex-col min-h-screen">
-                <NavbarSitewide routes={allRoutes} />
-                <Component className="flex-1 pb-10" {...pageProps} />
-                <Footer />
-              </div>
+              <Component className="flex-1 pb-10" {...pageProps} />
             )}
           </main>
         </ThemeProvider>
