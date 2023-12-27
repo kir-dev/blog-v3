@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { useLiveQuery } from 'next-sanity/preview'
 
 import Container from '~/components/Container'
+import PostCodeBlock from '~/components/post-components/PostCodeBlock'
+import PostImage from '~/components/post-components/PostImage'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 import { urlForImage } from '~/lib/sanity.image'
@@ -70,7 +72,10 @@ export default function ProjectSlugRoute(
           <p className="post__excerpt">{post.excerpt}</p>
           <p className="post__date">{formatDate(post._createdAt)}</p>
           <div className="post__content">
-            <PortableText value={post.body} />
+            <PortableText
+              value={post.body}
+              components={{ types: { code: PostCodeBlock, image: PostImage } }}
+            />
           </div>
         </div>
       </section>
