@@ -1,0 +1,190 @@
+'use client'
+
+import {
+  ChevronDownIcon,
+  ChevronRightIcon,
+  MagnifyingGlassIcon,
+  MoonIcon,
+  SunIcon,
+} from '@heroicons/react/24/solid'
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
+} from '@nextui-org/react'
+import { isAppleDevice } from '@react-aria/utils'
+import NextLink from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useTheme } from 'next-themes'
+import { FC, PropsWithChildren, useEffect, useState } from 'react'
+
+import { Route } from '~/utils/routes'
+
+import { LogoAnimated } from '../LogoAnimated'
+import SearchButton from './SearchButton'
+
+export interface Props {
+  routes: { homeRoute: Route; otherRoutes: Route[] }
+}
+
+export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false)
+  const [commandKey, setCommandKey] = useState<'ctrl' | 'command'>('command')
+  const pathname = usePathname()
+  const { setTheme, theme } = useTheme()
+  // const cmdkStore = useCmdkStore()
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      setIsMenuOpen(false)
+    }
+  }, [isMenuOpen, pathname])
+
+  useEffect(() => {
+    setCommandKey(isAppleDevice() ? 'command' : 'ctrl')
+  }, [])
+
+  const handleOpenCmdk = () => {
+    // cmdkStore.onOpen()
+  }
+
+  return (
+    <Navbar onMenuOpenChange={setIsMenuOpen}>
+      <NavbarContent>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          className="sm:hidden"
+        />
+        <NavbarBrand>
+          <NextLink aria-label="Kezdőlap" href="/">
+            <LogoAnimated style={{ height: '1rem' }} />
+          </NextLink>
+        </NavbarBrand>
+      </NavbarContent>
+
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        {routes.otherRoutes.map((route) =>
+          route.routes?.length ? (
+            <Dropdown key={route.key}>
+              <NavbarItem>
+                <DropdownTrigger>
+                  <Button
+                    disableRipple
+                    className="p-0 bg-transparent data-[hover=true]:bg-transparent text-md"
+                    endContent={<ChevronDownIcon className="h-3 w-3" />}
+                    radius="sm"
+                    variant="light"
+                  >
+                    {route.label}
+                  </Button>
+                </DropdownTrigger>
+              </NavbarItem>
+              <DropdownMenu
+                aria-label={route.label}
+                className="w-[340px]"
+                itemClasses={{
+                  base: 'gap-4',
+                }}
+              >
+                {route.routes.map((subRoute) => (
+                  <DropdownItem
+                    key={subRoute.key}
+                    startContent={
+                      subRoute.icon ? (
+                        <subRoute.icon className="h-4 w-4" />
+                      ) : (
+                        <ChevronRightIcon className="h-4 w-4" />
+                      )
+                    }
+                  >
+                    <NextLink
+                      href={subRoute.href}
+                      aria-label={subRoute.label}
+                      className="text-foreground"
+                    >
+                      {subRoute.label}
+                    </NextLink>
+                  </DropdownItem>
+                ))}
+              </DropdownMenu>
+            </Dropdown>
+          ) : (
+            <NavbarItem key={route.key}>
+              <NextLink
+                color="foreground"
+                className="text-md"
+                href={route.href}
+                aria-label={route.label}
+              >
+                {route.label}
+              </NextLink>
+            </NavbarItem>
+          ),
+        )}
+      </NavbarContent>
+
+      <NavbarContent className="flex gap-2" justify="end">
+        <NavbarItem className="flex h-full items-center">
+          <Button
+            isIconOnly
+            aria-label="Theme switcher"
+            className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+            onPress={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          >
+            {theme === 'dark' ? (
+              <SunIcon className="h-5 w-5" />
+            ) : (
+              <MoonIcon className="h-5 w-5" />
+            )}
+          </Button>
+        </NavbarItem>
+        <NavbarItem className="flex sm:hidden">
+          <Button
+            isIconOnly
+            aria-label="Search on site"
+            className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+            onPress={handleOpenCmdk}
+          >
+            <MagnifyingGlassIcon className="h-5 w-5" />
+          </Button>
+        </NavbarItem>
+        <NavbarItem className="hidden sm:flex">
+          <SearchButton
+            commandKey={commandKey}
+            handleOpenCmdk={handleOpenCmdk}
+          />
+        </NavbarItem>
+      </NavbarContent>
+
+      <NavbarMenu className="flex gap-4 pt-4 bg-background bg-opacity-70">
+        {routes.otherRoutes
+          .flatMap((item) => (item.routes?.length ? item.routes : item))
+          .map((item) => (
+            <NavbarMenuItem key={item.key} className="flex items-center gap-3">
+              {item.icon ? (
+                <item.icon className="h-5 w-5" />
+              ) : (
+                <ChevronRightIcon className="h-5 w-5" />
+              )}
+              <NextLink
+                className="w-full text-lg"
+                color="foreground"
+                href={item.href}
+              >
+                {item.label}
+              </NextLink>
+            </NavbarMenuItem>
+          ))}
+      </NavbarMenu>
+    </Navbar>
+  )
+}

@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import { urlForImage } from '~/lib/sanity.image'
 import { type Post } from '~/lib/sanity.queries'
-import { formatDate } from '~/utils'
+import { formatDate } from '~/utils/date-utils'
 
 export default function Card({ post }: { post: Post }) {
   return (

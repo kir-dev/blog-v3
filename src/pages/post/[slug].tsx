@@ -16,7 +16,7 @@ import {
   postSlugsQuery,
 } from '~/lib/sanity.queries'
 import type { SharedPageProps } from '~/pages/_app'
-import { formatDate } from '~/utils'
+import { formatDate } from '~/utils/date-utils'
 
 interface Query {
   [key: string]: string
