@@ -3,7 +3,10 @@ import type { ImageAsset, Slug } from '@sanity/types'
 import groq from 'groq'
 import { type SanityClient } from 'next-sanity'
 
-export const postsQuery = groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)`
+export const postsQuery = groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc){
+  "estimatedReadingTime": round(length(pt::text(body)) / 6 / 200 + 1),
+  ...
+}`
 
 export async function getPosts(client: SanityClient): Promise<Post[]> {
   return await client.fetch(postsQuery)
@@ -30,6 +33,7 @@ export interface Post {
   _createdAt: string
   title?: string
   slug: Slug
+  author?: string
   excerpt?: string
   mainImage?: ImageAsset
   body: PortableTextBlock[]

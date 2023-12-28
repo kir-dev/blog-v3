@@ -1,9 +1,12 @@
 import '~/styles/global.css'
 import '~/styles/prism-okaidia.css'
 
+import { NextUIProvider } from '@nextui-org/react'
 import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
-import { lazy } from 'react'
+import { useRouter } from 'next/router'
+import { ThemeProvider } from 'next-themes'
+import { lazy, useState } from 'react'
 import Refractor from 'react-refractor'
 import { RefractorSyntax } from 'refractor'
 import bash from 'refractor/lang/bash'
@@ -21,6 +24,10 @@ import sql from 'refractor/lang/sql'
 import tsx from 'refractor/lang/tsx'
 import ts from 'refractor/lang/typescript'
 import yaml from 'refractor/lang/yaml'
+
+import Footer from '~/components/Footer'
+import { NavbarSitewide } from '~/components/navbar/NavbarSitewide'
+import { allRoutes } from '~/utils/routes'
 
 export interface SharedPageProps {
   draftMode: boolean
@@ -59,6 +66,7 @@ export default function App({
     sql,
     htmlEtc,
   ])
+  const router = useRouter()
 
   return (
     <>
@@ -67,13 +75,23 @@ export default function App({
           font-family: ${inter.style.fontFamily};
         }
       `}</style>
-      {draftMode ? (
-        <PreviewProvider token={token}>
-          <Component {...pageProps} />
-        </PreviewProvider>
-      ) : (
-        <Component {...pageProps} />
-      )}
+      <NextUIProvider navigate={router.push}>
+        <ThemeProvider
+          themes={['dark', 'light']}
+          attribute="class"
+          defaultTheme="dark"
+        >
+          <main>
+            {draftMode ? (
+              <PreviewProvider token={token}>
+                <Component {...pageProps} />
+              </PreviewProvider>
+            ) : (
+              <Component className="flex-1 pb-10" {...pageProps} />
+            )}
+          </main>
+        </ThemeProvider>
+      </NextUIProvider>
     </>
   )
 }
