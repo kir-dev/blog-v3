@@ -24,6 +24,7 @@ import {
 import { isAppleDevice } from '@react-aria/utils'
 import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Router, useRouter } from 'next/router'
 import { useTheme } from 'next-themes'
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
@@ -40,6 +41,7 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false)
   const [commandKey, setCommandKey] = useState<'ctrl' | 'command'>('command')
   const pathname = usePathname()
+  const router = useRouter()
   const { setTheme, theme } = useTheme()
   // const cmdkStore = useCmdkStore()
 
@@ -105,14 +107,9 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
                         <ChevronRightIcon className="h-4 w-4" />
                       )
                     }
+                    onClick={() => router.push(subRoute.href)}
                   >
-                    <NextLink
-                      href={subRoute.href}
-                      aria-label={subRoute.label}
-                      className="text-foreground"
-                    >
-                      {subRoute.label}
-                    </NextLink>
+                    {subRoute.label}
                   </DropdownItem>
                 ))}
               </DropdownMenu>

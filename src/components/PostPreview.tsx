@@ -7,6 +7,7 @@ import {
   Chip,
 } from '@nextui-org/react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { urlForImage } from '~/lib/sanity.image'
@@ -16,16 +17,14 @@ import { formatDate } from '~/utils/date-utils'
 export default function PostPreview({ post }: { post: Post }) {
   const router = useRouter()
   return (
-    <Card
-      isFooterBlurred
-      className="w-full h-[300px]"
-      onClick={() => router.push(`/post/${post.slug.current}`)}
-    >
+    <Card isFooterBlurred className="w-full h-[300px]">
       <CardHeader className="absolute bg-black/60 z-10 top-0 flex-col items-start border-b-1 border-default-600 dark:border-default-100">
         <p className="text-end text-tiny text-white/60 uppercase font-bold">
           3 perc &bull; {post.excerpt}
         </p>
-        <h4 className="text-white/90 font-medium text-xl">{post.title}</h4>
+        <h4 className="text-white/90 font-medium text-xl">
+          <Link href={`/post/${post.slug.current}`}>{post.title}</Link>
+        </h4>
       </CardHeader>
       <Image
         alt={`Image for ${post.title}`}

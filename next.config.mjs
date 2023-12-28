@@ -6,6 +6,13 @@ const config = {
       { hostname: 'betteruptime.com' },
     ],
   },
+  redirects: async () => [
+    {
+      source: '/about',
+      destination: '/about/history',
+      permanent: true,
+    },
+  ],
 }
 
 export default config
