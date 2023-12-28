@@ -9,7 +9,7 @@ import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 import { getPosts, Post, postsQuery } from '~/lib/sanity.queries'
 
-import { SharedPageProps } from '../_app'
+import { SharedPageProps } from './_app'
 
 export const getStaticProps: GetStaticProps<
   SharedPageProps & {
