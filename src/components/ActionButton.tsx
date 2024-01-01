@@ -5,17 +5,19 @@ import { FC, PropsWithChildren } from 'react'
 
 interface Props {
   href: string
+  newTab?: boolean
   className?: string
 }
 
 const ActionButton: FC<PropsWithChildren<Props>> = ({
   children,
   href,
+  newTab,
   className,
 }) => {
   const router = useRouter()
   return (
-    <Link href={href}>
+    <Link href={href} target={newTab && '_blank'}>
       <div
         className={
           `h-14 w-auto cursor-pointer ` +

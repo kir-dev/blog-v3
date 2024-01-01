@@ -113,7 +113,11 @@ export default function IndexPage(
             amelynek hála azonnal értesülünk az esetleges leállásokról. A
             rendelkezésre állást a linkre kattintva ellenőrizheted.
           </p>
-          <ActionButton href={environment.statusKirDevUrl} className="mt-8">
+          <ActionButton
+            href={environment.statusKirDevUrl}
+            newTab
+            className="mt-8"
+          >
             Szolgáltatások státusza
           </ActionButton>
           <p className="mt-16">
