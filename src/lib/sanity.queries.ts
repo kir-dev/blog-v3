@@ -20,6 +20,12 @@ export async function getSiteSections(
   return await client.fetch(siteSectionsQuery)
 }
 
+export const membersQuery = groq`*[_type == "member" && defined(pekUsername)]`
+
+export async function getMembers(client: SanityClient): Promise<Member[]> {
+  return await client.fetch(membersQuery)
+}
+
 export async function getLatestPost(client: SanityClient): Promise<Post> {
   return await client.fetch(
     groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)[0]{
@@ -74,4 +80,16 @@ export interface SiteSection {
   _createdAt: string
   key: string
   body: PortableTextBlock[]
+}
+
+export interface Member {
+  _type: 'member'
+  _id: string
+  _createdAt: string
+  pekUsername: string
+  name: string
+  rank?: string
+  isActive?: boolean
+  mainImage?: ImageAsset
+  hoverImage?: ImageAsset
 }

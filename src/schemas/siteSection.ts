@@ -18,6 +18,9 @@ export default defineType({
     }),
   ],
   preview: {
+    select: {
+      title: 'key',
+    },
     prepare(selection) {
       return { ...selection }
     },
