@@ -7,6 +7,18 @@
     @apply bg-background text-foreground;
   }
 
+  html #tech-svg path {
+    @apply fill-foreground;
+  }
+
+  html #kir-dev-svg path {
+    @apply fill-foreground stroke-foreground stroke-1;
+  }
+
+  html #kir-dev-svg path.colored {
+    @apply fill-orange-600 stroke-orange-600 stroke-1;
+  }
+
   *::-webkit-scrollbar {
     @apply w-3 h-3;
   }
@@ -22,22 +34,6 @@
 
 html {
   scroll-behavior: smooth;
-}
-
-html #kir-dev-svg path {
-  stroke: black;
-  fill: black;
-  stroke-width: 1;
-}
-
-html[class*='dark'] #kir-dev-svg path {
-  stroke: #ebecec;
-  fill: #ebecec;
-}
-
-html #kir-dev-svg path.colored {
-  stroke: #f15a29;
-  fill: #f15a29;
 }
 
 @media not (prefers-reduced-motion) {

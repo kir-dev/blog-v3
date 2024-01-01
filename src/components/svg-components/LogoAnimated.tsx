@@ -1,15 +1,11 @@
 import { SVGProps } from 'react'
 
-export const LogoAnimated: React.FC<SVGProps<SVGElement>> = ({
-  className,
-  style,
-}) => (
+export const LogoAnimated: React.FC<SVGProps<SVGSVGElement>> = (props) => (
   <svg
     id="kir-dev-svg"
     viewBox="-1 -1 146 31"
     xmlns="http://www.w3.org/2000/svg"
-    className={className}
-    style={style}
+    {...props}
   >
     <path
       className="animate-svg-path"

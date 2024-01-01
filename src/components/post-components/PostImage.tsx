@@ -5,14 +5,24 @@ import { Image as SanityImage } from 'sanity'
 import { urlForImage } from '~/lib/sanity.image'
 
 interface ImageBlock extends SanityImage {
-  maxWidth?: number
-  maxHeight?: number
+  preferredWidth?: number
+  preferredHeight?: number
 }
 
-const PostImage: PortableTextComponent<SanityImage> = ({ value }) => {
-  console.log(value.asset)
+const PostImage: PortableTextComponent<ImageBlock> = ({ value }) => {
+  const { preferredHeight, preferredWidth } = value
+  const [, assetId, dimensions, format] =
+    /^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/.exec(value.asset?._ref)
+  const [width, height] = dimensions?.split('x').map((v) => parseInt(v, 10))
+  const calculatedHeight = preferredHeight ?? height
+  const calculatedWidth = preferredWidth ?? width
   return (
-    <Image src={urlForImage(value).url()} height={100} width={100} alt="" />
+    <Image
+      src={urlForImage(value).url()}
+      height={calculatedHeight ?? 100}
+      width={calculatedWidth ?? 100}
+      alt=""
+    />
   )
 }
 

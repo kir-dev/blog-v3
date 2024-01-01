@@ -6,7 +6,7 @@ import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
 import { ThemeProvider } from 'next-themes'
-import { lazy, useState } from 'react'
+import { lazy } from 'react'
 import Refractor from 'react-refractor'
 import { RefractorSyntax } from 'refractor'
 import bash from 'refractor/lang/bash'
@@ -24,10 +24,6 @@ import sql from 'refractor/lang/sql'
 import tsx from 'refractor/lang/tsx'
 import ts from 'refractor/lang/typescript'
 import yaml from 'refractor/lang/yaml'
-
-import Footer from '~/components/Footer'
-import { NavbarSitewide } from '~/components/navbar/NavbarSitewide'
-import { allRoutes } from '~/utils/routes'
 
 export interface SharedPageProps {
   draftMode: boolean
