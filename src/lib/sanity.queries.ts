@@ -26,6 +26,14 @@ export async function getMembers(client: SanityClient): Promise<Member[]> {
   return await client.fetch(membersQuery)
 }
 
+export const techStacksQuery = groq`*[_type == "techStack" && defined(key)]`
+
+export async function getTechStacks(
+  client: SanityClient,
+): Promise<TechStack[]> {
+  return await client.fetch(techStacksQuery)
+}
+
 export async function getLatestPost(client: SanityClient): Promise<Post> {
   return await client.fetch(
     groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)[0]{
@@ -92,4 +100,14 @@ export interface Member {
   isActive?: boolean
   mainImage?: ImageAsset
   hoverImage?: ImageAsset
+}
+
+export interface TechStack {
+  _type: 'techStack'
+  _id: string
+  _createdAt: string
+  key: string
+  name?: string
+  body?: string
+  priority?: number
 }
