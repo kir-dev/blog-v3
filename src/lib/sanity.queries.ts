@@ -12,6 +12,37 @@ export async function getPosts(client: SanityClient): Promise<Post[]> {
   return await client.fetch(postsQuery)
 }
 
+export const siteSectionsQuery = groq`*[_type == "siteSection" && defined(key)]`
+
+export async function getSiteSections(
+  client: SanityClient,
+): Promise<SiteSection[]> {
+  return await client.fetch(siteSectionsQuery)
+}
+
+export const membersQuery = groq`*[_type == "member" && defined(pekUsername)]`
+
+export async function getMembers(client: SanityClient): Promise<Member[]> {
+  return await client.fetch(membersQuery)
+}
+
+export const techStacksQuery = groq`*[_type == "techStack" && defined(key)]`
+
+export async function getTechStacks(
+  client: SanityClient,
+): Promise<TechStack[]> {
+  return await client.fetch(techStacksQuery)
+}
+
+export async function getLatestPost(client: SanityClient): Promise<Post> {
+  return await client.fetch(
+    groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)[0]{
+      "estimatedReadingTime": round(length(pt::text(body)) / 6 / 200 + 1),
+      ...
+    }`,
+  )
+}
+
 export const postBySlugQuery = groq`*[_type == "post" && slug.current == $slug][0]`
 
 export async function getPost(
@@ -20,6 +51,17 @@ export async function getPost(
 ): Promise<Post> {
   return await client.fetch(postBySlugQuery, {
     slug,
+  })
+}
+
+export const siteSectionByKeyQuery = groq`*[_type == "siteSection" && key == $key][0]`
+
+export async function getSiteSection(
+  client: SanityClient,
+  key: string,
+): Promise<SiteSection | undefined> {
+  return await client.fetch(siteSectionByKeyQuery, {
+    key,
   })
 }
 
@@ -36,5 +78,36 @@ export interface Post {
   author?: string
   excerpt?: string
   mainImage?: ImageAsset
+  estimatedReadingTime?: number
   body: PortableTextBlock[]
+}
+
+export interface SiteSection {
+  _type: 'siteSection'
+  _id: string
+  _createdAt: string
+  key: string
+  body: PortableTextBlock[]
+}
+
+export interface Member {
+  _type: 'member'
+  _id: string
+  _createdAt: string
+  pekUsername: string
+  name: string
+  rank?: string
+  isActive?: boolean
+  mainImage?: ImageAsset
+  hoverImage?: ImageAsset
+}
+
+export interface TechStack {
+  _type: 'techStack'
+  _id: string
+  _createdAt: string
+  key: string
+  name?: string
+  body?: string
+  priority?: number
 }

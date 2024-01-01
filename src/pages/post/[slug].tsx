@@ -18,6 +18,7 @@ import {
 } from '~/lib/sanity.queries'
 import type { SharedPageProps } from '~/pages/_app'
 import { formatDate } from '~/utils/date-utils'
+import { postPageComponents } from '~/utils/portable-text-comps'
 
 interface Query {
   [key: string]: string
@@ -73,10 +74,7 @@ export default function ProjectSlugRoute(
           <p className="post__excerpt">{post.excerpt}</p>
           <p className="post__date">{formatDate(post._createdAt)}</p>
           <div className="post__content">
-            <PortableText
-              value={post.body}
-              components={{ types: { code: PostCodeBlock, image: PostImage } }}
-            />
+            <PortableText value={post.body} components={postPageComponents} />
           </div>
         </div>
       </section>

@@ -1,10 +1,12 @@
 import { Button, Link } from '@nextui-org/react'
 import Image from 'next/image'
 
+import { environment } from '~/utils/environment'
 import { siteConfig } from '~/utils/site-config'
 
 import Container from './Container'
 import VercelLogo from './svg/powered-by-vercel.svg'
+import SchonherzLogo from './svg/Schönherz.svg'
 import { FacebookSvg } from './svg-components/FacebookSvg'
 import { GitHubSvg } from './svg-components/GitHubSvg'
 import { InstagramSvg } from './svg-components/InstagramSvg'
@@ -18,6 +20,43 @@ const socials = [
   { key: 'f', icon: FacebookSvg, href: siteConfig.links.facebook },
 ]
 
+const sponsors = [
+  {
+    key: 'v',
+    src: VercelLogo,
+    w: 209,
+    h: 40,
+    alt: 'Vercel Logo',
+    href: 'https://vercel.com?utm_source=kir-dev&utm_campaign=oss',
+  },
+  {
+    key: 'r',
+    src: '/images/rackhost.png',
+    w: 1850,
+    h: 382,
+    alt: 'Rackhost Logo',
+    href: 'https://rackhost.hu',
+    classNameExtra: 'bg-white py-2 px-4 rounded-lg',
+  },
+  {
+    key: '',
+    src: 'https://betteruptime.com/assets/static_assets/badges/light.png',
+    h: 260,
+    w: 104,
+    alt: 'Better Uptime Website Monitoring',
+    href: 'https://betteruptime.com/',
+  },
+  {
+    key: 's',
+    src: SchonherzLogo,
+    w: 320,
+    h: 100,
+    alt: 'Schönherz Logo',
+    href: 'https://svie.hu',
+    classNameExtra: 'bg-white py-2 px-4 rounded-lg',
+  },
+]
+
 export default function Footer() {
   return (
     <footer className="flex flex-col gap-10 pt-32">
@@ -26,39 +65,22 @@ export default function Footer() {
           Támogatóink
         </div>
         <div className="flex w-full justify-center items-center gap-3 flex-col sm:flex-row">
-          <Link
-            href="https://vercel.com?utm_source=kir-dev&utm_campaign=oss"
-            className="w-40"
-          >
-            <Image
-              src={VercelLogo}
-              width={209}
-              height={40}
-              alt="Vercel Logo"
-              className="h-auto w-full"
-            />
-          </Link>
-          <Link
-            href="https://rackhost.hu"
-            className="bg-white p-2 rounded-lg w-40"
-          >
-            <Image
-              height={382}
-              width={1850}
-              src="/images/rackhost.png"
-              alt="Rackhost Logo"
-              className="h-auto w-full"
-            />
-          </Link>
-          <Link href="https://betteruptime.com/" className="w-40">
-            <Image
-              height={104}
-              width={260}
-              alt="Better Uptime Website Monitoring"
-              src="https://betteruptime.com/assets/static_assets/badges/light.png"
-              className="h-auto w-full"
-            />
-          </Link>
+          {sponsors.map((item) => (
+            <Link
+              key={item.key}
+              href={item.href}
+              target="_blank"
+              className={`${item.classNameExtra} w-40`}
+            >
+              <Image
+                src={item.src}
+                width={item.w}
+                height={item.h}
+                alt={item.alt}
+                className="h-auto w-full"
+              />
+            </Link>
+          ))}
         </div>
       </div>
       <Container>
@@ -69,7 +91,7 @@ export default function Footer() {
               <p>
                 A Kir-Dev a{' '}
                 <Link
-                  href="https://simonyi.bme.hu"
+                  href={environment.simonyiUrl}
                   target="_blank"
                   className="text-sm"
                 >

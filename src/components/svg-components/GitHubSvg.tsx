@@ -1,16 +1,12 @@
 import { SVGProps } from 'react'
 
-export const GitHubSvg: React.FC<SVGProps<SVGElement>> = ({
-  className,
-  style,
-}) => (
+export const GitHubSvg: React.FC<SVGProps<SVGSVGElement>> = (props) => (
   <svg
     width="98"
     height="96"
     viewBox="0 0 98 96"
     xmlns="http://www.w3.org/2000/svg"
-    style={style}
-    className={className}
+    {...props}
   >
     <path
       fillRule="evenodd"

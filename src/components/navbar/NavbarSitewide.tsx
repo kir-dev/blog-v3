@@ -144,7 +144,7 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
             )}
           </Button>
         </NavbarItem>
-        <NavbarItem className="flex sm:hidden">
+        {/*<NavbarItem className="flex sm:hidden">
           <Button
             isIconOnly
             aria-label="Search on site"
@@ -159,7 +159,7 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
             commandKey={commandKey}
             handleOpenCmdk={handleOpenCmdk}
           />
-        </NavbarItem>
+        </NavbarItem>*/}
       </NavbarContent>
 
       <NavbarMenu className="flex gap-4 pt-4 bg-background bg-opacity-70">

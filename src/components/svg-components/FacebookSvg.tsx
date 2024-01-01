@@ -1,9 +1,6 @@
 import { SVGProps } from 'react'
 
-export const FacebookSvg: React.FC<SVGProps<SVGElement>> = ({
-  className,
-  style,
-}) => (
+export const FacebookSvg: React.FC<SVGProps<SVGSVGElement>> = (props) => (
   <svg
     width="14.2222in"
     height="14.2222in"
@@ -11,8 +8,7 @@ export const FacebookSvg: React.FC<SVGProps<SVGElement>> = ({
     viewBox="0 0 14222 14222"
     id="svg445"
     xmlns="http://www.w3.org/2000/svg"
-    style={style}
-    className={className}
+    {...props}
   >
     <g id="Layer_x0020_1">
       <path

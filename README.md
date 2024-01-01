@@ -13,6 +13,7 @@ Generated from this [starter](https://www.sanity.io/templates/nextjs-sanity-clea
     - [Step 2. Set up the project locally](#step-2-set-up-the-project-locally)
     - [Step 3. Run Next.js locally in development mode](#step-3-run-nextjs-locally-in-development-mode)
   - [Next steps](#next-steps)
+  - [Attributions](#attributions)
   - [Sponsors](#sponsors)
 
 ## Configuration
@@ -66,6 +67,11 @@ Your blog should be up and running on [http://localhost:3000][localhost-3000]! Y
 - [How to edit my content structure?][sanity-schema-types]
 - [How to query content?][sanity-groq]
 - [What is content modelling?][sanity-content-modelling]
+
+## Attributions
+
+- Frontpage images by
+  - Photo by <a href="https://unsplash.com/@filisantillan?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Fili Santillán</a> on <a href="https://unsplash.com/photos/macbook-pro-EFAqnx9iKG4?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
 
 ## Sponsors
 
