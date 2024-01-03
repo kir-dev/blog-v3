@@ -100,6 +100,8 @@ export interface Member {
   isActive?: boolean
   mainImage?: ImageAsset
   hoverImage?: ImageAsset
+  darkImage?: ImageAsset
+  darkHoverImage?: ImageAsset
 }
 
 export interface TechStack {

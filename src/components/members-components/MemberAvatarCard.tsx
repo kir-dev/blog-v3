@@ -1,6 +1,7 @@
 import { Avatar, Button, Card, CardFooter } from '@nextui-org/react'
 import { OnLoadingComplete } from 'next/dist/shared/lib/get-img-props'
 import Image from 'next/image'
+import { useTheme } from 'next-themes'
 import { FC, ReactEventHandler, useState } from 'react'
 
 import { urlForImage } from '~/lib/sanity.image'
@@ -16,10 +17,23 @@ export const MemberAvatarCard: FC<Props> = ({ member }) => {
   const [overlayShown, setOverlayShown] = useState(false)
   const onOverlayEnter = () => setOverlayShown(true)
   const onOverlayLeave = () => setOverlayShown(false)
+  const { theme } = useTheme()
   // const openPekUrl = () => window.open(`${environment.pekUrl}/profiles/${member.pekUsername}`)
 
   const onError: ReactEventHandler<HTMLImageElement> = (e) => {
     setShowAvatar(true)
+  }
+
+  const getImageUrl =() => {
+    if (theme === 'dark') {
+      return overlayShown && member.darkHoverImage
+      ? urlForImage(member.darkHoverImage)?.url()
+      : urlForImage(member.darkImage)?.url()
+    } else {
+      return overlayShown
+      ? (member.hoverImage ? urlForImage(member.hoverImage)?.url() : urlForImage(member.darkHoverImage)?.url())
+      : (member.mainImage ? urlForImage(member.mainImage)?.url() : urlForImage(member.darkImage)?.url())
+    }
   }
 
   return (
@@ -57,9 +71,7 @@ export const MemberAvatarCard: FC<Props> = ({ member }) => {
           height={500}
           width={500}
           src={
-            overlayShown && member.hoverImage
-              ? urlForImage(member.hoverImage)?.url()
-              : urlForImage(member.mainImage)?.url()
+            getImageUrl()
           }
           onError={onError}
         />
