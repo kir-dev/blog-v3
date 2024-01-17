@@ -34,6 +34,12 @@ export async function getTechStacks(
   return await client.fetch(techStacksQuery)
 }
 
+export const projectsQuery = groq`*[_type == "project" && defined(slug.current)]`
+
+export async function getProjects(client: SanityClient): Promise<Project[]> {
+  return await client.fetch(projectsQuery)
+}
+
 export async function getLatestPost(client: SanityClient): Promise<Post> {
   return await client.fetch(
     groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)[0]{
@@ -50,6 +56,17 @@ export async function getPost(
   slug: string,
 ): Promise<Post> {
   return await client.fetch(postBySlugQuery, {
+    slug,
+  })
+}
+
+export const projectBySlugQuery = groq`*[_type == "project" && slug.current == $slug][0]`
+
+export async function getProject(
+  client: SanityClient,
+  slug: string,
+): Promise<Project> {
+  return await client.fetch(projectBySlugQuery, {
     slug,
   })
 }
@@ -111,5 +128,21 @@ export interface TechStack {
   key: string
   name?: string
   body?: string
+  priority?: number
+}
+
+export interface Project {
+  _type: 'project'
+  _id: string
+  _createdAt: string
+  title: string
+  slug: Slug
+  status?: string
+  shortDesc?: string
+  githubRepos?: string[]
+  techStacks?: string[]
+  homePageUrls?: string[]
+  mainImage?: ImageAsset
+  body?: PortableTextBlock[]
   priority?: number
 }
