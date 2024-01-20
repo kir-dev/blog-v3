@@ -77,16 +77,14 @@ export const MemberAvatarCard: FC<Props> = ({ member }) => {
           />
         </div>
       ) : (
-        avatarUrl && (
           <Image
             alt={`${member.name} profile picture`}
-            className="object-contain w-full h-[180px] sm:h-[300px]"
+            className="object-contain"
             height={500}
             width={500}
             src={avatarUrl}
             onError={onError}
           />
-        )
       )}
       <CardFooter className="before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_4px)] shadow-small ml-0.5 z-10">
         <div
