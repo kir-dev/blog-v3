@@ -43,6 +43,22 @@ export default defineType({
         hotspot: true,
       },
     }),
+    defineField({
+      name: 'darkImage',
+      title: 'Dark mode image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'darkHoverImage',
+      title: 'Dark mode hover image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
   ],
   preview: {
     select: {

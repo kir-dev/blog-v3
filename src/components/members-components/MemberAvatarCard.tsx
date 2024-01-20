@@ -1,26 +1,52 @@
-import { Avatar, Button, Card, CardFooter } from '@nextui-org/react'
-import { OnLoadingComplete } from 'next/dist/shared/lib/get-img-props'
+import { Avatar, Card, CardFooter } from '@nextui-org/react'
 import Image from 'next/image'
-import { FC, ReactEventHandler, useState } from 'react'
+import { useTheme } from 'next-themes'
+import { FC, ReactEventHandler, useEffect, useState } from 'react'
 
 import { urlForImage } from '~/lib/sanity.image'
 import { Member } from '~/lib/sanity.queries'
-import { environment } from '~/utils/environment'
 
 type Props = {
   member: Member
 }
 
+const getAdaptiveImageUrl = (
+  member: Member,
+  overlayShown: boolean,
+  theme?: string,
+) => {
+  if (theme === 'dark') {
+    return overlayShown && member.darkHoverImage
+      ? urlForImage(member.darkHoverImage)?.url()
+      : urlForImage(member.darkImage)?.url()
+  } else {
+    return overlayShown
+      ? member.hoverImage
+        ? urlForImage(member.hoverImage)?.url()
+        : urlForImage(member.darkHoverImage)?.url()
+      : member.mainImage
+        ? urlForImage(member.mainImage)?.url()
+        : urlForImage(member.darkImage)?.url()
+  }
+}
+
 export const MemberAvatarCard: FC<Props> = ({ member }) => {
+  const defaultAvatarUrl = urlForImage(member.mainImage)?.url()
+  const [avatarUrl, setAvatarUrl] = useState(defaultAvatarUrl)
   const [showAvatar, setShowAvatar] = useState(false)
   const [overlayShown, setOverlayShown] = useState(false)
   const onOverlayEnter = () => setOverlayShown(true)
   const onOverlayLeave = () => setOverlayShown(false)
+  const { theme } = useTheme()
   // const openPekUrl = () => window.open(`${environment.pekUrl}/profiles/${member.pekUsername}`)
 
   const onError: ReactEventHandler<HTMLImageElement> = (e) => {
     setShowAvatar(true)
   }
+
+  useEffect(() => {
+    setAvatarUrl(getAdaptiveImageUrl(member, overlayShown, theme))
+  }, [setAvatarUrl, member, overlayShown, theme])
 
   return (
     <Card
@@ -51,18 +77,14 @@ export const MemberAvatarCard: FC<Props> = ({ member }) => {
           />
         </div>
       ) : (
-        <Image
-          alt={`${member.name} profile picture`}
-          className="object-contain w-full h-[180px] sm:h-[300px]"
-          height={500}
-          width={500}
-          src={
-            overlayShown && member.hoverImage
-              ? urlForImage(member.hoverImage)?.url()
-              : urlForImage(member.mainImage)?.url()
-          }
-          onError={onError}
-        />
+          <Image
+            alt={`${member.name} profile picture`}
+            className="object-contain"
+            height={500}
+            width={500}
+            src={avatarUrl}
+            onError={onError}
+          />
       )}
       <CardFooter className="before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_4px)] shadow-small ml-0.5 z-10">
         <div

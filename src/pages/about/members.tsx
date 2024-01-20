@@ -40,11 +40,11 @@ export default function MembersPage(
           Tagjaink
         </h1>
         <div className="flex flex-col">
-          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-7xl mx-auto">
             {actives
               ?.sort((a, b) => a.name.localeCompare(b.name))
               .map((member) => (
-                <div className="flex" key={member.pekUsername}>
+                <div className="flex aspect-square" key={member.pekUsername}>
                   <MemberAvatarCard member={member} />
                 </div>
               ))}
@@ -54,11 +54,11 @@ export default function MembersPage(
         {inactives?.length && (
           <>
             <h1 className="text-3xl font-bold my-16">Korábbi tagjaink</h1>
-            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-7xl mx-auto">
               {inactives
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .map((member) => (
-                  <div className="flex" key={member.pekUsername}>
+                  <div className="flex aspect-square" key={member.pekUsername}>
                     <MemberAvatarCard member={member} />
                   </div>
                 ))}
