@@ -21,7 +21,7 @@ import type { SharedPageProps } from '~/pages/_app'
 import { environment } from '~/utils/environment'
 
 import { PortableText } from '@portabletext/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { aboutPageComponents } from '~/utils/portable-text-comps'
 import LaptopSuite from '../components/svg/laptop-suite.svg'
 
@@ -55,9 +55,19 @@ export default function IndexPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
   const { post, frontSections, frontAlert } = props
-  const [alertShown, setAlertShown] = useState(
-    frontAlert.isHidden ? false : true,
-  )
+  const [alertShown, setAlertShown] = useState(false)
+  const closeAlert = () => {
+    localStorage.setItem('lastIgnoredAlertUpdatedAt', frontAlert._updatedAt)
+    setAlertShown(false)
+  }
+  useEffect(() => {
+    frontAlert?.isHidden
+      ? setAlertShown(false)
+      : localStorage.getItem('lastIgnoredAlertUpdatedAt') ===
+          frontAlert._updatedAt
+        ? setAlertShown(false)
+        : setAlertShown(true)
+  }, [frontAlert])
   const router = useRouter()
 
   return (
@@ -65,7 +75,7 @@ export default function IndexPage(
       <section className="flex flex-col items-center h-[90vh] sm:h-[96vh] justify-center px-6 sm:px-0 pb-8">
         {alertShown && (
           <Chip
-            onClose={() => setAlertShown(false)}
+            onClose={closeAlert}
             variant="solid"
             color="primary"
             classNames={{ base: 'absolute top-16 sm:top-20 z-50' }}

@@ -109,6 +109,7 @@ export interface SiteSection {
   _type: 'siteSection'
   _id: string
   _createdAt: string
+  _updatedAt: string
   key: string
   body: PortableTextBlock[]
   isHidden?: boolean
