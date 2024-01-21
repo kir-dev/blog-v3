@@ -1,10 +1,15 @@
 import { PortableTextReactComponents } from '@portabletext/react'
+import { PortableActionButton } from '~/components/ActionButton'
 
 import PostCodeBlock from '~/components/post-components/PostCodeBlock'
 import PostImage from '~/components/post-components/PostImage'
 
 export const aboutPageComponents = {
-  types: { code: PostCodeBlock, image: PostImage },
+  types: {
+    code: PostCodeBlock,
+    image: PostImage,
+    actionButton: PortableActionButton,
+  },
   block: {
     h2: ({ children }) => (
       <h2 className="text-4xl font-extrabold leading-none tracking-tight py-4">

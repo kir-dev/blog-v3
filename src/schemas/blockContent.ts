@@ -14,6 +14,10 @@ export default defineType({
       title: 'Code block',
     }),
     defineArrayMember({
+      type: 'actionButton',
+      title: 'Action button',
+    }),
+    defineArrayMember({
       title: 'Block',
       type: 'block',
       styles: [
