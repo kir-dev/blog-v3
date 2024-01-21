@@ -42,9 +42,7 @@ export async function getProjects(client: SanityClient): Promise<Project[]> {
 
 export const coursesQuery = groq`*[_type == "course"]`
 
-export async function getCourses(
-  client: SanityClient,
-): Promise<Course[]> {
+export async function getCourses(client: SanityClient): Promise<Course[]> {
   return await client.fetch(coursesQuery)
 }
 
@@ -160,6 +158,7 @@ export interface Course {
   _id: string
   _createdAt: string
   title?: string
+  isShown?: boolean
   excerpt?: string
   lecturers?: string[]
   lectures?: {

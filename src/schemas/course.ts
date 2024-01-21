@@ -11,6 +11,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'isShown',
+      title: 'Should it be displayed?',
+      type: 'boolean',
+    }),
+    defineField({
       name: 'excerpt',
       title: 'Excerpt',
       type: 'text',
@@ -27,8 +32,8 @@ export default defineType({
       title: 'Lectures',
       type: 'array',
       of: [
-        { 
-          type: 'object', 
+        {
+          type: 'object',
           fields: [
             {
               name: 'dateTimeInterval',
@@ -40,8 +45,9 @@ export default defineType({
               title: 'Place',
               type: 'string',
             },
-          ] 
-        }],
+          ],
+        },
+      ],
     }),
   ],
   preview: {

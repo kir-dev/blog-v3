@@ -8,9 +8,15 @@ import Layout from '~/components/Layout'
 import { TechsLogo } from '~/components/svg-components/TechsLogo'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
-import { Course, getCourses, getSiteSection,SiteSection } from '~/lib/sanity.queries'
+import {
+  Course,
+  getCourses,
+  getSiteSection,
+  SiteSection,
+} from '~/lib/sanity.queries'
 import { aboutPageComponents } from '~/utils/portable-text-comps'
 
+import CoursePreview from '~/components/courses-components/CoursePreview'
 import { SharedPageProps } from './_app'
 
 export const getStaticProps: GetStaticProps<
@@ -31,7 +37,7 @@ export const getStaticProps: GetStaticProps<
       token: draftMode ? readToken : '',
       sectionMentoring,
       sectionJoining,
-      courses
+      courses,
     },
   }
 }
@@ -44,7 +50,7 @@ export default function CoursesPage(
   return (
     <Layout>
       <Container>
-        <div className="flex flex-col md:flex-row my-16 gap-8">
+        <div className="flex flex-col md:flex-row my-16 mb-24 gap-8">
           <div>
             <h1 className="text-4xl font-extrabold leading-none tracking-tight mb-6">
               Tanfolyamunk
@@ -55,7 +61,11 @@ export default function CoursesPage(
               keretrendszerrel, illetve a webfejlesztés szakkifejezéseivel,
               eszközeivel.
             </p>
-            <ActionButton href="#join" className="mt-8" icon={<ArrowDownIcon className="h-4 w-4" />}>
+            <ActionButton
+              href="#join"
+              className="mt-8"
+              icon={<ArrowDownIcon className="h-4 w-4" />}
+            >
               Jelentkezés lentebb
             </ActionButton>
           </div>
@@ -65,19 +75,26 @@ export default function CoursesPage(
         </div>
       </Container>
       <Container>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          {courses
+            ?.filter((course) => course.isShown)
+            .map((course) => (
+              <CoursePreview key={course._id} course={course} />
+            ))}
+        </div>
+      </Container>
+      <Container>
         <section className="my-8 mt-24">
           <h2 className="text-4xl font-extrabold leading-none tracking-tight mt-16">
-          Jelentkezés
+            Jelentkezés
           </h2>
           <hr className="my-8" />
+          <a id="join" />
           <PortableText
             value={sectionJoining?.body}
             components={aboutPageComponents}
           />
-          <a id="join" />
         </section>
-      </Container>
-      <Container>
         <section className="my-8 mt-24">
           <h2 className="text-4xl font-extrabold leading-none tracking-tight mt-16">
             Mentorprogram

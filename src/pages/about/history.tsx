@@ -57,9 +57,6 @@ export default function HistoryPage(
             value={sectionHistory?.body}
             components={aboutPageComponents}
           />
-          <ActionButton href="/about/contact" className="mt-8">
-            Keress meg minket
-          </ActionButton>
         </section>
         <section className="my-8 mt-24">
           <h2 className="text-4xl font-extrabold leading-none tracking-tight mt-16">
@@ -103,9 +100,6 @@ export default function HistoryPage(
             value={sectionTeamwork?.body}
             components={aboutPageComponents}
           />
-          <ActionButton href="/about/members" className="mt-8">
-            Ismerd meg tagjaink
-          </ActionButton>
         </section>
         <div className="mt-12 flex flex-col items-start gap-4"></div>
       </Container>
