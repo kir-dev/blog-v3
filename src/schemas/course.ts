@@ -16,6 +16,11 @@ export default defineType({
       type: 'boolean',
     }),
     defineField({
+      name: 'priority',
+      title: 'Priority (highest on top)',
+      type: 'number',
+    }),
+    defineField({
       name: 'excerpt',
       title: 'Excerpt',
       type: 'text',

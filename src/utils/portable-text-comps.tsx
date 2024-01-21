@@ -20,6 +20,11 @@ export const aboutPageComponents = {
       <h3 className="text-2xl font-bold py-4 mt-8">{children}</h3>
     ),
     normal: ({ children }) => <p className="py-2">{children}</p>,
+    blockquote: ({ children }) => (
+      <blockquote className="border-l-4 border-primary border-opacity-50 pl-4 py-1 my-2">
+        {children}
+      </blockquote>
+    ),
   },
   list: {
     bullet: ({ children }) => (

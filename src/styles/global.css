@@ -2,13 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './custom-container.css';
+
 @layer base {
   body {
     @apply bg-background text-foreground;
-  }
-
-  html #tech-svg path {
-    @apply fill-foreground;
   }
 
   html #kir-dev-svg path {

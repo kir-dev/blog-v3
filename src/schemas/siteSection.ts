@@ -12,6 +12,11 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'isHidden',
+      title: 'Should it be hidden?',
+      type: 'boolean',
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',

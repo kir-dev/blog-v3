@@ -4,6 +4,7 @@ export const NestSvg: React.FC<SVGProps<SVGSVGElement>> = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 264.583 255.588"
+    fill="#e0234e"
     {...props}
   >
     <g id="layer1" transform="translate(0,-41.412487)">

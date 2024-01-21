@@ -1,13 +1,18 @@
 import { DetailedHTMLProps, FC, HTMLAttributes } from 'react'
 
 const Container: FC<
-  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-> = ({ children, ...props }) => {
-  return (
-    <div {...props} className={`${props.className} container px-4 mx-auto`}>
-      {children}
-    </div>
-  )
-}
+  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
+    useCustom?: boolean
+  }
+> = ({ children, useCustom, className, ...props }) => (
+  <div
+    {...props}
+    className={`container px-4 mx-auto ${
+      useCustom ? ' custom-container' : ''
+    } ${className}`}
+  >
+    {children}
+  </div>
+)
 
 export default Container

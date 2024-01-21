@@ -47,7 +47,7 @@ export default function HistoryPage(
 
   return (
     <Layout>
-      <Container>
+      <Container useCustom>
         <section className="my-8">
           <h2 className="text-4xl font-extrabold leading-none tracking-tight mt-16">
             Történelem

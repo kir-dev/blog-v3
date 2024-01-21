@@ -111,6 +111,7 @@ export interface SiteSection {
   _createdAt: string
   key: string
   body: PortableTextBlock[]
+  isHidden?: boolean
 }
 
 export interface Member {
@@ -159,6 +160,7 @@ export interface Course {
   _createdAt: string
   title?: string
   isShown?: boolean
+  priority?: number
   excerpt?: string
   lecturers?: string[]
   lectures?: {

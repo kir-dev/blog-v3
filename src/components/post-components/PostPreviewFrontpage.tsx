@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Button,
-  Card,
-  CardFooter,
-  CardHeader,
-  Chip,
-} from '@nextui-org/react'
+import { Avatar, Chip } from '@nextui-org/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -40,7 +33,7 @@ export default function PostPreviewFrontpage({ post }: { post: Post }) {
           </div>
         </footer>
       </div>
-      <div className="flex-1 px-4">
+      <div className="flex-1 flex justify-end px-4">
         <div className="max-w-xl flex flex-col justify-center">
           <div className="md:h-42 lg:h-64 xl:h-80">
             <Image
