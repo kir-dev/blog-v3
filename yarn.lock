@@ -4634,7 +4634,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/webhook@npm:4.0.0":
+"@sanity/webhook@npm:4.0.0, @sanity/webhook@npm:^4.0.0":
   version: 4.0.0
   resolution: "@sanity/webhook@npm:4.0.0"
   checksum: 76760d9b5be9d496046f8283e4933a36e77c2d9b6baaa802eddda76b1407c5ad48a6624aa4087fad2e913bea9146ce224eafd124ab831b40cb3e22c12224bfe5
@@ -11455,6 +11455,7 @@ __metadata:
     "@sanity/demo": "npm:1.0.2"
     "@sanity/preview-url-secret": "npm:1.4.0"
     "@sanity/vision": "npm:3.23.4"
+    "@sanity/webhook": "npm:^4.0.0"
     "@tailwindcss/typography": "npm:0.5.10"
     "@types/react": "npm:18.2.45"
     "@types/refractor": "npm:3.4.0"

@@ -18,6 +18,7 @@
     "@sanity/demo": "1.0.2",
     "@sanity/preview-url-secret": "1.4.0",
     "@sanity/vision": "3.23.4",
+    "@sanity/webhook": "^4.0.0",
     "@tailwindcss/typography": "0.5.10",
     "cmdk": "0.2.0",
     "framer-motion": "10.16.16",
