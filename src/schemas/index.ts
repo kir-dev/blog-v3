@@ -1,6 +1,7 @@
 import { SchemaTypeDefinition } from 'sanity'
 
 import blockContent from './blockContent'
+import course from './course'
 import member from './member'
 import post from './post'
 import project from './project'

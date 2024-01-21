@@ -40,6 +40,14 @@ export async function getProjects(client: SanityClient): Promise<Project[]> {
   return await client.fetch(projectsQuery)
 }
 
+export const coursesQuery = groq`*[_type == "course"]`
+
+export async function getCourses(
+  client: SanityClient,
+): Promise<Course[]> {
+  return await client.fetch(coursesQuery)
+}
+
 export async function getLatestPost(client: SanityClient): Promise<Post> {
   return await client.fetch(
     groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)[0]{
@@ -145,4 +153,17 @@ export interface Project {
   mainImage?: ImageAsset
   body?: PortableTextBlock[]
   priority?: number
+}
+
+export interface Course {
+  _type: 'course'
+  _id: string
+  _createdAt: string
+  title?: string
+  excerpt?: string
+  lecturers?: string[]
+  lectures?: {
+    dateTimeInterval?: string
+    place?: string
+  }[]
 }
