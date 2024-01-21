@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity'
 import slugify from 'slugify'
+import { projectStatusMapping } from '~/utils/project-status'
 
 export default defineType({
   name: 'project',
@@ -32,18 +33,13 @@ export default defineType({
       title: 'Status',
       type: 'string',
       options: {
-        list: [
-          { title: 'Aktív', value: 'active' },
-          { title: 'Új', value: 'new' },
-          { title: 'Átadva', value: 'done' },
-          { title: 'Megszakítva', value: 'discontinued' },
-        ],
+        list: projectStatusMapping,
       },
     }),
     defineField({
       name: 'priority',
       title: 'Priority (highest on top)',
-      type: 'number'
+      type: 'number',
     }),
     defineField({
       name: 'shortDesc',
