@@ -35,7 +35,7 @@ export default function ContactPage(
   return (
     <Layout>
       <Container>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center text-center">
           <h1 className="text-6xl mt-16 p-1 font-extrabold tracking-tight">
             Kir-Dev
           </h1>

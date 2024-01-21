@@ -10,5 +10,5 @@ export const environment = {
     facebookUrl: 'https://facebook.com/kirdevteam',
     publicEmail: 'hello [kukac] kir-dev.hu',
   },
-  rickrollUrl: process.env.GATSBY_RICKROLL_URL,
+  rickrollUrl: 'https://youtu.be/HtaZuzmDHuI',
 }
