@@ -95,6 +95,9 @@ export async function getSiteSection(
 export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current)][].slug.current
 `
+export const projectSlugsQuery = groq`
+*[_type == "project" && defined(slug.current)][].slug.current
+`
 
 export interface Post {
   _type: 'post'

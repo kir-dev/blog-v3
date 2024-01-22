@@ -7,6 +7,7 @@ import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 import { getProjects, Project } from '~/lib/sanity.queries'
 
+import { NextSeo } from 'next-seo'
 import { SharedPageProps } from '../_app'
 
 export const getStaticProps: GetStaticProps<
@@ -33,6 +34,7 @@ export default function ProjectsPage(
 
   return (
     <Layout>
+      <NextSeo title="Projektjeink" />
       <Container>
         <h1 className="text-4xl font-bold my-16">Projektjeink</h1>
         <hr className="my-8" />

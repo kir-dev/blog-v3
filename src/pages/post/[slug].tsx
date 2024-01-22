@@ -1,20 +1,19 @@
 import { PortableText } from '@portabletext/react'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
-import Image from 'next/image'
 import { useLiveQuery } from 'next-sanity/preview'
-
+import { NextSeo } from 'next-seo'
+import Image from 'next/image'
 import Container from '~/components/Container'
+
 import Layout from '~/components/Layout'
-import PostCodeBlock from '~/components/post-components/PostCodeBlock'
-import PostImage from '~/components/post-components/PostImage'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 import { urlForImage } from '~/lib/sanity.image'
 import {
   getPost,
-  type Post,
   postBySlugQuery,
   postSlugsQuery,
+  type Post,
 } from '~/lib/sanity.queries'
 import type { SharedPageProps } from '~/pages/_app'
 import { formatDate } from '~/utils/date-utils'
@@ -48,7 +47,7 @@ export const getStaticProps: GetStaticProps<
   }
 }
 
-export default function ProjectSlugRoute(
+export default function PostSlugRoute(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
   const [post] = useLiveQuery(props.post, postBySlugQuery, {
@@ -57,7 +56,8 @@ export default function ProjectSlugRoute(
 
   return (
     <Layout>
-      <section className="post">
+      <NextSeo title={post.title} /* TODO: better SEO */ />
+      <Container useCustom className="post my-16">
         {post.mainImage ? (
           <Image
             className="post__cover"
@@ -70,14 +70,16 @@ export default function ProjectSlugRoute(
           <div className="post__cover--none" />
         )}
         <div className="post__container">
-          <h1 className="post__title">{post.title}</h1>
+          <h1 className="text-4xl tracking-tighter font-extrabold my-8">
+            {post.title}
+          </h1>
           <p className="post__excerpt">{post.excerpt}</p>
           <p className="post__date">{formatDate(post._createdAt)}</p>
-          <div className="post__content">
+          <div className="post__content mt-16">
             <PortableText value={post.body} components={postPageComponents} />
           </div>
         </div>
-      </section>
+      </Container>
     </Layout>
   )
 }

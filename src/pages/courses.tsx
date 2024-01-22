@@ -16,6 +16,7 @@ import {
 } from '~/lib/sanity.queries'
 import { aboutPageComponents } from '~/utils/portable-text-comps'
 
+import { NextSeo } from 'next-seo'
 import CoursePreview from '~/components/courses-components/CoursePreview'
 import { SharedPageProps } from './_app'
 
@@ -52,6 +53,7 @@ export default function CoursesPage(
 
   return (
     <Layout>
+      <NextSeo title="Tanfolyamunk" />
       <section className="flex flex-col items-center md:h-[96vh] justify-center">
         <Container useCustom>
           <div className="flex flex-col lg:flex-row my-16 mb-24 md:my-0 gap-24 md:pb-16">

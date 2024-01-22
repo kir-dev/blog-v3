@@ -2,22 +2,21 @@ import { Button, Link } from '@nextui-org/react'
 import Image from 'next/image'
 
 import { environment } from '~/utils/environment'
-import { siteConfig } from '~/utils/site-config'
 
 import Container from './Container'
-import VercelLogo from './svg/powered-by-vercel.svg'
-import SchonherzLogo from './svg/Schönherz.svg'
 import { FacebookSvg } from './svg-components/FacebookSvg'
 import { GitHubSvg } from './svg-components/GitHubSvg'
 import { InstagramSvg } from './svg-components/InstagramSvg'
 import { LogoBig } from './svg-components/LogoBig'
 import { YoutubeSvg } from './svg-components/YoutubeSvg'
+import SchonherzLogo from './svg/Schönherz.svg'
+import VercelLogo from './svg/powered-by-vercel.svg'
 
 const socials = [
-  { key: 'g', icon: GitHubSvg, href: siteConfig.links.github },
-  { key: 'y', icon: YoutubeSvg, href: siteConfig.links.youtube },
-  { key: 'i', icon: InstagramSvg, href: siteConfig.links.instagram },
-  { key: 'f', icon: FacebookSvg, href: siteConfig.links.facebook },
+  { key: 'g', icon: GitHubSvg, href: environment.socials.githubOrgUrl },
+  { key: 'y', icon: YoutubeSvg, href: environment.socials.youtubeUrl },
+  { key: 'i', icon: InstagramSvg, href: environment.socials.instagramUrl },
+  { key: 'f', icon: FacebookSvg, href: environment.socials.facebookUrl },
 ]
 
 const sponsors = [

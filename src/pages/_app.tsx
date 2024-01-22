@@ -1,11 +1,14 @@
 import '~/styles/global.css'
 import '~/styles/prism-okaidia.css'
 
+import SEO from '../../next-seo.config'
+
 import { NextUIProvider } from '@nextui-org/react'
+import { DefaultSeo } from 'next-seo'
+import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
-import { ThemeProvider } from 'next-themes'
 import { lazy } from 'react'
 import Refractor from 'react-refractor'
 import { RefractorSyntax } from 'refractor'
@@ -66,6 +69,7 @@ export default function App({
 
   return (
     <>
+      <DefaultSeo {...SEO} />
       <style jsx global>{`
         html {
           font-family: ${inter.style.fontFamily};

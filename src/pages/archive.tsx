@@ -1,4 +1,5 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { NextSeo } from 'next-seo'
 import ActionButton from '~/components/ActionButton'
 import Container from '~/components/Container'
 import Layout from '~/components/Layout'
@@ -32,6 +33,7 @@ export default function ArchivePage(
 
   return (
     <Layout>
+      <NextSeo title="Blog archívum" />
       <Container>
         <h1 className="text-4xl font-bold my-16">Archívum</h1>
         <ul className="flex flex-col gap-8">

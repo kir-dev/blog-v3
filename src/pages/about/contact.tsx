@@ -9,6 +9,7 @@ import { getClient } from '~/lib/sanity.client'
 import { getSiteSection, SiteSection } from '~/lib/sanity.queries'
 import { aboutPageComponents } from '~/utils/portable-text-comps'
 
+import { NextSeo } from 'next-seo'
 import { SharedPageProps } from '../_app'
 
 export const getStaticProps: GetStaticProps<
@@ -34,6 +35,7 @@ export default function ContactPage(
   const { sectionContact } = props
   return (
     <Layout>
+      <NextSeo title="Kapcsolat" />
       <Container>
         <div className="flex flex-col items-center text-center">
           <h1 className="text-6xl mt-16 p-1 font-extrabold tracking-tight">

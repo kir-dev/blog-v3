@@ -8,6 +8,7 @@ import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 import { getMembers, Member } from '~/lib/sanity.queries'
 
+import { NextSeo } from 'next-seo'
 import { SharedPageProps } from '../_app'
 
 export const getStaticProps: GetStaticProps<
@@ -35,6 +36,7 @@ export default function MembersPage(
 
   return (
     <Layout>
+      <NextSeo title="Tagjaink" />
       <Container>
         <h1 className="text-4xl font-extrabold tracking-tighter my-16">
           Tagjaink

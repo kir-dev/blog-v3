@@ -3,7 +3,6 @@
 import {
   ChevronDownIcon,
   ChevronRightIcon,
-  MagnifyingGlassIcon,
   MoonIcon,
   SunIcon,
 } from '@heroicons/react/24/solid'
@@ -21,17 +20,15 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from '@nextui-org/react'
-import { isAppleDevice } from '@react-aria/utils'
+import { useTheme } from 'next-themes'
 import NextLink from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Router, useRouter } from 'next/router'
-import { useTheme } from 'next-themes'
+import { useRouter } from 'next/router'
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
 import { Route } from '~/utils/routes'
 
 import { LogoAnimated } from '../svg-components/LogoAnimated'
-import SearchButton from './SearchButton'
 
 export interface Props {
   routes: { homeRoute: Route; otherRoutes: Route[] }
@@ -39,25 +36,15 @@ export interface Props {
 
 export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false)
-  const [commandKey, setCommandKey] = useState<'ctrl' | 'command'>('command')
   const pathname = usePathname()
   const router = useRouter()
   const { setTheme, theme } = useTheme()
-  // const cmdkStore = useCmdkStore()
 
   useEffect(() => {
     if (isMenuOpen) {
       setIsMenuOpen(false)
     }
   }, [isMenuOpen, pathname])
-
-  useEffect(() => {
-    setCommandKey(isAppleDevice() ? 'command' : 'ctrl')
-  }, [])
-
-  const handleOpenCmdk = () => {
-    // cmdkStore.onOpen()
-  }
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -144,22 +131,6 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
             )}
           </Button>
         </NavbarItem>
-        {/*<NavbarItem className="flex sm:hidden">
-          <Button
-            isIconOnly
-            aria-label="Search on site"
-            className="p-0 bg-transparent data-[hover=true]:bg-transparent"
-            onPress={handleOpenCmdk}
-          >
-            <MagnifyingGlassIcon className="h-5 w-5" />
-          </Button>
-        </NavbarItem>
-        <NavbarItem className="hidden sm:flex">
-          <SearchButton
-            commandKey={commandKey}
-            handleOpenCmdk={handleOpenCmdk}
-          />
-        </NavbarItem>*/}
       </NavbarContent>
 
       <NavbarMenu className="flex gap-4 pt-4 bg-background bg-opacity-70">

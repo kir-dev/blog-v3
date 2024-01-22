@@ -15,6 +15,7 @@ import {
 import { aboutPageComponents } from '~/utils/portable-text-comps'
 import { getStackSvg } from '~/utils/tech-stack'
 
+import { NextSeo } from 'next-seo'
 import { SharedPageProps } from '../_app'
 
 export const getStaticProps: GetStaticProps<
@@ -47,6 +48,7 @@ export default function HistoryPage(
 
   return (
     <Layout>
+      <NextSeo title="Rólunk" />
       <Container useCustom>
         <section className="my-8">
           <h2 className="text-4xl font-extrabold leading-none tracking-tight mt-16">

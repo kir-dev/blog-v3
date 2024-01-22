@@ -1,5 +1,4 @@
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
-import Link from 'next/link'
 import { useLiveQuery } from 'next-sanity/preview'
 
 import ActionButton from '~/components/ActionButton'
@@ -10,6 +9,7 @@ import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 import { getPosts, Post, postsQuery } from '~/lib/sanity.queries'
 
+import { NextSeo } from 'next-seo'
 import { SharedPageProps } from './_app'
 
 export const getStaticProps: GetStaticProps<
@@ -35,6 +35,7 @@ export default function BlogPage(
   const [posts] = useLiveQuery<Post[]>(props.posts, postsQuery)
   return (
     <Layout>
+      <NextSeo title="Blog" />
       <Container>
         <h1 className="text-4xl font-extrabold leading-none tracking-tight mt-16">
           Blog

@@ -55,6 +55,8 @@ export default function IndexPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
   const { post, frontSections, frontAlert } = props
+
+  // TODO: use zustand for alert state
   const [alertShown, setAlertShown] = useState(false)
   const closeAlert = () => {
     localStorage.setItem('lastIgnoredAlertUpdatedAt', frontAlert._updatedAt)
