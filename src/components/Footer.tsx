@@ -84,7 +84,7 @@ export default function Footer() {
       </div>
       <Container>
         <div className="flex justify-between items-center gap-3 flex-col-reverse sm:flex-row pb-10">
-          <div className="h-16 flex flex-col sm:flex-row items-center text-sm mt-10">
+          <div className="h-24 sm:h-16 flex flex-col sm:flex-row items-center text-sm mt-10">
             <LogoBig className="h-full w-auto" />
             <div className="hidden sm:block">
               <p>
@@ -98,9 +98,19 @@ export default function Footer() {
                 </Link>{' '}
                 tagszervezete.
               </p>
+              <p>
+                <Link className="text-sm" href="/about/contact">
+                  Kapcsolat
+                </Link>
+              </p>
               <p>Kir-Dev &copy; {new Date().getFullYear()}</p>
             </div>
-            <div className="block sm:hidden">
+            <div className="block sm:hidden text-center">
+              <p>
+                <Link className="text-sm" href="/about/contact">
+                  Kapcsolat
+                </Link>
+              </p>
               <p>Kir-Dev &copy; {new Date().getFullYear()}</p>
             </div>
           </div>

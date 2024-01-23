@@ -34,7 +34,7 @@ const PostPreview: FC<
             width={500}
           />
         </Link>
-        <div className="text-tiny text-foreground-300 text-end flex flex-row justify-between mt-2">
+        <div className="text-tiny text-foreground-500 text-end flex flex-row justify-between mt-2">
           <div>{formatDate(post._createdAt)}</div>
           <div>~{post.estimatedReadingTime} min</div>
         </div>
