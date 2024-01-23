@@ -8,16 +8,12 @@ import Layout from '~/components/Layout'
 import { TechsLogo } from '~/components/svg-components/TechsLogo'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
-import {
-  Course,
-  getCourses,
-  getSiteSection,
-  SiteSection,
-} from '~/lib/sanity.queries'
 import { aboutPageComponents } from '~/utils/portable-text-comps'
 
 import { NextSeo } from 'next-seo'
 import CoursePreview from '~/components/courses-components/CoursePreview'
+import { getCourses, getSiteSection } from '~/lib/queries'
+import { Course, SiteSection } from '~/lib/sanity.types'
 import { SharedPageProps } from './_app'
 
 export const getStaticProps: GetStaticProps<

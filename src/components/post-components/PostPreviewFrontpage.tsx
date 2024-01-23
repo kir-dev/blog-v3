@@ -1,14 +1,21 @@
-import { Avatar, Chip } from '@nextui-org/react'
+import { Chip, User } from '@nextui-org/react'
+import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import { urlForImage } from '~/lib/sanity.image'
-import { type Post } from '~/lib/sanity.queries'
+import { Member, Post } from '~/lib/sanity.types'
+import { getAdaptiveImageUrl } from '~/utils/adaptive-member-image'
 import { formatDate } from '~/utils/date-utils'
 
-export default function PostPreviewFrontpage({ post }: { post: Post }) {
-  const router = useRouter()
+interface Props {
+  post: Post
+  author?: Member
+}
+
+export default function PostPreviewFrontpage({ post, author }: Props) {
+  const { theme } = useTheme()
+
   return (
     <article className="flex flex-col sm:flex-row gap-8">
       <div className="flex-1 px-4 flex flex-col justify-center">
@@ -18,32 +25,42 @@ export default function PostPreviewFrontpage({ post }: { post: Post }) {
           </h4>
         </header>
         <footer>
-          <p className="mb-2">{post.excerpt}</p>
-          <div className="flex flex-row gap-2 items-center">
-            <Avatar
-              src={`https://pek.sch.bme.hu/photos/${post.author}`}
-              name={post.author}
-              showFallback
-              size="md"
-            />
-            <div className="flex flex-col text-sm">
-              {post.author ?? `anonymous`} &bull; {post.estimatedReadingTime}{' '}
-              min
-            </div>
-          </div>
+          <p className="mb-8 text-foreground-400">
+            {post.excerpt} &bull; ~{post.estimatedReadingTime}&nbsp;min
+          </p>
+          <User
+            name={author?.name ?? post.author ?? 'anonymous'}
+            description={author?.rank}
+            avatarProps={{
+              src: getAdaptiveImageUrl(author, false, theme),
+              size: 'sm',
+              showFallback: true,
+              fallback:
+                (author?.name ?? post.author)
+                  ?.match(/(^\S\S?|\s\S)?/g)
+                  .map((v) => v.trim())
+                  .join('')
+                  .match(/(^\S|\S$)?/g)
+                  .join('')
+                  .toLocaleUpperCase() ?? 'AN',
+            }}
+          />
         </footer>
       </div>
       <div className="flex-1 flex justify-end px-4">
         <div className="max-w-xl flex flex-col justify-center">
-          <div className="md:h-42 lg:h-64 xl:h-80">
+          <Link
+            href={`/post/${post.slug.current}`}
+            className="md:h-42 lg:h-64 xl:h-80"
+          >
             <Image
               alt={`Image for ${post.title}`}
               className="z-0 w-full h-full object-cover rounded-lg"
-              src={urlForImage(post.mainImage).width(500).height(300).url()}
-              height={300}
-              width={500}
+              src={urlForImage(post.mainImage)?.width(1000).height(700).url()}
+              height={700}
+              width={1000}
             />
-          </div>
+          </Link>
           <div className="flex flex-row justify-between items-center mt-2">
             <p className="text-tiny">{formatDate(post._createdAt)}</p>
             <Chip size="sm">#közélet</Chip>

@@ -7,14 +7,15 @@ import Layout from '~/components/Layout'
 import PostPreview from '~/components/post-components/PostPreview'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
-import { getPosts, Post, postsQuery } from '~/lib/sanity.queries'
 
 import { NextSeo } from 'next-seo'
+import { getPosts, postsQuery } from '~/lib/queries'
+import { PostWithAuthor } from '~/lib/sanity.types'
 import { SharedPageProps } from './_app'
 
 export const getStaticProps: GetStaticProps<
   SharedPageProps & {
-    posts: Post[]
+    posts: PostWithAuthor[]
   }
 > = async ({ draftMode = false }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
@@ -32,7 +33,7 @@ export const getStaticProps: GetStaticProps<
 export default function BlogPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
-  const [posts] = useLiveQuery<Post[]>(props.posts, postsQuery)
+  const [posts] = useLiveQuery<PostWithAuthor[]>(props.posts, postsQuery)
   return (
     <Layout>
       <NextSeo title="Blog" />
@@ -42,8 +43,13 @@ export default function BlogPage(
         </h1>
         <hr className="my-8" />
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
-          {posts.map((post) => (
-            <PostPreview key={post._id} post={post} />
+          {posts.map(({ post, author }) => (
+            <PostPreview
+              key={post._id}
+              post={post}
+              author={author}
+              className="lg:last:hidden"
+            />
           ))}
         </section>
         <div className="text-end my-12">

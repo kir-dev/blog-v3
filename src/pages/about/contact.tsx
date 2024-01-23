@@ -6,10 +6,11 @@ import Container from '~/components/Container'
 import Layout from '~/components/Layout'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
-import { getSiteSection, SiteSection } from '~/lib/sanity.queries'
 import { aboutPageComponents } from '~/utils/portable-text-comps'
 
 import { NextSeo } from 'next-seo'
+import { getSiteSection } from '~/lib/queries'
+import { SiteSection } from '~/lib/sanity.types'
 import { SharedPageProps } from '../_app'
 
 export const getStaticProps: GetStaticProps<

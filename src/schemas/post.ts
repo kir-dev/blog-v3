@@ -40,6 +40,11 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'hashTag',
+      title: 'Hashtag (without #)',
+      type: 'string',
+    }),
+    defineField({
       name: 'mainImage',
       title: 'Main image',
       type: 'image',

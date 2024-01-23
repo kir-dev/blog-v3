@@ -2,19 +2,16 @@ import { PortableText } from '@portabletext/react'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useLiveQuery } from 'next-sanity/preview'
 import { NextSeo } from 'next-seo'
+import config from 'next-seo.config'
 import Image from 'next/image'
 import Container from '~/components/Container'
 
 import Layout from '~/components/Layout'
+import { getPost, postBySlugQuery, postSlugsQuery } from '~/lib/queries'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 import { urlForImage } from '~/lib/sanity.image'
-import {
-  getPost,
-  postBySlugQuery,
-  postSlugsQuery,
-  type Post,
-} from '~/lib/sanity.queries'
+import { Post } from '~/lib/sanity.types'
 import type { SharedPageProps } from '~/pages/_app'
 import { formatDate } from '~/utils/date-utils'
 import { postPageComponents } from '~/utils/portable-text-comps'
@@ -56,28 +53,56 @@ export default function PostSlugRoute(
 
   return (
     <Layout>
-      <NextSeo title={post.title} /* TODO: better SEO */ />
-      <Container useCustom className="post my-16">
+      <NextSeo
+        title={post.title}
+        description={post.excerpt ?? config.description}
+        openGraph={{
+          images: [
+            {
+              url:
+                urlForImage(post.mainImage)?.url() ??
+                config.openGraph.images[0].url,
+            },
+          ],
+          type: 'article',
+          title: post.title,
+          description: post.excerpt ?? config.openGraph.description,
+          article: {
+            publishedTime: post._createdAt,
+            modifiedTime: post._updatedAt,
+            authors: [`https://pek.sch.bme.hu/photos/${post.author}`],
+            tags: ['közélet'],
+          },
+        }}
+      />
+      <Container useCustom className="mb-16">
         {post.mainImage ? (
           <Image
-            className="post__cover"
-            src={urlForImage(post.mainImage).url()}
-            height={231}
-            width={367}
+            src={urlForImage(post.mainImage)?.url()}
+            height={500}
+            width={1000}
+            className="object-cover rounded-md w-full h-[50vh]"
             alt=""
           />
         ) : (
-          <div className="post__cover--none" />
+          <div className="mt-16" />
         )}
-        <div className="post__container">
-          <h1 className="text-4xl tracking-tighter font-extrabold my-8">
-            {post.title}
-          </h1>
-          <p className="post__excerpt">{post.excerpt}</p>
-          <p className="post__date">{formatDate(post._createdAt)}</p>
-          <div className="post__content mt-16">
-            <PortableText value={post.body} components={postPageComponents} />
+        <div className="flex flex-row flex-wrap justify-between gap-4 mt-8 mb-4">
+          <div>
+            <h1 className="text-4xl tracking-tighter font-extrabold">
+              {post.title}
+            </h1>
           </div>
+          <div className="flex-1 flex flex-row justify-end whitespace-nowrap">
+            <div className="text-small text-foreground-500 text-end flex flex-col gap-1">
+              <p>{formatDate(post._createdAt)}</p>
+              <p>by {post.author ?? 'anonymous'}</p>
+              {post.hashTag && <p>#{post.hashTag}</p>}
+            </div>
+          </div>
+        </div>
+        <div className="mt-16 break-words">
+          <PortableText value={post.body} components={postPageComponents} />
         </div>
       </Container>
     </Layout>

@@ -6,9 +6,10 @@ import { MeetingControls } from '~/components/members-components/MeetingControls
 import { MemberAvatarCard } from '~/components/members-components/MemberAvatarCard'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
-import { getMembers, Member } from '~/lib/sanity.queries'
 
 import { NextSeo } from 'next-seo'
+import { getMembers } from '~/lib/queries'
+import { Member } from '~/lib/sanity.types'
 import { SharedPageProps } from '../_app'
 
 export const getStaticProps: GetStaticProps<

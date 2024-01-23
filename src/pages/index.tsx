@@ -11,29 +11,26 @@ import { GitHubSvg } from '~/components/svg-components/GitHubSvg'
 import { Terminal } from '~/components/terminal/Terminal'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
-import {
-  SiteSection,
-  getLatestPost,
-  getSiteSection,
-  type Post,
-} from '~/lib/sanity.queries'
 import type { SharedPageProps } from '~/pages/_app'
 import { environment } from '~/utils/environment'
 
 import { PortableText } from '@portabletext/react'
 import { useEffect, useState } from 'react'
+import { getLatestPost, getSiteSection } from '~/lib/queries'
+import { Member, Post, SiteSection } from '~/lib/sanity.types'
 import { aboutPageComponents } from '~/utils/portable-text-comps'
 import LaptopSuite from '../components/svg/laptop-suite.svg'
 
 export const getStaticProps: GetStaticProps<
   SharedPageProps & {
     post?: Post
+    author?: Member
     frontSections?: SiteSection[]
     frontAlert?: SiteSection
   }
 > = async ({ draftMode = false }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
-  const post = await getLatestPost(client)
+  const { post, author } = await getLatestPost(client)
   const frontSections = [
     await getSiteSection(client, 'frontpage1'),
     await getSiteSection(client, 'frontpage2'),
@@ -45,6 +42,7 @@ export const getStaticProps: GetStaticProps<
       draftMode,
       token: draftMode ? readToken : '',
       post,
+      author,
       frontSections,
       frontAlert,
     },
@@ -54,7 +52,7 @@ export const getStaticProps: GetStaticProps<
 export default function IndexPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
-  const { post, frontSections, frontAlert } = props
+  const { post, author, frontSections, frontAlert } = props
 
   // TODO: use zustand for alert state
   const [alertShown, setAlertShown] = useState(false)
@@ -139,7 +137,7 @@ export default function IndexPage(
             Legutóbbi bejegyzés blogunkból
           </h2>
           <hr className="mb-16" />
-          <PostPreviewFrontpage post={post} />
+          <PostPreviewFrontpage post={post} author={author} />
         </Container>
       </section>
       <section className="py-24">

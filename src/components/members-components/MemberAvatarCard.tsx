@@ -1,33 +1,14 @@
 import { Avatar, Card, CardFooter } from '@nextui-org/react'
-import Image from 'next/image'
 import { useTheme } from 'next-themes'
+import Image from 'next/image'
 import { FC, ReactEventHandler, useEffect, useState } from 'react'
 
 import { urlForImage } from '~/lib/sanity.image'
-import { Member } from '~/lib/sanity.queries'
+import { Member } from '~/lib/sanity.types'
+import { getAdaptiveImageUrl } from '~/utils/adaptive-member-image'
 
 type Props = {
   member: Member
-}
-
-const getAdaptiveImageUrl = (
-  member: Member,
-  overlayShown: boolean,
-  theme?: string,
-) => {
-  if (theme === 'dark') {
-    return overlayShown && member.darkHoverImage
-      ? urlForImage(member.darkHoverImage)?.url()
-      : urlForImage(member.darkImage)?.url()
-  } else {
-    return overlayShown
-      ? member.hoverImage
-        ? urlForImage(member.hoverImage)?.url()
-        : urlForImage(member.darkHoverImage)?.url()
-      : member.mainImage
-        ? urlForImage(member.mainImage)?.url()
-        : urlForImage(member.darkImage)?.url()
-  }
 }
 
 export const MemberAvatarCard: FC<Props> = ({ member }) => {
@@ -38,7 +19,6 @@ export const MemberAvatarCard: FC<Props> = ({ member }) => {
   const onOverlayEnter = () => setOverlayShown(true)
   const onOverlayLeave = () => setOverlayShown(false)
   const { theme } = useTheme()
-  // const openPekUrl = () => window.open(`${environment.pekUrl}/profiles/${member.pekUsername}`)
 
   const onError: ReactEventHandler<HTMLImageElement> = (e) => {
     setShowAvatar(true)
@@ -77,14 +57,14 @@ export const MemberAvatarCard: FC<Props> = ({ member }) => {
           />
         </div>
       ) : (
-          <Image
-            alt={`${member.name} profile picture`}
-            className="object-contain"
-            height={500}
-            width={500}
-            src={avatarUrl}
-            onError={onError}
-          />
+        <Image
+          alt={`${member.name} profile picture`}
+          className="object-contain"
+          height={500}
+          width={500}
+          src={avatarUrl}
+          onError={onError}
+        />
       )}
       <CardFooter className="before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_4px)] shadow-small ml-0.5 z-10">
         <div

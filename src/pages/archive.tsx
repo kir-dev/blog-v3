@@ -3,9 +3,10 @@ import { NextSeo } from 'next-seo'
 import ActionButton from '~/components/ActionButton'
 import Container from '~/components/Container'
 import Layout from '~/components/Layout'
+import { getArchive } from '~/lib/queries'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
-import { Post, getArchive } from '~/lib/sanity.queries'
+import { Post } from '~/lib/sanity.types'
 import { formatDateEasy } from '~/utils/date-utils'
 import { SharedPageProps } from './_app'
 
@@ -36,7 +37,7 @@ export default function ArchivePage(
       <NextSeo title="Blog archívum" />
       <Container>
         <h1 className="text-4xl font-bold my-16">Archívum</h1>
-        <ul className="flex flex-col gap-8">
+        <ul className="flex flex-col gap-2">
           {posts?.map((post) => (
             <li key={post._id} className="flex flex-wrap items-center gap-x-4">
               <div>{formatDateEasy(post._createdAt)}</div>

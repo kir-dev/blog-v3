@@ -3,20 +3,21 @@ import { PortableText } from '@portabletext/react'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useLiveQuery } from 'next-sanity/preview'
 import { NextSeo } from 'next-seo'
+import config from 'next-seo.config'
 import Image from 'next/image'
 import Container from '~/components/Container'
 
 import Layout from '~/components/Layout'
 import { GitHubSvg } from '~/components/svg-components/GitHubSvg'
-import { readToken } from '~/lib/sanity.api'
-import { getClient } from '~/lib/sanity.client'
-import { urlForImage } from '~/lib/sanity.image'
 import {
-  Project,
   getProject,
   projectBySlugQuery,
   projectSlugsQuery,
-} from '~/lib/sanity.queries'
+} from '~/lib/queries'
+import { readToken } from '~/lib/sanity.api'
+import { getClient } from '~/lib/sanity.client'
+import { urlForImage } from '~/lib/sanity.image'
+import { Project } from '~/lib/sanity.types'
 import type { SharedPageProps } from '~/pages/_app'
 import { postPageComponents } from '~/utils/portable-text-comps'
 
@@ -57,11 +58,36 @@ export default function ProjectSlugRoute(
 
   return (
     <Layout>
-      <NextSeo title={project.title} /* TODO: better SEO */ />
-      <Container useCustom className="post">
+      <NextSeo
+        title={project.title}
+        description={project.shortDesc ?? config.description}
+        openGraph={{
+          images: [
+            {
+              url:
+                urlForImage(project.mainImage)?.url() ??
+                config.openGraph.images[0].url,
+            },
+          ],
+          type: 'article',
+          title: project.title,
+          description: project.shortDesc ?? config.openGraph.description,
+          article: {
+            publishedTime: project._createdAt,
+            modifiedTime: project._updatedAt,
+            authors: [`kir-dev`],
+            tags: [
+              'webdev',
+              'engineering',
+              'programming',
+              ...project.techStacks.map((s) => s.toLowerCase()),
+            ],
+          },
+        }}
+      />
+      <Container useCustom>
         {project.mainImage ? (
           <Image
-            className="post__cover"
             src={urlForImage(project.mainImage).url()}
             height={231}
             width={367}
@@ -70,11 +96,11 @@ export default function ProjectSlugRoute(
         ) : (
           <div className="post__cover--none" />
         )}
-        <div className="post__container">
+        <div className="">
           <h1 className="text-4xl tracking-tighter font-extrabold my-16">
             {project.title}
           </h1>
-          <p className="post__excerpt">{project.shortDesc}</p>
+          <p className="">{project.shortDesc}</p>
           <div className="flex items-center gap-2 mt-2">
             {project.techStacks.map((techStack, index) => (
               <Chip key={`${techStack}-${index}`} size="sm">
@@ -98,7 +124,7 @@ export default function ProjectSlugRoute(
               </a>
             </div>
           ))}
-          <div className="post__content mt-16">
+          <div className="mt-16">
             <PortableText
               value={project.body}
               components={postPageComponents}

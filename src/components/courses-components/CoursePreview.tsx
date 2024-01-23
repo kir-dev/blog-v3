@@ -1,6 +1,5 @@
 import { ClockIcon, MapPinIcon, UserIcon } from '@heroicons/react/24/solid'
-
-import { Course } from '~/lib/sanity.queries'
+import { Course } from '~/lib/sanity.types'
 
 export default function CoursePreview({ course }: { course: Course }) {
   return (

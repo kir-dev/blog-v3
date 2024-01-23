@@ -5,9 +5,10 @@ import Layout from '~/components/Layout'
 import ProjectPreview from '~/components/project-components/ProjectPreview'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
-import { getProjects, Project } from '~/lib/sanity.queries'
 
 import { NextSeo } from 'next-seo'
+import { getProjects } from '~/lib/queries'
+import { Project } from '~/lib/sanity.types'
 import { SharedPageProps } from '../_app'
 
 export const getStaticProps: GetStaticProps<

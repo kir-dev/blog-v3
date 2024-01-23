@@ -1,7 +1,7 @@
 import { DefaultSeoProps } from 'next-seo'
 
 const config: DefaultSeoProps = {
-  canonical: 'https://kir-dev.hu/',
+  canonical: 'https://kir-dev.hu',
   defaultTitle: 'Kir-Dev',
   titleTemplate: '%s | Kir-Dev',
   languageAlternates: [{ hrefLang: 'hu-HU', href: 'https://kir-dev.hu/' }],
@@ -28,7 +28,7 @@ const config: DefaultSeoProps = {
   additionalLinkTags: [
     {
       rel: 'icon',
-      href: '/favicon/favicon.ico',
+      href: '/favicon/favicon-96x96.png',
     },
     {
       rel: 'apple-touch-icon',

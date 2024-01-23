@@ -19,9 +19,10 @@ const PostImage: PortableTextComponent<ImageBlock> = ({ value }) => {
   return (
     <Image
       src={urlForImage(value).url()}
-      height={calculatedHeight ?? 100}
-      width={calculatedWidth ?? 100}
+      height={calculatedHeight ?? 500}
+      width={calculatedWidth ?? 1000}
       alt=""
+      className="object-contain max-w-full max-h-[75vh] py-4 mx-auto"
     />
   )
 }

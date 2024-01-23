@@ -3,8 +3,8 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 import { urlForImage } from '~/lib/sanity.image'
-import { type Project } from '~/lib/sanity.queries'
 
+import { Project } from '~/lib/sanity.types'
 import { projectStatusMapping } from '~/utils/project-status'
 import { GitHubSvg } from '../svg-components/GitHubSvg'
 import LaptopSuite from '../svg/laptop-suite.svg'
