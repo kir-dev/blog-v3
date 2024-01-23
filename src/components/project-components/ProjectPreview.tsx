@@ -11,7 +11,6 @@ import LaptopSuite from '../svg/laptop-suite.svg'
 
 export default function ProjectPreview({ project }: { project: Project }) {
   const router = useRouter()
-  const image = urlForImage(project.mainImage)?.width(500).height(300).url()
 
   return (
     <div className="w-full">
@@ -29,27 +28,25 @@ export default function ProjectPreview({ project }: { project: Project }) {
           }
           placement="bottom-right"
           classNames={{
-            base: 'h-32 xl:h-48 w-full',
+            base: 'aspect-[21/9] w-full',
             badge: 'text-xs px-1.5 py-0.5',
           }}
         >
           <Image
             alt={`Image for ${project.title}`}
-            className={`z-0 w-full h-full ${
-              image ? 'object-cover' : 'object-contain'
-            } rounded-lg`}
+            className={`z-0 w-full h-full object-contain rounded-lg`}
             src={
-              urlForImage(project.mainImage)?.width(500).height(300).url() ??
+              urlForImage(project.mainImage)?.width(1280).height(540).url() ??
               LaptopSuite
             }
-            height={300}
-            width={500}
+            height={540}
+            width={1280}
           />
         </Badge>
         <h4 className="text-3xl font-extrabold tracking-tight my-2">
-          {/* 
+          {/*
             TODO: https://github.com/kir-dev/blog-v3/issues/21
-            <Link href={`/project/${project.slug.current}`}>{project.title}</Link> 
+            <Link href={`/project/${project.slug.current}`}>{project.title}</Link>
             */}
           {project.title}
         </h4>
