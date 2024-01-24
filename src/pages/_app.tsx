@@ -9,6 +9,7 @@ import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
+import Script from 'next/script'
 import { lazy } from 'react'
 import Refractor from 'react-refractor'
 import { RefractorSyntax } from 'refractor'
@@ -70,6 +71,20 @@ export default function App({
   return (
     <>
       <DefaultSeo {...SEO} />
+      <Script
+        id="YeetGatsby"
+        dangerouslySetInnerHTML={{
+          __html: `
+          if(window.navigator && navigator.serviceWorker) {
+            navigator.serviceWorker.getRegistrations()
+              .then(function(registrations) {
+                for(let registration of registrations) {
+                  registration.unregister();
+                }
+              });
+          }`,
+        }}
+      />
       <style jsx global>{`
         html {
           font-family: ${inter.style.fontFamily};
