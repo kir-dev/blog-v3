@@ -5,54 +5,57 @@
 @import './custom-container.css';
 
 @layer base {
-  body {
-    @apply bg-background text-foreground;
-  }
+    body {
+        @apply bg-background text-foreground;
+    }
 
-  html #kir-dev-svg path {
-    @apply fill-foreground stroke-foreground stroke-1;
-  }
+    svg.kir-dev-svg path {
+        @apply fill-foreground stroke-foreground stroke-1;
+    }
 
-  html #kir-dev-svg path.colored {
-    @apply fill-orange-600 stroke-orange-600 stroke-1;
-  }
+    svg.kir-dev-svg path.colored {
+        @apply fill-orange-600 stroke-orange-600 stroke-1;
+    }
 
-  *::-webkit-scrollbar {
-    @apply w-3 h-3;
-  }
+    *::-webkit-scrollbar {
+        @apply w-3 h-3;
+    }
 
-  *::-webkit-scrollbar-track {
-    @apply bg-background;
-  }
+    *::-webkit-scrollbar-track {
+        @apply bg-background;
+    }
 
-  *::-webkit-scrollbar-thumb {
-    @apply bg-orange-500 rounded-lg hover:bg-orange-400;
-  }
+    *::-webkit-scrollbar-thumb {
+        @apply bg-orange-500 rounded-lg hover:bg-orange-400;
+    }
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
+    --svg-animation-length: 2s;
 }
 
 @media not (prefers-reduced-motion) {
-  svg .animate-svg-path {
-    stroke-dasharray: var(--svg-path-length);
-    stroke-dashoffset: var(--svg-path-length);
-    animation: animate-svg 2s ease forwards;
-  }
+    @media screen {
+        svg .animate-svg-path {
+            stroke-dasharray: var(--svg-path-length);
+            stroke-dashoffset: var(--svg-path-length);
+            animation: animate-svg var(--svg-animation-length) ease forwards;
+        }
 
-  @keyframes animate-svg {
-    from {
-      fill-opacity: 0;
-      stroke-opacity: 0.5;
+        @keyframes animate-svg {
+            from {
+                fill-opacity: 0;
+                stroke-opacity: 0.5;
+            }
+            45% {
+                stroke-opacity: 1;
+                fill-opacity: 0;
+            }
+            to {
+                stroke-dashoffset: 0;
+                fill-opacity: 1;
+            }
+        }
     }
-    25% {
-      stroke-opacity: 1;
-      fill-opacity: 0;
-    }
-    to {
-      stroke-dashoffset: 0;
-      fill-opacity: 1;
-    }
-  }
 }

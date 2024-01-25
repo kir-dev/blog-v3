@@ -126,12 +126,14 @@ export const Terminal: React.FC = () => {
             )}
           {lineCount >= 8 && emptyLine()}
         </div>
-        <div
-          className={`h-48 absolute end-1 bottom-1 transition-opacity`}
-          style={{ opacity }}
-        >
-          <LogoNoText className="h-full" />
-        </div>
+        {opacity > 0 && (
+          <div
+            className={`h-48 absolute end-1 bottom-1 transition-opacity`}
+            style={{ opacity }}
+          >
+            <LogoNoText className="h-full" />
+          </div>
+        )}
       </div>
     </div>
   )
