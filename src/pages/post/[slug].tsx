@@ -75,7 +75,11 @@ export default function PostSlugRoute(
           },
         }}
       />
-      <Container useCustom className="mb-16">
+      <Container
+        useCustom
+        className="mb-16"
+        style={{ wordBreak: 'break-word' }}
+      >
         {post.mainImage ? (
           <Image
             src={urlForImage(post.mainImage)?.url()}
