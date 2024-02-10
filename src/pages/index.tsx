@@ -15,6 +15,8 @@ import type { SharedPageProps } from '~/pages/_app'
 import { environment } from '~/utils/environment'
 
 import { PortableText } from '@portabletext/react'
+import config from 'next-seo.config'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { getLatestPost, getSiteSection } from '~/lib/queries'
 import { Member, Post, SiteSection } from '~/lib/sanity.types'
@@ -82,7 +84,27 @@ export default function IndexPage(
           >
             <PortableText
               value={frontAlert?.body}
-              components={aboutPageComponents}
+              components={{
+                ...aboutPageComponents,
+                marks: {
+                  link: ({ value, children }) => {
+                    const url = new URL(value?.href)
+                    const isInternal = value?.href?.startsWith(config.canonical)
+                    return (
+                      <Link
+                        href={
+                          isInternal
+                            ? `${url.pathname}${url.hash}`
+                            : value?.href
+                        }
+                        className="underline"
+                      >
+                        {children}
+                      </Link>
+                    )
+                  },
+                },
+              }}
             />
           </Chip>
         )}

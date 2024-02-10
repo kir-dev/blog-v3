@@ -39,7 +39,7 @@ export const aboutPageComponents = {
       const isInternal = value?.href?.startsWith(config.canonical)
       return (
         <UiLink
-          href={isInternal ? url.pathname : value?.href}
+          href={isInternal ? `${url.pathname}${url.hash}` : value?.href}
           isExternal={!isInternal}
           showAnchorIcon={!isInternal}
         >
