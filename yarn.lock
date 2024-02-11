@@ -8715,6 +8715,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"next-plausible@npm:^3.12.0":
+  version: 3.12.0
+  resolution: "next-plausible@npm:3.12.0"
+  peerDependencies:
+    next: ^11.1.0 || ^12.0.0 || ^13.0.0 || ^14.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 0894d81e7decb2dda6f9aee66b663ed4264533d2b21b86ffcecbb5ac471b56064506c4d34d07a4f59b26a75df53c6b9ec7f39554f1da920c9e013d4d9f6178e3
+  languageName: node
+  linkType: hard
+
 "next-sanity@npm:7.0.12":
   version: 7.0.12
   resolution: "next-sanity@npm:7.0.12"
@@ -10177,6 +10188,7 @@ __metadata:
     eslint-plugin-simple-import-sort: "npm:10.0.0"
     framer-motion: "npm:10.18.0"
     next: "npm:14.1.0"
+    next-plausible: "npm:^3.12.0"
     next-sanity: "npm:7.0.12"
     next-seo: "npm:6.4.0"
     next-themes: "npm:0.2.1"
