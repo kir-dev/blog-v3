@@ -1,5 +1,7 @@
+import { withPlausibleProxy } from 'next-plausible'
+
 /** @type {import('next').NextConfig} */
-const config = {
+const config = withPlausibleProxy()({
   images: {
     remotePatterns: [
       { hostname: 'cdn.sanity.io' },
@@ -13,6 +15,6 @@ const config = {
       permanent: true,
     },
   ],
-}
+})
 
 export default config

@@ -4,6 +4,7 @@ import '~/styles/prism-okaidia.css'
 import SEO from '../../next-seo.config'
 
 import { NextUIProvider } from '@nextui-org/react'
+import PlausibleProvider from 'next-plausible'
 import { DefaultSeo } from 'next-seo'
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
@@ -96,15 +97,22 @@ export default function App({
           attribute="class"
           defaultTheme="dark"
         >
-          <main>
-            {draftMode ? (
-              <PreviewProvider token={token}>
-                <Component {...pageProps} />
-              </PreviewProvider>
-            ) : (
-              <Component className="flex-1 pb-10" {...pageProps} />
-            )}
-          </main>
+          <PlausibleProvider
+            domain="kir-dev.hu"
+            selfHosted
+            enabled
+            customDomain={process.env.NEXT_PUBLIC_PLAUSIBLE_URL}
+          >
+            <main>
+              {draftMode ? (
+                <PreviewProvider token={token}>
+                  <Component {...pageProps} />
+                </PreviewProvider>
+              ) : (
+                <Component className="flex-1 pb-10" {...pageProps} />
+              )}
+            </main>
+          </PlausibleProvider>
         </ThemeProvider>
       </NextUIProvider>
     </>
