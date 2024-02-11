@@ -100,7 +100,6 @@ export default function App({
           <PlausibleProvider
             domain="kir-dev.hu"
             selfHosted
-            enabled
             customDomain={process.env.NEXT_PUBLIC_PLAUSIBLE_URL}
           >
             <main>
