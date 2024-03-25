@@ -1,11 +1,12 @@
-import type { SVGProps, CSSProperties, FC } from 'react'
+import { clsx } from 'clsx'
+import type { CSSProperties, FC, SVGProps } from 'react'
 
 export const LogoAnimated: FC<SVGProps<SVGSVGElement>> = (props) => (
   <svg
     viewBox="-1 -1 146 31"
-    className="kir-dev-svg"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
+    className={clsx(props.className, 'kir-dev-svg')}
   >
     <path
       className="animate-svg-path"
