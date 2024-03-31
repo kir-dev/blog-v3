@@ -78,7 +78,7 @@ export interface Course {
   title?: string
   isShown?: boolean
   priority?: number
-  excerpt?: string
+  body?: PortableTextBlock[]
   lecturers?: string[]
   lectures?: {
     dateTimeInterval?: string
