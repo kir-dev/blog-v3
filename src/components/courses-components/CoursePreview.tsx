@@ -1,5 +1,7 @@
 import { ClockIcon, MapPinIcon, UserIcon } from '@heroicons/react/24/solid'
+import { PortableText } from '@portabletext/react'
 import { Course } from '~/lib/sanity.types'
+import { aboutPageComponents } from '~/utils/portable-text-comps'
 
 export default function CoursePreview({ course }: { course: Course }) {
   return (
@@ -34,7 +36,9 @@ export default function CoursePreview({ course }: { course: Course }) {
             <div>{lecturer}</div>
           </div>
         ))}
-        <p className="mt-6">{course.excerpt}</p>
+        <div className="mt-4">
+          <PortableText value={course.body} components={aboutPageComponents} />
+        </div>
       </footer>
     </div>
   )

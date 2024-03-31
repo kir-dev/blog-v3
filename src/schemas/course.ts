@@ -21,10 +21,9 @@ export default defineType({
       type: 'number',
     }),
     defineField({
-      name: 'excerpt',
-      title: 'Excerpt',
-      type: 'text',
-      rows: 4,
+      name: 'body',
+      title: 'Body',
+      type: 'blockContent',
     }),
     defineField({
       name: 'lecturers',
