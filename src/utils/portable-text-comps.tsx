@@ -1,8 +1,8 @@
 import { Link as UiLink } from '@nextui-org/react'
 import { PortableTextReactComponents } from '@portabletext/react'
-import { PortableActionButton } from '~/components/ActionButton'
-
 import config from 'next-seo.config'
+import { PortableActionButton } from '~/components/ActionButton'
+import { PortableYoutubeEmbed } from '~/components/YoutubeEmbed'
 import PostCodeBlock from '~/components/post-components/PostCodeBlock'
 import PostImage from '~/components/post-components/PostImage'
 
@@ -11,6 +11,7 @@ export const aboutPageComponents = {
     code: PostCodeBlock,
     image: PostImage,
     actionButton: PortableActionButton,
+    youtubeEmbed: PortableYoutubeEmbed,
   },
   block: {
     h2: ({ children }) => (

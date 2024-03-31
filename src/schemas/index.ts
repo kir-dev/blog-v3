@@ -8,6 +8,7 @@ import post from './post'
 import project from './project'
 import siteSection from './siteSection'
 import techStack from './techStack'
+import youtubeEmbed from './youtubeEmbed'
 
 export const schemaTypes = [
   post,
@@ -28,5 +29,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     project,
     course,
     actionButton,
+    youtubeEmbed,
   ],
 }
