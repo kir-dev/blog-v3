@@ -20,7 +20,7 @@ export const getStaticProps: GetStaticProps<
   }
 > = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
-  const sectionContact = await getSiteSection(client, 'contact')
+  const sectionContact = await getSiteSection(client, 'contact', locale)
 
   return {
     props: {

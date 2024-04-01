@@ -27,6 +27,7 @@
     }
   },
   "History": {
+    "title": "Rólunk",
     "sectionHistory": {
       "title": "Történelem"
     },
@@ -74,6 +75,11 @@
   },
   "Post": {
     "toc": "Tartalomjegyzék"
+  },
+  "Blog": {
+    "title": "Blog",
+    "action": "Archívum megtekintése",
+    "archiveTitle": "Blog archívum"
   },
   "common": {
     "navbar": {

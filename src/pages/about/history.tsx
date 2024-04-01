@@ -24,10 +24,10 @@ export const getStaticProps: GetStaticProps<
   }
 > = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
-  const sectionHistory = await getSiteSection(client, 'history')
-  const sectionTechStack = await getSiteSection(client, 'techstack')
-  const sectionTeamwork = await getSiteSection(client, 'teamwork')
-  const techStacks = await getTechStacks(client)
+  const sectionHistory = await getSiteSection(client, 'history', locale)
+  const sectionTechStack = await getSiteSection(client, 'techstack', locale)
+  const sectionTeamwork = await getSiteSection(client, 'teamwork', locale)
+  const techStacks = await getTechStacks(client, locale)
 
   return {
     props: {

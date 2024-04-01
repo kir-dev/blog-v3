@@ -26,9 +26,9 @@ export const getStaticProps: GetStaticProps<
   }
 > = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
-  const sectionCourseList = await getSiteSection(client, 'courseList')
-  const sectionJoining = await getSiteSection(client, 'joining')
-  const sectionMentoring = await getSiteSection(client, 'mentoring')
+  const sectionCourseList = await getSiteSection(client, 'courseList', locale)
+  const sectionJoining = await getSiteSection(client, 'joining', locale)
+  const sectionMentoring = await getSiteSection(client, 'mentoring', locale)
   const courses = await getCourses(client)
 
   return {

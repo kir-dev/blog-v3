@@ -21,13 +21,23 @@ export default defineType({
       title: 'Body',
       type: 'blockContent',
     }),
+    defineField({
+      name: 'language',
+      type: 'string',
+      readOnly: true,
+      hidden: true,
+    }),
   ],
   preview: {
     select: {
-      title: 'key',
+      key: 'key',
+      language: 'language',
     },
     prepare(selection) {
-      return { ...selection }
+      return {
+        ...selection,
+        title: selection.key + ' ' + selection.language.toUpperCase(),
+      }
     },
   },
 })

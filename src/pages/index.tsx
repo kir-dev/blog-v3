@@ -35,10 +35,10 @@ export const getStaticProps: GetStaticProps<
   const client = getClient(draftMode ? { token: readToken } : undefined)
   const { post, author } = await getLatestPost(client)
   const frontSections = [
-    await getSiteSection(client, 'frontpage1'),
-    await getSiteSection(client, 'frontpage2'),
+    await getSiteSection(client, 'frontpage1', locale),
+    await getSiteSection(client, 'frontpage2', locale),
   ]
-  const frontAlert = await getSiteSection(client, 'frontAlert')
+  const frontAlert = await getSiteSection(client, 'frontAlert', locale)
 
   return {
     props: {

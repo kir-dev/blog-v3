@@ -27,6 +27,7 @@
     }
   },
   "History": {
+    "title": "About us",
     "sectionHistory": {
       "title": "History"
     },
@@ -74,6 +75,11 @@
   },
   "Post": {
     "toc": "Table of contents"
+  },
+  "Blog": {
+    "title": "Blog",
+    "action": "See more in archive",
+    "archiveTitle": "Blog archive"
   },
   "common": {
     "navbar": {
