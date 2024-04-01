@@ -19,6 +19,9 @@ const PostCodeBlock: PortableTextComponent<CodeBlock> = ({
     case 'sh':
       modLang = 'bash'
       break
+    case 'powershell':
+      modLang = 'bash'
+      break
     case 'dockerfile':
       modLang = 'bash'
       break

@@ -17,38 +17,44 @@ const classNameRed = 'bg-red-500 hover:bg-red-600'
 
 const actionIcons = [
   {
+    key: 'microphone',
     align: 'center',
     icon: MicrophoneIcon,
     className: classNameGray,
   },
   {
+    key: 'video',
     align: 'center',
     icon: VideoCameraSlashIcon,
     className: classNameRed,
   },
   {
+    key: 'hand',
     align: 'center',
     icon: HandRaisedIcon,
     className: `${classNameGray} hidden lg:flex`,
   },
   {
+    key: 'desktop',
     align: 'center',
     icon: ComputerDesktopIcon,
     className: `${classNameGray} hidden lg:flex`,
   },
   {
+    key: 'ellipsis',
     align: 'center',
     icon: EllipsisVerticalIcon,
     className: `${classNameGray} hidden lg:flex`,
   },
   {
+    key: 'phone',
     align: 'center',
     icon: PhoneXMarkIcon,
     className: classNameRed,
   },
-  { align: 'right', icon: InformationCircleIcon },
-  { align: 'right', icon: UsersIcon, showBadge: true },
-  { align: 'right', icon: ChatBubbleBottomCenterTextIcon },
+  { key: 'info', align: 'right', icon: InformationCircleIcon },
+  { key: 'users', align: 'right', icon: UsersIcon, showBadge: true },
+  { key: 'chat', align: 'right', icon: ChatBubbleBottomCenterTextIcon },
 ]
 
 type Props = {
@@ -76,7 +82,7 @@ export const MeetingControls: FC<Props> = ({ numberOfActives }) => {
           .filter((a) => a.align === 'center')
           .map((a) => (
             <Button
-              key={a.icon.toString()}
+              key={a.key}
               size="sm"
               isIconOnly
               aria-label="Non-functional button"
@@ -95,7 +101,7 @@ export const MeetingControls: FC<Props> = ({ numberOfActives }) => {
           .map((a) => {
             const button = (
               <Button
-                key={a.icon.toString()}
+                key={a.showBadge ? undefined : a.key}
                 size="sm"
                 variant="light"
                 isIconOnly
@@ -106,7 +112,7 @@ export const MeetingControls: FC<Props> = ({ numberOfActives }) => {
               </Button>
             )
             return a.showBadge ? (
-              <Badge color="default" content={numberOfActives}>
+              <Badge color="default" content={numberOfActives} key={a.key}>
                 {button}
               </Badge>
             ) : (
