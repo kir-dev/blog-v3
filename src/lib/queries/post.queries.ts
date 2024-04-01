@@ -1,5 +1,5 @@
 import { SanityClient, groq } from 'next-sanity'
-import { Post, PostWithAuthor } from '../sanity.types'
+import { Post, PostWithAuthor, ReducedPost } from '../sanity.types'
 
 export const postsQuery = groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc){
   "estimatedReadingTime": round(length(pt::text(body)) / 6 / 200 + 1),
@@ -7,7 +7,12 @@ export const postsQuery = groq`*[_type == "post" && defined(slug.current)] | ord
   ...
 }[0..3]`
 
-export const archiveQuery = groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc)`
+export const archiveQuery = groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc){
+  _id,
+  _createdAt,
+  title,
+  slug
+}`
 
 export const getPosts = async (
   client: SanityClient,
@@ -21,8 +26,9 @@ export const getPosts = async (
   })
 }
 
-export const getArchive = async (client: SanityClient): Promise<Post[]> =>
-  client.fetch(archiveQuery)
+export const getArchive = async (
+  client: SanityClient,
+): Promise<ReducedPost[]> => client.fetch(archiveQuery)
 
 export const latestPostQuery = groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc){
   "estimatedReadingTime": round(length(pt::text(body)) / 6 / 200 + 1),

@@ -7,13 +7,13 @@ import Layout from '~/components/Layout'
 import { getArchive } from '~/lib/queries'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
-import { Post } from '~/lib/sanity.types'
+import { ReducedPost } from '~/lib/sanity.types'
 import { formatDateEasy } from '~/utils/date-utils'
 import { SharedPageProps } from './_app'
 
 export const getStaticProps: GetStaticProps<
   SharedPageProps & {
-    posts: Post[]
+    posts: ReducedPost[]
   }
 > = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
