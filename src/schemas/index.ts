@@ -19,6 +19,16 @@ export const schemaTypes = [
   project,
   course,
 ]
+
+/**
+ * These can be used as building blocks in general.
+ * When you define a new schemaType, export it here too.
+ * Always check sanity.config.ts in the root and include schemaTypes
+ * in the i18n plugin that you want to be able to translate.
+ *
+ * Any schemaType that is document, will be available as high level building
+ * blocks in the studio "Contents" pane.
+ */
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     post,

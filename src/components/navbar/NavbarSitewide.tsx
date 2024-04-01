@@ -124,6 +124,16 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
             className="p-0 bg-transparent data-[hover=true]:bg-transparent"
             onPress={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           >
+            {theme === 'dark' ? 'EN' : 'HU'}
+          </Button>
+        </NavbarItem>
+        <NavbarItem className="flex h-full items-center">
+          <Button
+            isIconOnly
+            aria-label="Theme switcher"
+            className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+            onPress={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          >
             {theme === 'dark' ? (
               <SunIcon className="h-5 w-5" />
             ) : (
