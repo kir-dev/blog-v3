@@ -100,7 +100,7 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
                         <ChevronRightIcon className="h-4 w-4" />
                       )
                     }
-                    onClick={() => router.push(subRoute.href)}
+                    onClick={() => router.push(subRoute.href ?? '')}
                   >
                     {t(`routes.${subRoute.key}`)}
                   </DropdownItem>
@@ -112,7 +112,7 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
               <NextLink
                 color="foreground"
                 className="text-md"
-                href={route.href}
+                href={route.href ?? ''}
                 aria-label={t(`routes.${route.key}`)}
               >
                 {t(`routes.${route.key}`)}
@@ -164,7 +164,7 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
               <NextLink
                 className="w-full text-lg"
                 color="foreground"
-                href={item.href}
+                href={item.href ?? ''}
               >
                 {t(`routes.${item.key}`)}
               </NextLink>
