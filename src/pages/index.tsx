@@ -20,7 +20,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { getLatestPost, getSiteSection } from '~/lib/queries'
 import { Member, Post, SiteSection } from '~/lib/sanity.types'
-import { aboutPageComponents } from '~/utils/portable-text-comps'
+import { commonSerializer } from '~/utils/serializers/common.serializer'
 import LaptopSuite from '../components/svg/laptop-suite.svg'
 
 export const getStaticProps: GetStaticProps<
@@ -85,7 +85,7 @@ export default function IndexPage(
             <PortableText
               value={frontAlert?.body}
               components={{
-                ...aboutPageComponents,
+                ...commonSerializer,
                 marks: {
                   link: ({ value, children }) => {
                     const url = new URL(value?.href)
@@ -173,7 +173,7 @@ export default function IndexPage(
               <div key={section._id}>
                 <PortableText
                   value={section?.body}
-                  components={aboutPageComponents}
+                  components={commonSerializer}
                 />
               </div>
             ))}

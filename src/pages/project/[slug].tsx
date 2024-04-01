@@ -1,4 +1,5 @@
-import { Chip } from '@nextui-org/react'
+import { LinkIcon } from '@heroicons/react/24/solid'
+import { Badge, Chip } from '@nextui-org/react'
 import { PortableText } from '@portabletext/react'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useLiveQuery } from 'next-sanity/preview'
@@ -19,7 +20,8 @@ import { getClient } from '~/lib/sanity.client'
 import { urlForImage } from '~/lib/sanity.image'
 import { Project } from '~/lib/sanity.types'
 import type { SharedPageProps } from '~/pages/_app'
-import { postPageComponents } from '~/utils/portable-text-comps'
+import { projectStatusMapping } from '~/utils/project-status'
+import { postContentSerializer } from '~/utils/serializers/post-content.serializer'
 
 interface Query {
   [key: string]: string
@@ -85,51 +87,91 @@ export default function ProjectSlugRoute(
           },
         }}
       />
-      <Container useCustom>
+      <Container
+        useCustom
+        className="mb-16"
+        style={{ wordBreak: 'break-word' }}
+      >
         {project.mainImage ? (
           <Image
-            src={urlForImage(project.mainImage).url()}
-            height={231}
-            width={367}
+            src={urlForImage(project.mainImage)?.url()}
+            height={500}
+            width={1000}
+            className="object-cover rounded-md w-full h-[50vh]"
             alt=""
           />
         ) : (
-          <div className="post__cover--none" />
+          <div className="mt-16" />
         )}
-        <div className="">
-          <h1 className="text-4xl tracking-tighter font-extrabold my-16">
-            {project.title}
-          </h1>
-          <p className="">{project.shortDesc}</p>
-          <div className="flex items-center gap-2 mt-2">
-            {project.techStacks.map((techStack, index) => (
-              <Chip key={`${techStack}-${index}`} size="sm">
-                {techStack}
-              </Chip>
-            ))}
-          </div>
-          {project.githubRepos.map((p) => (
-            <div
-              key={p}
-              className="flex items-center gap-2 mt-2 text-foreground text-opacity-70 hover:text-opacity-100"
+        <div className="flex flex-row flex-wrap justify-between gap-4 mt-8 mb-4">
+          <div>
+            <Badge
+              content={
+                projectStatusMapping.find((p) => p.value === project.status)
+                  .title
+              }
+              color={
+                project.status === 'discontinued'
+                  ? 'danger'
+                  : project.status === 'new'
+                    ? 'secondary'
+                    : 'success'
+              }
             >
-              <GitHubSvg className="w-4 h-4 fill-current" />
-              <a
-                className="hover:underline"
-                href={`https://github.com/${p}`}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                {p}
-              </a>
+              <h1 className="text-4xl tracking-tighter font-extrabold">
+                {project.title}&nbsp;&nbsp;
+              </h1>
+            </Badge>
+            <div className="flex items-center gap-2 mt-2">
+              {project.techStacks.map((techStack, index) => (
+                <Chip key={`${techStack}-${index}`} size="sm">
+                  {techStack}
+                </Chip>
+              ))}
             </div>
-          ))}
-          <div className="mt-16">
-            <PortableText
-              value={project.body}
-              components={postPageComponents}
-            />
           </div>
+          <div className="flex-1 flex flex-row justify-end whitespace-nowrap">
+            <div className="text-small text-foreground-500 text-end flex flex-col gap-1">
+              {project.githubRepos?.map((p) => (
+                <div
+                  key={p}
+                  className="flex items-center justify-end gap-2 mt-2 text-foreground text-opacity-70 hover:text-opacity-100"
+                >
+                  <GitHubSvg className="w-4 h-4 fill-current" />
+                  <a
+                    className="hover:underline"
+                    href={`https://github.com/${p}`}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {p}
+                  </a>
+                </div>
+              ))}
+              {project.homePageUrls?.map((p) => (
+                <div
+                  key={p}
+                  className="flex items-center justify-end gap-2 mt-2 text-foreground text-opacity-70 hover:text-opacity-100"
+                >
+                  <LinkIcon className="w-4 h-4 fill-current" />
+                  <a
+                    className="hover:underline"
+                    href={p}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {p}
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="mt-16 break-words">
+          <PortableText
+            value={project.body}
+            components={postContentSerializer}
+          />
         </div>
       </Container>
     </Layout>

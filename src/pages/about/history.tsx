@@ -6,7 +6,7 @@ import Container from '~/components/Container'
 import Layout from '~/components/Layout'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
-import { aboutPageComponents } from '~/utils/portable-text-comps'
+import { commonSerializer } from '~/utils/serializers/common.serializer'
 import { getStackSvg } from '~/utils/tech-stack'
 
 import { NextSeo } from 'next-seo'
@@ -53,7 +53,7 @@ export default function HistoryPage(
           <hr className="my-8" />
           <PortableText
             value={sectionHistory?.body}
-            components={aboutPageComponents}
+            components={commonSerializer}
           />
         </section>
         <section className="my-8 mt-24">
@@ -96,7 +96,7 @@ export default function HistoryPage(
           <hr className="my-8" />
           <PortableText
             value={sectionTeamwork?.body}
-            components={aboutPageComponents}
+            components={commonSerializer}
           />
         </section>
         <div className="mt-12 flex flex-col items-start gap-4"></div>

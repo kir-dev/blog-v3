@@ -11,6 +11,7 @@ export interface Post {
   excerpt?: string
   mainImage?: ImageAsset
   estimatedReadingTime?: number
+  hasToc?: boolean
   body: PortableTextBlock[]
   hashTag?: string
 }

@@ -18,6 +18,10 @@ export default defineType({
       title: 'Action button',
     }),
     defineArrayMember({
+      type: 'youtubeEmbed',
+      title: 'YouTube Embed',
+    }),
+    defineArrayMember({
       title: 'Block',
       type: 'block',
       styles: [
