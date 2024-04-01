@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 
 import { urlForImage } from '~/lib/sanity.image'
 
+import Link from 'next/link'
 import { Project } from '~/lib/sanity.types'
 import { projectStatusMapping } from '~/utils/project-status'
 import { GitHubSvg } from '../svg-components/GitHubSvg'
@@ -34,21 +35,18 @@ export default function ProjectPreview({ project }: { project: Project }) {
         >
           <Image
             alt={`Image for ${project.title}`}
-            className={`z-0 w-full h-full object-contain rounded-lg`}
+            className={`z-0 w-full h-full object-contain rounded-lg cursor-pointer`}
             src={
               urlForImage(project.mainImage)?.width(1280).height(540).url() ??
               LaptopSuite
             }
             height={540}
             width={1280}
+            onClick={() => router.push(`/project/${project.slug.current}`)}
           />
         </Badge>
         <h4 className="text-3xl font-extrabold tracking-tight my-2">
-          {/*
-            TODO: https://github.com/kir-dev/blog-v3/issues/21
-            <Link href={`/project/${project.slug.current}`}>{project.title}</Link>
-            */}
-          {project.title}
+          <Link href={`/project/${project.slug.current}`}>{project.title}</Link>
         </h4>
       </header>
       <footer>
