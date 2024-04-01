@@ -2,7 +2,7 @@ import { PortableTextReactComponents } from '@portabletext/react'
 import { FC, PropsWithChildren } from 'react'
 import { commonSerializer } from './common.serializer'
 
-const InnerHeading: FC<PropsWithChildren<{ _key: string }>> = ({
+const InnerHeading: FC<PropsWithChildren<{ _key?: string }>> = ({
   children,
   _key,
 }) => (
