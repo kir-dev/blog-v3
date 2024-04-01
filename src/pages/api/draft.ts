@@ -29,7 +29,7 @@ export default async function preview(
     token: readToken,
   })
 
-  const { isValid } = await validatePreviewUrl(authClient, req.url)
+  const { isValid } = await validatePreviewUrl(authClient, req.url ?? '')
   if (!isValid) {
     return res.status(401).send('Invalid secret')
   }
