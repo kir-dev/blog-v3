@@ -6,7 +6,7 @@ import Container from '~/components/Container'
 import Layout from '~/components/Layout'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
-import { aboutPageComponents } from '~/utils/portable-text-comps'
+import { commonSerializer } from '~/utils/serializers/common.serializer'
 
 import { NextSeo } from 'next-seo'
 import { getSiteSection } from '~/lib/queries'
@@ -47,7 +47,7 @@ export default function ContactPage(
           </h2>
           <PortableText
             value={sectionContact?.body}
-            components={aboutPageComponents}
+            components={commonSerializer}
           />
           <ActionButton href="/about/members" className="mt-12">
             Ismerd meg tagjaink

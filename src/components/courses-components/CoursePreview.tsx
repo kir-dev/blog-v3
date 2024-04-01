@@ -1,7 +1,7 @@
 import { ClockIcon, MapPinIcon, UserIcon } from '@heroicons/react/24/solid'
 import { PortableText } from '@portabletext/react'
 import { Course } from '~/lib/sanity.types'
-import { aboutPageComponents } from '~/utils/portable-text-comps'
+import { commonSerializer } from '~/utils/serializers/common.serializer'
 
 export default function CoursePreview({ course }: { course: Course }) {
   return (
@@ -37,7 +37,7 @@ export default function CoursePreview({ course }: { course: Course }) {
           </div>
         ))}
         <div className="mt-4">
-          <PortableText value={course.body} components={aboutPageComponents} />
+          <PortableText value={course.body} components={commonSerializer} />
         </div>
       </footer>
     </div>

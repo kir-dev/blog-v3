@@ -6,7 +6,7 @@ import { PortableYoutubeEmbed } from '~/components/YoutubeEmbed'
 import PostCodeBlock from '~/components/post-components/PostCodeBlock'
 import PostImage from '~/components/post-components/PostImage'
 
-export const aboutPageComponents = {
+export const commonSerializer = {
   types: {
     code: PostCodeBlock,
     image: PostImage,
@@ -14,6 +14,11 @@ export const aboutPageComponents = {
     youtubeEmbed: PortableYoutubeEmbed,
   },
   block: {
+    h1: ({ children }) => (
+      <h1 className="text-6xl font-extrabold leading-none tracking-tight py-4">
+        {children}
+      </h1>
+    ),
     h2: ({ children }) => (
       <h2 className="text-4xl font-extrabold leading-none tracking-tight py-4">
         {children}
@@ -21,6 +26,9 @@ export const aboutPageComponents = {
     ),
     h3: ({ children }) => (
       <h3 className="text-2xl font-bold py-4 mt-8">{children}</h3>
+    ),
+    h4: ({ children }) => (
+      <h4 className="text-xl font-bold py-4 mt-4">{children}</h4>
     ),
     normal: ({ children }) => <p className="py-2">{children}</p>,
     blockquote: ({ children }) => (
@@ -48,17 +56,5 @@ export const aboutPageComponents = {
         </UiLink>
       )
     },
-  },
-} satisfies Partial<PortableTextReactComponents>
-
-export const postPageComponents: Partial<PortableTextReactComponents> = {
-  ...aboutPageComponents,
-  block: {
-    h2: ({ children }) => (
-      <h2 className="text-3xl font-extrabold leading-none tracking-tight py-4 mt-8">
-        {children}
-      </h2>
-    ),
-    normal: ({ children }) => <p className="py-4">{children}</p>,
   },
 } satisfies Partial<PortableTextReactComponents>

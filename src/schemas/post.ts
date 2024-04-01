@@ -53,6 +53,11 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'hasToc',
+      title: 'Show table of contents before body?',
+      type: 'boolean',
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',

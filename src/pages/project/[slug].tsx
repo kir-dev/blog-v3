@@ -19,7 +19,7 @@ import { getClient } from '~/lib/sanity.client'
 import { urlForImage } from '~/lib/sanity.image'
 import { Project } from '~/lib/sanity.types'
 import type { SharedPageProps } from '~/pages/_app'
-import { postPageComponents } from '~/utils/portable-text-comps'
+import { postContentSerializer } from '~/utils/serializers/post-content.serializer'
 
 interface Query {
   [key: string]: string
@@ -127,7 +127,7 @@ export default function ProjectSlugRoute(
           <div className="mt-16">
             <PortableText
               value={project.body}
-              components={postPageComponents}
+              components={postContentSerializer}
             />
           </div>
         </div>

@@ -14,7 +14,8 @@ import { urlForImage } from '~/lib/sanity.image'
 import { Post } from '~/lib/sanity.types'
 import type { SharedPageProps } from '~/pages/_app'
 import { formatDate } from '~/utils/date-utils'
-import { postPageComponents } from '~/utils/portable-text-comps'
+import { postContentSerializer } from '~/utils/serializers/post-content.serializer'
+import { tocSerializer } from '~/utils/serializers/toc.serializer'
 
 interface Query {
   [key: string]: string
@@ -106,7 +107,17 @@ export default function PostSlugRoute(
           </div>
         </div>
         <div className="mt-16 break-words">
-          <PortableText value={post.body} components={postPageComponents} />
+          {post.hasToc && (
+            <>
+              <h2 className="text-4xl font-extrabold leading-none tracking-tight py-4 mt-8">
+                Tartalomjegyzék
+              </h2>
+              <ul className="mb-8 list-disc list-inside ml-2">
+                <PortableText value={post.body} components={tocSerializer} />
+              </ul>
+            </>
+          )}
+          <PortableText value={post.body} components={postContentSerializer} />
         </div>
       </Container>
     </Layout>

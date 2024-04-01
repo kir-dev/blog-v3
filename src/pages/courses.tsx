@@ -8,7 +8,7 @@ import Layout from '~/components/Layout'
 import { TechsLogo } from '~/components/svg-components/TechsLogo'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
-import { aboutPageComponents } from '~/utils/portable-text-comps'
+import { commonSerializer } from '~/utils/serializers/common.serializer'
 
 import { NextSeo } from 'next-seo'
 import CoursePreview from '~/components/courses-components/CoursePreview'
@@ -81,7 +81,7 @@ export default function CoursesPage(
         <Container>
           <PortableText
             value={sectionCourseList?.body}
-            components={aboutPageComponents}
+            components={commonSerializer}
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-24 mt-8">
             {courses
@@ -104,7 +104,7 @@ export default function CoursesPage(
             <hr className="my-8" />
             <PortableText
               value={sectionJoining?.body}
-              components={aboutPageComponents}
+              components={commonSerializer}
             />
           </div>
           <div className="my-8 mt-24">
@@ -114,7 +114,7 @@ export default function CoursesPage(
             <hr className="my-8" />
             <PortableText
               value={sectionMentoring?.body}
-              components={aboutPageComponents}
+              components={commonSerializer}
             />
           </div>
         </Container>

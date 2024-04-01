@@ -5,7 +5,7 @@ import {
 } from '@portabletext/react'
 import { useEffect, useState } from 'react'
 import YouTubePlayer from 'react-player/youtube'
-import { aboutPageComponents } from '~/utils/portable-text-comps'
+import { commonSerializer } from '~/utils/serializers/common.serializer'
 
 interface PortableProps {
   url: string
@@ -25,7 +25,7 @@ export const PortableYoutubeEmbed: PortableTextComponent<PortableProps> = ({
     <div className="flex flex-col md:flex-row md:gap-10 justify-center">
       {body && body.length && (
         <div className="w-full">
-          <PortableText value={body} components={aboutPageComponents} />
+          <PortableText value={body} components={commonSerializer} />
         </div>
       )}
       <div className="w-full md:w-[40rem] mb-4 py-3">
