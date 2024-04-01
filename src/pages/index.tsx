@@ -15,6 +15,7 @@ import type { SharedPageProps } from '~/pages/_app'
 import { environment } from '~/utils/environment'
 
 import { PortableText } from '@portabletext/react'
+import { useTranslations } from 'next-intl'
 import config from 'next-seo.config'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -27,10 +28,10 @@ export const getStaticProps: GetStaticProps<
   SharedPageProps & {
     post?: Post
     author?: Member
-    frontSections?: SiteSection[]
+    frontSections?: (SiteSection | undefined)[]
     frontAlert?: SiteSection
   }
-> = async ({ draftMode = false }) => {
+> = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
   const { post, author } = await getLatestPost(client)
   const frontSections = [
@@ -47,6 +48,7 @@ export const getStaticProps: GetStaticProps<
       author,
       frontSections,
       frontAlert,
+      messages: (await import(`../../messages/${locale}.json`)).default,
     },
   }
 }
@@ -56,21 +58,24 @@ export default function IndexPage(
 ) {
   const { post, author, frontSections, frontAlert } = props
 
-  // TODO: use zustand for alert state
   const [alertShown, setAlertShown] = useState(false)
   const closeAlert = () => {
-    localStorage.setItem('lastIgnoredAlertUpdatedAt', frontAlert._updatedAt)
+    localStorage.setItem(
+      'lastIgnoredAlertUpdatedAt',
+      frontAlert?._updatedAt ?? '',
+    )
     setAlertShown(false)
   }
   useEffect(() => {
     frontAlert?.isHidden
       ? setAlertShown(false)
       : localStorage.getItem('lastIgnoredAlertUpdatedAt') ===
-          frontAlert._updatedAt
+          frontAlert?._updatedAt
         ? setAlertShown(false)
         : setAlertShown(true)
   }, [frontAlert])
   const router = useRouter()
+  const t = useTranslations('Index')
 
   return (
     <Layout>
@@ -83,7 +88,7 @@ export default function IndexPage(
             classNames={{ base: 'absolute top-16 sm:top-20 z-50' }}
           >
             <PortableText
-              value={frontAlert?.body}
+              value={frontAlert?.body ?? []}
               components={{
                 ...commonSerializer,
                 marks: {
@@ -153,15 +158,17 @@ export default function IndexPage(
           </div>
         </Container>
       </section>
-      <section className="py-24">
-        <Container>
-          <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
-            Legutóbbi bejegyzés blogunkból
-          </h2>
-          <hr className="mb-16" />
-          <PostPreviewFrontpage post={post} author={author} />
-        </Container>
-      </section>
+      {post && (
+        <section className="py-24">
+          <Container>
+            <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
+              Legutóbbi bejegyzés blogunkból
+            </h2>
+            <hr className="mb-16" />
+            <PostPreviewFrontpage post={post} author={author} />
+          </Container>
+        </section>
+      )}
       <section className="py-24">
         <Container>
           <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
@@ -169,14 +176,16 @@ export default function IndexPage(
           </h2>
           <hr className="mb-8" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            {frontSections?.map((section) => (
-              <div key={section._id}>
-                <PortableText
-                  value={section?.body}
-                  components={commonSerializer}
-                />
-              </div>
-            ))}
+            {frontSections?.map((section) =>
+              section ? (
+                <div key={section._id}>
+                  <PortableText
+                    value={section?.body}
+                    components={commonSerializer}
+                  />
+                </div>
+              ) : null,
+            )}
           </div>
         </Container>
       </section>

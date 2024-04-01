@@ -18,7 +18,7 @@ export interface Post {
 
 export type PostWithAuthor = {
   post: Post
-  author?: Member | null
+  author?: Member
 }
 
 export interface SiteSection {

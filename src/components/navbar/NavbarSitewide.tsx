@@ -22,7 +22,6 @@ import {
 } from '@nextui-org/react'
 import { useTheme } from 'next-themes'
 import NextLink from 'next/link'
-import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
@@ -36,8 +35,8 @@ export interface Props {
 
 export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false)
-  const pathname = usePathname()
   const router = useRouter()
+  const { pathname, asPath, query, locales, locale } = router
   const { setTheme, theme } = useTheme()
 
   useEffect(() => {
@@ -45,6 +44,11 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
       setIsMenuOpen(false)
     }
   }, [isMenuOpen, pathname])
+
+  const switchLocale = () => {
+    const nextLocale = locales?.find((loc) => loc !== locale) || locale
+    router.push({ pathname, query }, asPath, { locale: nextLocale })
+  }
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -120,18 +124,20 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
         <NavbarItem className="flex h-full items-center">
           <Button
             isIconOnly
-            aria-label="Theme switcher"
-            className="p-0 bg-transparent data-[hover=true]:bg-transparent"
-            onPress={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            aria-label="Language switcher"
+            className="p-0"
+            variant="flat"
+            onPress={switchLocale}
           >
-            {theme === 'dark' ? 'EN' : 'HU'}
+            {locale === 'en' ? 'HU' : 'EN'}
           </Button>
         </NavbarItem>
         <NavbarItem className="flex h-full items-center">
           <Button
             isIconOnly
             aria-label="Theme switcher"
-            className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+            className="p-0"
+            variant="flat"
             onPress={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           >
             {theme === 'dark' ? (
