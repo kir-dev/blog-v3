@@ -1,4 +1,5 @@
 import { Chip, User } from '@nextui-org/react'
+import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -15,6 +16,7 @@ interface Props {
 
 export default function PostPreviewFrontpage({ post, author }: Props) {
   const { theme } = useTheme()
+  const t = useTranslations()
 
   return (
     <article className="flex flex-col sm:flex-row gap-8">
@@ -29,20 +31,24 @@ export default function PostPreviewFrontpage({ post, author }: Props) {
             {post.excerpt} &bull; ~{post.estimatedReadingTime}&nbsp;min
           </p>
           <User
-            name={author?.name ?? post.author ?? 'anonymous'}
+            name={
+              author
+                ? t('Members.nameFormat', {
+                    firstName: author?.firstName,
+                    lastName: author?.lastName,
+                  })
+                : post.author ?? 'anonymous'
+            }
             description={author?.rank}
             avatarProps={{
-              src: getAdaptiveImageUrl(author, false, theme),
+              src: author
+                ? getAdaptiveImageUrl(author, false, theme)
+                : undefined,
               size: 'sm',
               showFallback: true,
-              fallback:
-                (author?.name ?? post.author)
-                  ?.match(/(^\S\S?|\s\S)?/g)
-                  .map((v) => v.trim())
-                  .join('')
-                  .match(/(^\S|\S$)?/g)
-                  .join('')
-                  .toLocaleUpperCase() ?? 'AN',
+              fallback: author
+                ? `${author.lastName[0]}${author.firstName[0]}`
+                : 'AN',
             }}
           />
         </footer>
@@ -56,14 +62,21 @@ export default function PostPreviewFrontpage({ post, author }: Props) {
             <Image
               alt={`Image for ${post.title}`}
               className="z-0 w-full h-full object-cover rounded-lg"
-              src={urlForImage(post.mainImage)?.width(1000).height(700).url()}
+              src={
+                post.mainImage
+                  ? urlForImage(post.mainImage)
+                      ?.width(1000)
+                      .height(700)
+                      .url() ?? '/images/card-example-2.jpeg'
+                  : '/images/card-example-2.jpeg'
+              }
               height={700}
               width={1000}
             />
           </Link>
           <div className="flex flex-row justify-between items-center mt-2">
             <p className="text-tiny">{formatDate(post._createdAt)}</p>
-            <Chip size="sm">#közélet</Chip>
+            {post.hashTag && <Chip size="sm">#{post.hashTag}</Chip>}
           </div>
         </div>
       </div>

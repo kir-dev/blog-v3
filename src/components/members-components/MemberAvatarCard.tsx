@@ -1,4 +1,5 @@
 import { Avatar, Card, CardFooter } from '@nextui-org/react'
+import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import { FC, ReactEventHandler, useEffect, useState } from 'react'
@@ -12,13 +13,16 @@ type Props = {
 }
 
 export const MemberAvatarCard: FC<Props> = ({ member }) => {
-  const defaultAvatarUrl = urlForImage(member.mainImage)?.url()
+  const defaultAvatarUrl = member.mainImage
+    ? urlForImage(member.mainImage)?.url()
+    : ''
   const [avatarUrl, setAvatarUrl] = useState(defaultAvatarUrl)
   const [showAvatar, setShowAvatar] = useState(false)
   const [overlayShown, setOverlayShown] = useState(false)
   const onOverlayEnter = () => setOverlayShown(true)
   const onOverlayLeave = () => setOverlayShown(false)
   const { theme } = useTheme()
+  const t = useTranslations('Members')
 
   const onError: ReactEventHandler<HTMLImageElement> = (e) => {
     setShowAvatar(true)
@@ -41,28 +45,26 @@ export const MemberAvatarCard: FC<Props> = ({ member }) => {
           <Avatar
             size="lg"
             classNames={{ base: 'h-24 w-24' }}
-            name={member.name}
+            name={`${member.lastName} ${member.firstName}`}
             showFallback
             fallback={
               <div className="text-2xl">
-                {member.name
-                  .match(/(^\S\S?|\s\S)?/g)
-                  .map((v) => v.trim())
-                  .join('')
-                  .match(/(^\S|\S$)?/g)
-                  .join('')
-                  .toLocaleUpperCase()}
+                {member.lastName[0]}
+                {member.firstName[0]}
               </div>
             }
           />
         </div>
       ) : (
         <Image
-          alt={`${member.name} profile picture`}
+          alt={t('imageAlt', {
+            firstName: member.firstName,
+            lastName: member.lastName,
+          })}
           className="object-contain"
           height={500}
           width={500}
-          src={avatarUrl}
+          src={avatarUrl ?? ''}
           onError={onError}
         />
       )}
@@ -71,10 +73,13 @@ export const MemberAvatarCard: FC<Props> = ({ member }) => {
           className="flex-1 text-small text-white text-center sm:text-start"
           style={{ textShadow: '1px 1px 1px #000000, 2px 2px 4px #000000' }}
         >
-          {member.name}
+          {t('nameFormat', {
+            firstName: member.firstName,
+            lastName: member.lastName,
+          })}
         </div>
         <div className="hidden sm:flex justify-self-end text-[0.6rem] tracking-tighter uppercase text-white bg-black/30 py-1 px-2 rounded-2xl">
-          {member.rank ?? 'újonc'}
+          {t(`rank.${member.rank ?? 'rookie'}`)}
         </div>
       </CardFooter>
     </Card>

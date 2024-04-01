@@ -26,7 +26,7 @@ const PostCodeBlock: PortableTextComponent<CodeBlock> = ({
       modLang = 'bash'
       break
     default:
-      modLang = language
+      modLang = language ?? ''
   }
   return (
     <div className="relative">

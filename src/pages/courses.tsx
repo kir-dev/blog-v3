@@ -10,6 +10,7 @@ import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 import { commonSerializer } from '~/utils/serializers/common.serializer'
 
+import { useTranslations } from 'next-intl'
 import { NextSeo } from 'next-seo'
 import CoursePreview from '~/components/courses-components/CoursePreview'
 import { getCourses, getSiteSection } from '~/lib/queries'
@@ -23,7 +24,7 @@ export const getStaticProps: GetStaticProps<
     sectionJoining?: SiteSection
     courses: Course[]
   }
-> = async ({ draftMode = false }) => {
+> = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
   const sectionCourseList = await getSiteSection(client, 'courseList')
   const sectionJoining = await getSiteSection(client, 'joining')
@@ -38,6 +39,7 @@ export const getStaticProps: GetStaticProps<
       sectionMentoring,
       sectionJoining,
       courses,
+      messages: (await import(`../../messages/${locale}.json`)).default,
     },
   }
 }
@@ -46,29 +48,25 @@ export default function CoursesPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
   const { sectionCourseList, sectionJoining, sectionMentoring, courses } = props
+  const t = useTranslations('Courses')
 
   return (
     <Layout>
-      <NextSeo title="Tanfolyamunk" />
+      <NextSeo title={t('title')} />
       <section className="flex flex-col items-center md:h-[96vh] justify-center">
         <Container useCustom>
           <div className="flex flex-col lg:flex-row my-16 mb-24 md:my-0 gap-24 md:pb-16">
             <div className="flex-1">
               <h1 className="text-4xl font-extrabold leading-none tracking-tight mb-6">
-                Tanfolyamunk
+                {t('title')}
               </h1>
-              <p>
-                A tavaszi félévek folyamán több alkalmas tanfolyamsorozatot
-                tartunk. Megismerkedhettek a HTML-JS-CSS világával, egy-egy
-                webes keretrendszerrel, illetve a webfejlesztés
-                szakkifejezéseivel, eszközeivel.
-              </p>
+              <p>{t('body')}</p>
               <ActionButton
                 href="#join"
                 className="mt-8"
                 icon={<ArrowDownIcon className="h-4 w-4" />}
               >
-                Jelentkezés lentebb
+                {t('action')}
               </ActionButton>
             </div>
             <div className="flex-1 flex justify-end">
@@ -80,7 +78,7 @@ export default function CoursesPage(
       <section className="bg-gradient-to-r from-foreground-50 to-foreground-200 border-gray-300 border-y-1 py-24">
         <Container>
           <PortableText
-            value={sectionCourseList?.body}
+            value={sectionCourseList?.body ?? []}
             components={commonSerializer}
           />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-24 mt-8">
@@ -99,21 +97,21 @@ export default function CoursesPage(
           <div className="my-8 mt-24">
             <a id="join" className="top-[-100px] block relative invisible" />
             <h2 className="text-4xl font-extrabold leading-none tracking-tight mt-16">
-              Jelentkezés
+              {t('sectionJoiningTitle')}
             </h2>
             <hr className="my-8" />
             <PortableText
-              value={sectionJoining?.body}
+              value={sectionJoining?.body ?? []}
               components={commonSerializer}
             />
           </div>
           <div className="my-8 mt-24">
             <h2 className="text-4xl font-extrabold leading-none tracking-tight mt-16">
-              Mentorprogram
+              {t('sectionMentoringTitle')}
             </h2>
             <hr className="my-8" />
             <PortableText
-              value={sectionMentoring?.body}
+              value={sectionMentoring?.body ?? []}
               components={commonSerializer}
             />
           </div>

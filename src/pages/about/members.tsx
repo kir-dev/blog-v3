@@ -7,6 +7,7 @@ import { MemberAvatarCard } from '~/components/members-components/MemberAvatarCa
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 
+import { useTranslations } from 'next-intl'
 import { NextSeo } from 'next-seo'
 import { getMembers } from '~/lib/queries'
 import { Member } from '~/lib/sanity.types'
@@ -16,7 +17,7 @@ export const getStaticProps: GetStaticProps<
   SharedPageProps & {
     members: Member[]
   }
-> = async ({ draftMode = false }) => {
+> = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
   const members = await getMembers(client)
 
@@ -25,6 +26,7 @@ export const getStaticProps: GetStaticProps<
       draftMode,
       token: draftMode ? readToken : '',
       members,
+      messages: (await import(`../../../messages/${locale}.json`)).default,
     },
   }
 }
@@ -34,18 +36,19 @@ export default function MembersPage(
 ) {
   const actives = props.members?.filter((m) => m.isActive)
   const inactives = props.members?.filter((m) => !m.isActive)
+  const t = useTranslations('Members')
 
   return (
     <Layout>
-      <NextSeo title="Tagjaink" />
+      <NextSeo title={t('title')} />
       <Container>
         <h1 className="text-4xl font-extrabold tracking-tighter my-16">
-          Tagjaink
+          {t('title')}
         </h1>
         <div className="flex flex-col">
           <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-7xl mx-auto">
             {actives
-              ?.sort((a, b) => a.name.localeCompare(b.name))
+              ?.sort((a, b) => a.lastName.localeCompare(b.lastName))
               .map((member) => (
                 <div className="flex aspect-square" key={member.pekUsername}>
                   <MemberAvatarCard member={member} />
@@ -56,10 +59,10 @@ export default function MembersPage(
         </div>
         {inactives?.length && (
           <>
-            <h1 className="text-3xl font-bold my-16">Korábbi tagjaink</h1>
+            <h1 className="text-3xl font-bold my-16">{t('inactivesTitle')}</h1>
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-7xl mx-auto">
               {inactives
-                .sort((a, b) => a.name.localeCompare(b.name))
+                .sort((a, b) => a.lastName.localeCompare(b.lastName))
                 .map((member) => (
                   <div className="flex aspect-square" key={member.pekUsername}>
                     <MemberAvatarCard member={member} />

@@ -36,7 +36,8 @@ export interface Member {
   _id: string
   _createdAt: string
   pekUsername: string
-  name: string
+  firstName: string
+  lastName: string
   rank?: string
   isActive?: boolean
   mainImage?: ImageAsset

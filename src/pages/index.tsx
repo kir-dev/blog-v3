@@ -114,12 +114,12 @@ export default function IndexPage(
           </Chip>
         )}
         <h1 className="mb-6 text-4xl font-extrabold leading-none tracking-tight">
-          A kollégium webfejlesztői.
+          {t('mainTitle')}
         </h1>
         <Terminal />
         <div className="flex flex-row gap-4 mt-6">
           <Button color="primary" onClick={() => router.push('/about/contact')}>
-            Csatlakozás
+            {t('joinUs')}
           </Button>
           <Button
             as="a"
@@ -135,16 +135,11 @@ export default function IndexPage(
         <Container id="about-us-in-short" className="relative">
           <div className="max-w-3xl sm:h-96">
             <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
-              A Kir-Dev küldetése a Schönherz lakói számára hasznos webappok
-              készítése.
+              {t('mission.title')}
             </h2>
-            <p>
-              Webfejlesztés mellett a mobilfejlesztés és az üzemeltetési
-              technológiák terén is képezzük magunkat. Tavasszal tanfolyamokat
-              hirdetünk, amelyek segítik a körbe való csatlakozást.
-            </p>
+            <p>{t('mission.body')}</p>
             <ActionButton href="/about/history" className="mt-8">
-              Tudj meg rólunk többet
+              {t('mission.action')}
             </ActionButton>
           </div>
           <div className="absolute right-0 bottom-0 h-0 sm:h-48 lg:h-72 xl:h-96 pr-10">
@@ -162,7 +157,7 @@ export default function IndexPage(
         <section className="py-24">
           <Container>
             <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
-              Legutóbbi bejegyzés blogunkból
+              {t('blogPromo.title')}
             </h2>
             <hr className="mb-16" />
             <PostPreviewFrontpage post={post} author={author} />
@@ -172,7 +167,7 @@ export default function IndexPage(
       <section className="py-24">
         <Container>
           <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
-            Működésünk
+            {t('operations.title')}
           </h2>
           <hr className="mb-8" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">

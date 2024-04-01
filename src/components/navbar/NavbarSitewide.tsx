@@ -27,6 +27,7 @@ import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
 import { Route } from '~/utils/routes'
 
+import { useTranslations } from 'next-intl'
 import { LogoAnimated } from '../svg-components/LogoAnimated'
 
 export interface Props {
@@ -45,6 +46,7 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
     }
   }, [isMenuOpen, pathname])
 
+  const t = useTranslations('common.navbar')
   const switchLocale = () => {
     const nextLocale = locales?.find((loc) => loc !== locale) || locale
     router.push({ pathname, query }, asPath, { locale: nextLocale })
@@ -54,11 +56,11 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
     <Navbar onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-label={isMenuOpen ? t('closeMenu') : t('openMenu')}
           className="sm:hidden"
         />
         <NavbarBrand>
-          <NextLink aria-label="Kezdőlap" href="/">
+          <NextLink aria-label={t('home')} href="/">
             <LogoAnimated style={{ height: '1rem' }} />
           </NextLink>
         </NavbarBrand>
@@ -77,12 +79,12 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
                     radius="sm"
                     variant="light"
                   >
-                    {route.label}
+                    {t(`routes.${route.key}`)}
                   </Button>
                 </DropdownTrigger>
               </NavbarItem>
               <DropdownMenu
-                aria-label={route.label}
+                aria-label={t(`routes.${route.key}`)}
                 className="w-[340px]"
                 itemClasses={{
                   base: 'gap-4',
@@ -100,7 +102,7 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
                     }
                     onClick={() => router.push(subRoute.href)}
                   >
-                    {subRoute.label}
+                    {t(`routes.${subRoute.key}`)}
                   </DropdownItem>
                 ))}
               </DropdownMenu>
@@ -111,9 +113,9 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
                 color="foreground"
                 className="text-md"
                 href={route.href}
-                aria-label={route.label}
+                aria-label={t(`routes.${route.key}`)}
               >
-                {route.label}
+                {t(`routes.${route.key}`)}
               </NextLink>
             </NavbarItem>
           ),
@@ -124,7 +126,7 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
         <NavbarItem className="flex h-full items-center">
           <Button
             isIconOnly
-            aria-label="Language switcher"
+            aria-label={t('langSwitcher')}
             className="p-0"
             variant="flat"
             onPress={switchLocale}
@@ -135,7 +137,7 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
         <NavbarItem className="flex h-full items-center">
           <Button
             isIconOnly
-            aria-label="Theme switcher"
+            aria-label={t('themeSwitcher')}
             className="p-0"
             variant="flat"
             onPress={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -164,7 +166,7 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
                 color="foreground"
                 href={item.href}
               >
-                {item.label}
+                {t(`routes.${item.key}`)}
               </NextLink>
             </NavbarMenuItem>
           ))}

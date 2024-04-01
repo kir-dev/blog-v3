@@ -12,7 +12,6 @@ import { FC, SVGProps } from 'react'
 export type Route =
   | {
       key: string
-      label: string
       href: string
       keywords: string
       routes?: never
@@ -20,7 +19,6 @@ export type Route =
     }
   | {
       key: string
-      label: string
       href?: never
       keywords?: never
       routes: Route[]
@@ -30,7 +28,6 @@ export type Route =
 export const allRoutes: { homeRoute: Route; otherRoutes: Route[] } = {
   homeRoute: {
     key: 'home',
-    label: 'Kezdőlap',
     href: '/',
     keywords: 'kezdőlap, home, főoldal, start, kir-dev',
     icon: HomeIcon,
@@ -38,7 +35,6 @@ export const allRoutes: { homeRoute: Route; otherRoutes: Route[] } = {
   otherRoutes: [
     {
       key: 'blog',
-      label: 'Blog',
       href: '/blog',
       keywords:
         'blog, cikk, cikkek, posztok, articles, posts, tutorials, news, updates',
@@ -46,11 +42,9 @@ export const allRoutes: { homeRoute: Route; otherRoutes: Route[] } = {
     },
     {
       key: 'about',
-      label: 'Rólunk',
       routes: [
         {
           key: 'history',
-          label: 'Történelem',
           href: '/about/history',
           keywords:
             'történelem, history, about, rólunk, kir-dev, kirdev, kultúra, culture, vision',
@@ -58,7 +52,6 @@ export const allRoutes: { homeRoute: Route; otherRoutes: Route[] } = {
         },
         {
           key: 'members',
-          label: 'Csapatunk',
           href: '/about/members',
           keywords:
             'csapatunk, members, team, tagok, tag, member, senior, developer',
@@ -66,7 +59,6 @@ export const allRoutes: { homeRoute: Route; otherRoutes: Route[] } = {
         },
         {
           key: 'projects',
-          label: 'Projektjeink',
           href: '/about/projects',
           keywords:
             'projektjeink, projects, projektek, project, open-source, nyílt forráskódú, open source, nyílt forráskód',
@@ -74,7 +66,6 @@ export const allRoutes: { homeRoute: Route; otherRoutes: Route[] } = {
         },
         {
           key: 'contact',
-          label: 'Kapcsolat',
           href: '/about/contact',
           keywords: 'elérhetőségeink, contact, kapcsolat, email, phone',
           icon: ChatBubbleOvalLeftEllipsisIcon,
@@ -83,7 +74,6 @@ export const allRoutes: { homeRoute: Route; otherRoutes: Route[] } = {
     },
     {
       key: 'courses',
-      label: 'Tanfolyam',
       href: '/courses',
       keywords:
         'tanfolyam, courses, kurzus, mentor, course, tanfolyamok, tanulás, learning, education, oktatás, oktatási',

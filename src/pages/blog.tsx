@@ -17,7 +17,7 @@ export const getStaticProps: GetStaticProps<
   SharedPageProps & {
     posts: PostWithAuthor[]
   }
-> = async ({ draftMode = false }) => {
+> = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
   const posts = await getPosts(client)
 
@@ -26,6 +26,7 @@ export const getStaticProps: GetStaticProps<
       draftMode,
       token: draftMode ? readToken : '',
       posts,
+      messages: (await import(`../../messages/${locale}.json`)).default,
     },
   }
 }

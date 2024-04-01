@@ -6,6 +6,7 @@ import ProjectPreview from '~/components/project-components/ProjectPreview'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 
+import { useTranslations } from 'next-intl'
 import { NextSeo } from 'next-seo'
 import { getProjects } from '~/lib/queries'
 import { Project } from '~/lib/sanity.types'
@@ -15,7 +16,7 @@ export const getStaticProps: GetStaticProps<
   SharedPageProps & {
     projects: Project[]
   }
-> = async ({ draftMode = false }) => {
+> = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
   const projects = await getProjects(client)
 
@@ -24,6 +25,7 @@ export const getStaticProps: GetStaticProps<
       draftMode,
       token: draftMode ? readToken : '',
       projects,
+      messages: (await import(`../../../messages/${locale}.json`)).default,
     },
   }
 }
@@ -32,12 +34,13 @@ export default function ProjectsPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
   const { projects } = props
+  const t = useTranslations('Projects')
 
   return (
     <Layout>
-      <NextSeo title="Projektjeink" />
+      <NextSeo title={t('title')} />
       <Container>
-        <h1 className="text-4xl font-bold my-16">Projektjeink</h1>
+        <h1 className="text-4xl font-bold my-16">{t('title')}</h1>
         <hr className="my-8" />
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
           {projects

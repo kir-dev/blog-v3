@@ -1,4 +1,5 @@
 import { Chip, User } from '@nextui-org/react'
+import { useTranslations } from 'next-intl'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,17 +19,20 @@ const PostPreview: FC<
   DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & Props
 > = ({ post, author, ...props }) => {
   const { theme } = useTheme()
+  const t = useTranslations()
 
   return (
-    <article {...props} className={'w-full '.concat(props.className)}>
+    <article {...props} className={'w-full '.concat(props.className ?? '')}>
       <header>
         <Link href={`/post/${post.slug.current}`} className="h-48 xl:h-64">
           <Image
             alt={`Image for ${post.title}`}
             className="z-0 w-full h-full object-cover rounded-lg"
             src={
-              urlForImage(post.mainImage)?.width(500).height(300).url() ??
-              '/images/card-example-2.jpeg'
+              post.mainImage
+                ? urlForImage(post.mainImage)?.width(500).height(300).url() ??
+                  '/images/card-example-2.jpeg'
+                : '/images/card-example-2.jpeg'
             }
             height={300}
             width={500}
@@ -45,20 +49,22 @@ const PostPreview: FC<
       </header>
       <footer className="flex justify-between items-center flex-wrap gap-y-2">
         <User
-          name={author?.name ?? post.author ?? 'anonymous'}
+          name={
+            author
+              ? t('Members.nameFormat', {
+                  firstName: author?.firstName,
+                  lastName: author?.lastName,
+                })
+              : post.author ?? 'anonymous'
+          }
           description={author?.rank}
           avatarProps={{
-            src: getAdaptiveImageUrl(author, false, theme),
+            src: author ? getAdaptiveImageUrl(author, false, theme) : undefined,
             size: 'sm',
             showFallback: true,
-            fallback:
-              (author?.name ?? post.author)
-                ?.match(/(^\S\S?|\s\S)?/g)
-                .map((v) => v.trim())
-                .join('')
-                .match(/(^\S|\S$)?/g)
-                .join('')
-                .toLocaleUpperCase() ?? 'AN',
+            fallback: author
+              ? `${author.lastName[0]}${author.firstName[0]}`
+              : 'AN',
           }}
         />
         {post.hashTag && <Chip size="sm">#{post.hashTag}</Chip>}

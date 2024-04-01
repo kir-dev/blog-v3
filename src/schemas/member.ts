@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { memberRankMapping } from '~/utils/member-rank'
 
 export default defineType({
   name: 'member',
@@ -12,8 +13,14 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'name',
-      title: 'Full name',
+      name: 'lastName',
+      title: 'Last name',
+      type: 'string',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'firstName',
+      title: 'First name',
       type: 'string',
       validation: (rule) => rule.required(),
     }),
@@ -21,6 +28,9 @@ export default defineType({
       name: 'rank',
       title: 'Rank',
       type: 'string',
+      options: {
+        list: memberRankMapping,
+      },
     }),
     defineField({
       name: 'isActive',
@@ -62,11 +72,15 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'name',
+      firstName: 'firstName',
+      lastName: 'lastName',
       media: 'mainImage',
     },
     prepare(selection) {
-      return { ...selection }
+      return {
+        ...selection,
+        title: `${selection.lastName} ${selection.firstName}`,
+      }
     },
   },
 })

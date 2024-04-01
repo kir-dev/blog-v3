@@ -4,22 +4,21 @@ import { useRouter } from 'next/router'
 
 import { urlForImage } from '~/lib/sanity.image'
 
+import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { Project } from '~/lib/sanity.types'
-import { projectStatusMapping } from '~/utils/project-status'
 import { GitHubSvg } from '../svg-components/GitHubSvg'
 import LaptopSuite from '../svg/laptop-suite.svg'
 
 export default function ProjectPreview({ project }: { project: Project }) {
   const router = useRouter()
+  const t = useTranslations()
 
   return (
     <div className="w-full">
       <header>
         <Badge
-          content={
-            projectStatusMapping.find((p) => p.value === project.status).title
-          }
+          content={t(`Projects.status.${project.status}`)}
           color={
             project.status === 'discontinued'
               ? 'danger'
@@ -37,8 +36,12 @@ export default function ProjectPreview({ project }: { project: Project }) {
             alt={`Image for ${project.title}`}
             className={`z-0 w-full h-full object-contain rounded-lg cursor-pointer`}
             src={
-              urlForImage(project.mainImage)?.width(1280).height(540).url() ??
-              LaptopSuite
+              project.mainImage
+                ? urlForImage(project.mainImage)
+                    ?.width(1280)
+                    .height(540)
+                    .url() ?? LaptopSuite
+                : LaptopSuite
             }
             height={540}
             width={1280}
@@ -52,13 +55,13 @@ export default function ProjectPreview({ project }: { project: Project }) {
       <footer>
         <p className="mb-2">{project.shortDesc}</p>
         <div className="flex items-center gap-2 mt-2">
-          {project.techStacks.map((techStack, index) => (
+          {project.techStacks?.map((techStack, index) => (
             <Chip key={`${techStack}-${index}`} size="sm">
               {techStack}
             </Chip>
           ))}
         </div>
-        {project.githubRepos.map((p) => (
+        {project.githubRepos?.map((p) => (
           <div
             key={p}
             className="flex items-center gap-2 mt-2 text-foreground text-opacity-70 hover:text-opacity-100"

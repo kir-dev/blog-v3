@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { environment } from '~/utils/environment'
 
+import { useTranslations } from 'next-intl'
 import { LogoNoText } from '../svg-components/LogoNoText'
 import { Line } from './helpers/Line'
 import { Frame, Keyframes } from './react-keyframes'
@@ -11,9 +12,10 @@ const getTypingDuration = () => 80 + 80 * (Math.random() - 0.5)
 
 export const Terminal: React.FC = () => {
   const [lineCount, setLineCount] = useState(0)
+  const t = useTranslations('Index')
 
   const showLine = (text: string, name?: string) => {
-    const frames = [
+    const frames: JSX.Element[] = [
       <Frame key={`${text}-last`}>
         <Line name={name} text={text} noCaret noPrompt />
       </Frame>,
@@ -27,7 +29,7 @@ export const Terminal: React.FC = () => {
   }
 
   const emptyLine = () => {
-    const frames = []
+    const frames: JSX.Element[] = []
 
     // cursor animation 10 times
     for (let i = 0; i < 10; i += 1) {
@@ -46,7 +48,7 @@ export const Terminal: React.FC = () => {
   }
 
   const renderLine = (text: string) => {
-    const frames = []
+    const frames: JSX.Element[] = []
 
     // starting frame
     frames.push(
@@ -117,9 +119,9 @@ export const Terminal: React.FC = () => {
           {lineCount >= 3 && renderLine('yarn run render:about-us')}
           {lineCount >= 4 && showLine('○ Compiling /about-us ...')}
           {lineCount >= 5 &&
-            showLine('A Schönherz webfejlesztő köre.', '[Kir-Dev web] ')}
+            showLine(t('terminalTexts.line5'), '[Kir-Dev web] ')}
           {lineCount >= 6 &&
-            showLine('Fő technológiáink: Node.js és React.', '[Kir-Dev web] ')}
+            showLine(t('terminalTexts.line6'), '[Kir-Dev web] ')}
           {lineCount >= 7 &&
             showLine(
               `✓ Compiled /about-us in ${rand.ms}ms (${rand.modules} modules)`,
