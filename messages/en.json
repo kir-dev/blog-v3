@@ -9,14 +9,14 @@
     "joinUs": "Join us",
     "mission": {
       "title": "Kir-Dev's mission is to create useful webapps for the students of Schönherz.",
-      "body": "In addition to web development, we also train ourselves in mobile development and operational technologies. Every spring, we run courses in Hungarian to help interested parties join the group.",
+      "body": "In addition to web development, we also train ourselves in mobile development and DevOps. Every spring, we run courses in Hungarian to help interested parties join the group.",
       "action": "Get to know us better"
     },
     "blogPromo": {
       "title": "Latest post from our blog"
     },
     "operations": {
-      "title": "Our operations"
+      "title": "Way of working"
     }
   },
   "Contact": {
@@ -62,13 +62,13 @@
     "status": {
       "active": "Active",
       "new": "New",
-      "done": "Handed over",
+      "done": "Delivered",
       "discontinued": "Discontinued"
     }
   },
   "Courses": {
     "title": "Courses",
-    "body": "During the spring semesters, we run a series of suitable courses. You can learn about the world of HTML-JS-CSS, a web framework, and the terminology and tools of web development.",
+    "body": "During the spring semesters, we run a series of suitable courses. You can learn about the world of HTML-JS-CSS, several web frameworks, and the terminology and tools of web development.",
     "action": "Read more",
     "sectionJoiningTitle": "Application",
     "sectionMentoringTitle": "Mentoring"
@@ -99,7 +99,7 @@
       }
     },
     "footer": {
-      "contact": "Contact here",
+      "contact": "Contact",
       "partOfSimonyi": "Kir-Dev is part of the <link>Simonyi Károly Collegium</link>.",
       "sponsors": "Sponsors",
       "socials": "Social media links"
