@@ -15,6 +15,7 @@ import type { SharedPageProps } from '~/pages/_app'
 import { environment } from '~/utils/environment'
 
 import { PortableText } from '@portabletext/react'
+import { useTranslations } from 'next-intl'
 import config from 'next-seo.config'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -27,17 +28,17 @@ export const getStaticProps: GetStaticProps<
   SharedPageProps & {
     post?: Post
     author?: Member
-    frontSections?: SiteSection[]
+    frontSections?: (SiteSection | undefined)[]
     frontAlert?: SiteSection
   }
-> = async ({ draftMode = false }) => {
+> = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
   const { post, author } = await getLatestPost(client)
   const frontSections = [
-    await getSiteSection(client, 'frontpage1'),
-    await getSiteSection(client, 'frontpage2'),
+    await getSiteSection(client, 'frontpage1', locale),
+    await getSiteSection(client, 'frontpage2', locale),
   ]
-  const frontAlert = await getSiteSection(client, 'frontAlert')
+  const frontAlert = await getSiteSection(client, 'frontAlert', locale)
 
   return {
     props: {
@@ -47,6 +48,7 @@ export const getStaticProps: GetStaticProps<
       author,
       frontSections,
       frontAlert,
+      messages: (await import(`../../messages/${locale}.json`)).default,
     },
   }
 }
@@ -56,21 +58,24 @@ export default function IndexPage(
 ) {
   const { post, author, frontSections, frontAlert } = props
 
-  // TODO: use zustand for alert state
   const [alertShown, setAlertShown] = useState(false)
   const closeAlert = () => {
-    localStorage.setItem('lastIgnoredAlertUpdatedAt', frontAlert._updatedAt)
+    localStorage.setItem(
+      'lastIgnoredAlertUpdatedAt',
+      frontAlert?._updatedAt ?? '',
+    )
     setAlertShown(false)
   }
   useEffect(() => {
     frontAlert?.isHidden
       ? setAlertShown(false)
       : localStorage.getItem('lastIgnoredAlertUpdatedAt') ===
-          frontAlert._updatedAt
+          frontAlert?._updatedAt
         ? setAlertShown(false)
         : setAlertShown(true)
   }, [frontAlert])
   const router = useRouter()
+  const t = useTranslations('Index')
 
   return (
     <Layout>
@@ -83,7 +88,7 @@ export default function IndexPage(
             classNames={{ base: 'absolute top-16 sm:top-20 z-50' }}
           >
             <PortableText
-              value={frontAlert?.body}
+              value={frontAlert?.body ?? []}
               components={{
                 ...commonSerializer,
                 marks: {
@@ -109,12 +114,12 @@ export default function IndexPage(
           </Chip>
         )}
         <h1 className="mb-6 text-4xl font-extrabold leading-none tracking-tight">
-          A kollégium webfejlesztői.
+          {t('mainTitle')}
         </h1>
         <Terminal />
         <div className="flex flex-row gap-4 mt-6">
           <Button color="primary" onClick={() => router.push('/about/contact')}>
-            Csatlakozás
+            {t('joinUs')}
           </Button>
           <Button
             as="a"
@@ -130,16 +135,11 @@ export default function IndexPage(
         <Container id="about-us-in-short" className="relative">
           <div className="max-w-3xl sm:h-96">
             <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
-              A Kir-Dev küldetése a Schönherz lakói számára hasznos webappok
-              készítése.
+              {t('mission.title')}
             </h2>
-            <p>
-              Webfejlesztés mellett a mobilfejlesztés és az üzemeltetési
-              technológiák terén is képezzük magunkat. Tavasszal tanfolyamokat
-              hirdetünk, amelyek segítik a körbe való csatlakozást.
-            </p>
+            <p>{t('mission.body')}</p>
             <ActionButton href="/about/history" className="mt-8">
-              Tudj meg rólunk többet
+              {t('mission.action')}
             </ActionButton>
           </div>
           <div className="absolute right-0 bottom-0 h-0 sm:h-48 lg:h-72 xl:h-96 pr-10">
@@ -153,30 +153,34 @@ export default function IndexPage(
           </div>
         </Container>
       </section>
+      {post && (
+        <section className="py-24">
+          <Container>
+            <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
+              {t('blogPromo.title')}
+            </h2>
+            <hr className="mb-16" />
+            <PostPreviewFrontpage post={post} author={author} />
+          </Container>
+        </section>
+      )}
       <section className="py-24">
         <Container>
           <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
-            Legutóbbi bejegyzés blogunkból
-          </h2>
-          <hr className="mb-16" />
-          <PostPreviewFrontpage post={post} author={author} />
-        </Container>
-      </section>
-      <section className="py-24">
-        <Container>
-          <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
-            Működésünk
+            {t('operations.title')}
           </h2>
           <hr className="mb-8" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-            {frontSections?.map((section) => (
-              <div key={section._id}>
-                <PortableText
-                  value={section?.body}
-                  components={commonSerializer}
-                />
-              </div>
-            ))}
+            {frontSections?.map((section) =>
+              section ? (
+                <div key={section._id}>
+                  <PortableText
+                    value={section?.body}
+                    components={commonSerializer}
+                  />
+                </div>
+              ) : null,
+            )}
           </div>
         </Container>
       </section>

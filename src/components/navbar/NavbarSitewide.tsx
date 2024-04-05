@@ -22,12 +22,12 @@ import {
 } from '@nextui-org/react'
 import { useTheme } from 'next-themes'
 import NextLink from 'next/link'
-import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { FC, PropsWithChildren, useEffect, useState } from 'react'
 
 import { Route } from '~/utils/routes'
 
+import { useTranslations } from 'next-intl'
 import { LogoAnimated } from '../svg-components/LogoAnimated'
 
 export interface Props {
@@ -36,8 +36,8 @@ export interface Props {
 
 export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false)
-  const pathname = usePathname()
   const router = useRouter()
+  const { pathname, asPath, query, locales, locale } = router
   const { setTheme, theme } = useTheme()
 
   useEffect(() => {
@@ -46,15 +46,21 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
     }
   }, [isMenuOpen, pathname])
 
+  const t = useTranslations('common.navbar')
+  const switchLocale = () => {
+    const nextLocale = locales?.find((loc) => loc !== locale) || locale
+    router.push({ pathname, query }, asPath, { locale: nextLocale })
+  }
+
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-label={isMenuOpen ? t('closeMenu') : t('openMenu')}
           className="sm:hidden"
         />
         <NavbarBrand>
-          <NextLink aria-label="Kezdőlap" href="/">
+          <NextLink aria-label={t('home')} href="/">
             <LogoAnimated style={{ height: '1rem' }} />
           </NextLink>
         </NavbarBrand>
@@ -73,12 +79,12 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
                     radius="sm"
                     variant="light"
                   >
-                    {route.label}
+                    {t(`routes.${route.key}`)}
                   </Button>
                 </DropdownTrigger>
               </NavbarItem>
               <DropdownMenu
-                aria-label={route.label}
+                aria-label={t(`routes.${route.key}`)}
                 className="w-[340px]"
                 itemClasses={{
                   base: 'gap-4',
@@ -94,9 +100,9 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
                         <ChevronRightIcon className="h-4 w-4" />
                       )
                     }
-                    onClick={() => router.push(subRoute.href)}
+                    onClick={() => router.push(subRoute.href ?? '')}
                   >
-                    {subRoute.label}
+                    {t(`routes.${subRoute.key}`)}
                   </DropdownItem>
                 ))}
               </DropdownMenu>
@@ -106,10 +112,10 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
               <NextLink
                 color="foreground"
                 className="text-md"
-                href={route.href}
-                aria-label={route.label}
+                href={route.href ?? ''}
+                aria-label={t(`routes.${route.key}`)}
               >
-                {route.label}
+                {t(`routes.${route.key}`)}
               </NextLink>
             </NavbarItem>
           ),
@@ -120,8 +126,20 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
         <NavbarItem className="flex h-full items-center">
           <Button
             isIconOnly
-            aria-label="Theme switcher"
-            className="p-0 bg-transparent data-[hover=true]:bg-transparent"
+            aria-label={t('langSwitcher')}
+            className="p-0"
+            variant="flat"
+            onPress={switchLocale}
+          >
+            {locale === 'en' ? 'HU' : 'EN'}
+          </Button>
+        </NavbarItem>
+        <NavbarItem className="flex h-full items-center">
+          <Button
+            isIconOnly
+            aria-label={t('themeSwitcher')}
+            className="p-0"
+            variant="flat"
             onPress={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
           >
             {theme === 'dark' ? (
@@ -146,9 +164,9 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
               <NextLink
                 className="w-full text-lg"
                 color="foreground"
-                href={item.href}
+                href={item.href ?? ''}
               >
-                {item.label}
+                {t(`routes.${item.key}`)}
               </NextLink>
             </NavbarMenuItem>
           ))}

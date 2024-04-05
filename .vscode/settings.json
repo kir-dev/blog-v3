@@ -9,5 +9,8 @@
     "source.organizeImports": "explicit",
     "source.formatDocument": "explicit",
     "source.fixAll.eslint": "explicit"
-  }
+  },
+  "i18n-ally.localesPaths": [
+    "messages"
+  ]
 }

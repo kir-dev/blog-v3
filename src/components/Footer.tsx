@@ -3,6 +3,7 @@ import Image from 'next/image'
 
 import { environment } from '~/utils/environment'
 
+import { useTranslations } from 'next-intl'
 import Container from './Container'
 import { FacebookSvg } from './svg-components/FacebookSvg'
 import { GitHubSvg } from './svg-components/GitHubSvg'
@@ -57,11 +58,12 @@ const sponsors = [
 ]
 
 export default function Footer() {
+  const t = useTranslations('common.footer')
   return (
     <footer className="flex flex-col gap-10 pt-32">
       <div className="flex flex-col items-center">
         <div className="px-1 pb-6 text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-400 font-bold w-min">
-          Támogatóink
+          {t('sponsors')}
         </div>
         <div className="flex w-full justify-center items-center gap-3 flex-col sm:flex-row">
           {sponsors.map((item) => (
@@ -88,19 +90,21 @@ export default function Footer() {
             <LogoBig className="h-full w-auto" />
             <div className="hidden sm:block">
               <p>
-                A Kir-Dev a{' '}
-                <Link
-                  href={environment.simonyiUrl}
-                  target="_blank"
-                  className="text-sm"
-                >
-                  Simonyi Károly Szakkollégium
-                </Link>{' '}
-                tagszervezete.
+                {t.rich('partOfSimonyi', {
+                  link: (chunks) => (
+                    <Link
+                      href={environment.simonyiUrl}
+                      target="_blank"
+                      className="text-sm"
+                    >
+                      {chunks}
+                    </Link>
+                  ),
+                })}
               </p>
               <p>
                 <Link className="text-sm" href="/about/contact">
-                  Kapcsolat
+                  {t('contact')}
                 </Link>
               </p>
               <p>Kir-Dev &copy; {new Date().getFullYear()}</p>
@@ -108,7 +112,7 @@ export default function Footer() {
             <div className="block sm:hidden text-center">
               <p>
                 <Link className="text-sm" href="/about/contact">
-                  Kapcsolat
+                  {t('contact')}
                 </Link>
               </p>
               <p>Kir-Dev &copy; {new Date().getFullYear()}</p>
@@ -116,7 +120,7 @@ export default function Footer() {
           </div>
           <div className="flex flex-col items-center">
             <div className="px-1 pb-6 text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-400 font-bold">
-              Közösségi linkek
+              {t('socials')}
             </div>
             <div className="flex gap-4">
               {socials.map((item) => (

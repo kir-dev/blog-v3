@@ -1,0 +1,108 @@
+{
+  "Index": {
+    "ourName": "Kir-Dev",
+    "mainTitle": "Web developers at Schönherz.",
+    "terminalTexts": {
+      "line5": "We're a study group learning web tech.",
+      "line6": "Main tech stack: Node.js & React."
+    },
+    "joinUs": "Join us",
+    "mission": {
+      "title": "Kir-Dev's mission is to create useful webapps for the students of Schönherz.",
+      "body": "In addition to web development, we also train ourselves in mobile development and DevOps. Every spring, we run courses in Hungarian to help interested parties join the group.",
+      "action": "Get to know us better"
+    },
+    "blogPromo": {
+      "title": "Latest post from our blog"
+    },
+    "operations": {
+      "title": "Way of working"
+    }
+  },
+  "Contact": {
+    "title": "Contact",
+    "action": {
+      "members": "Meet our members",
+      "projects": "Check out our projects"
+    }
+  },
+  "History": {
+    "title": "About us",
+    "sectionHistory": {
+      "title": "History"
+    },
+    "sectionTechStack": {
+      "title": "Tech stack",
+      "action": "Check out our projects"
+    },
+    "sectionTeamwork": {
+      "title": "Teamwork"
+    }
+  },
+  "Members": {
+    "title": "Members",
+    "inactivesTitle": "Former members",
+    "rank": {
+      "ex-leader": "ex-leader",
+      "leader": "leader",
+      "rookie": "rookie",
+      "member": "member",
+      "courses-coord": "courses coord.",
+      "financial-coord": "financial coord.",
+      "hr-coord": "HR coord.",
+      "pek-admin": "PéK admin"
+    },
+    "meetingTitle": "Kir-Dev meeting",
+    "nonFuncButton": "Non-functional button",
+    "nameFormat": "{firstName} {lastName}",
+    "imageAlt": "{firstName} {lastName}'s profile picture"
+  },
+  "Projects": {
+    "title": "Projects",
+    "status": {
+      "active": "Active",
+      "new": "New",
+      "done": "Delivered",
+      "discontinued": "Discontinued"
+    }
+  },
+  "Courses": {
+    "title": "Courses",
+    "body": "During the spring semesters, we run a series of courses. You can learn about the world of HTML-JS-CSS, several web frameworks, and the terminology and tools of web development.",
+    "action": "Read more",
+    "sectionJoiningTitle": "Application",
+    "sectionMentoringTitle": "Mentoring"
+  },
+  "Post": {
+    "toc": "Table of contents"
+  },
+  "Blog": {
+    "title": "Blog",
+    "action": "See more in archive",
+    "archiveTitle": "Blog archive"
+  },
+  "common": {
+    "navbar": {
+      "closeMenu": "Close menu",
+      "openMenu": "Open menu",
+      "langSwitcher": "Switch language",
+      "themeSwitcher": "Switch color theme",
+      "home": "Home",
+      "routes": {
+        "blog": "Blog",
+        "about": "About us",
+        "history": "History",
+        "projects": "Projects",
+        "members": "Members",
+        "contact": "Contact",
+        "courses": "Courses"
+      }
+    },
+    "footer": {
+      "contact": "Contact",
+      "partOfSimonyi": "Kir-Dev is part of the <link>Simonyi Károly Collegium</link>.",
+      "sponsors": "Sponsors",
+      "socials": "Social media links"
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { LinkIcon } from '@heroicons/react/24/solid'
 import { Badge, Chip } from '@nextui-org/react'
 import { PortableText } from '@portabletext/react'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { useTranslations } from 'next-intl'
 import { useLiveQuery } from 'next-sanity/preview'
 import { NextSeo } from 'next-seo'
 import config from 'next-seo.config'
@@ -20,7 +21,6 @@ import { getClient } from '~/lib/sanity.client'
 import { urlForImage } from '~/lib/sanity.image'
 import { Project } from '~/lib/sanity.types'
 import type { SharedPageProps } from '~/pages/_app'
-import { projectStatusMapping } from '~/utils/project-status'
 import { postContentSerializer } from '~/utils/serializers/post-content.serializer'
 
 interface Query {
@@ -32,7 +32,7 @@ export const getStaticProps: GetStaticProps<
     project: Project
   },
   Query
-> = async ({ draftMode = false, params = {} }) => {
+> = async ({ draftMode = false, params = {}, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
   const project = await getProject(client, params.slug)
 
@@ -47,6 +47,7 @@ export const getStaticProps: GetStaticProps<
       draftMode,
       token: draftMode ? readToken : '',
       project,
+      messages: (await import(`../../../messages/${locale}.json`)).default,
     },
   }
 }
@@ -57,6 +58,7 @@ export default function ProjectSlugRoute(
   const [project] = useLiveQuery(props.project, projectBySlugQuery, {
     slug: props.project.slug.current,
   })
+  const t = useTranslations()
 
   return (
     <Layout>
@@ -66,14 +68,16 @@ export default function ProjectSlugRoute(
         openGraph={{
           images: [
             {
-              url:
-                urlForImage(project.mainImage)?.url() ??
-                config.openGraph.images[0].url,
+              url: project.mainImage
+                ? urlForImage(project.mainImage)?.url() ??
+                  config.openGraph?.images?.[0].url ??
+                  ''
+                : '',
             },
           ],
           type: 'article',
           title: project.title,
-          description: project.shortDesc ?? config.openGraph.description,
+          description: project.shortDesc ?? config.openGraph?.description,
           article: {
             publishedTime: project._createdAt,
             modifiedTime: project._updatedAt,
@@ -82,7 +86,7 @@ export default function ProjectSlugRoute(
               'webdev',
               'engineering',
               'programming',
-              ...project.techStacks.map((s) => s.toLowerCase()),
+              ...(project.techStacks?.map((s) => s.toLowerCase()) ?? []),
             ],
           },
         }}
@@ -94,7 +98,7 @@ export default function ProjectSlugRoute(
       >
         {project.mainImage ? (
           <Image
-            src={urlForImage(project.mainImage)?.url()}
+            src={urlForImage(project.mainImage)?.url() ?? ''}
             height={500}
             width={1000}
             className="object-cover rounded-md w-full h-[50vh]"
@@ -106,10 +110,7 @@ export default function ProjectSlugRoute(
         <div className="flex flex-row flex-wrap justify-between gap-4 mt-8 mb-4">
           <div>
             <Badge
-              content={
-                projectStatusMapping.find((p) => p.value === project.status)
-                  .title
-              }
+              content={t(`Projects.status.${project.status}`)}
               color={
                 project.status === 'discontinued'
                   ? 'danger'
@@ -123,7 +124,7 @@ export default function ProjectSlugRoute(
               </h1>
             </Badge>
             <div className="flex items-center gap-2 mt-2">
-              {project.techStacks.map((techStack, index) => (
+              {project.techStacks?.map((techStack, index) => (
                 <Chip key={`${techStack}-${index}`} size="sm">
                   {techStack}
                 </Chip>
@@ -169,7 +170,7 @@ export default function ProjectSlugRoute(
         </div>
         <div className="mt-16 break-words">
           <PortableText
-            value={project.body}
+            value={project.body ?? []}
             components={postContentSerializer}
           />
         </div>

@@ -1,5 +1,6 @@
 import { PortableText } from '@portabletext/react'
 import type { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { useTranslations } from 'next-intl'
 import { useLiveQuery } from 'next-sanity/preview'
 import { NextSeo } from 'next-seo'
 import config from 'next-seo.config'
@@ -26,7 +27,7 @@ export const getStaticProps: GetStaticProps<
     post: Post
   },
   Query
-> = async ({ draftMode = false, params = {} }) => {
+> = async ({ draftMode = false, params = {}, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
   const post = await getPost(client, params.slug)
 
@@ -41,6 +42,7 @@ export const getStaticProps: GetStaticProps<
       draftMode,
       token: draftMode ? readToken : '',
       post,
+      messages: (await import(`../../../messages/${locale}.json`)).default,
     },
   }
 }
@@ -51,6 +53,7 @@ export default function PostSlugRoute(
   const [post] = useLiveQuery(props.post, postBySlugQuery, {
     slug: props.post.slug.current,
   })
+  const t = useTranslations('Post')
 
   return (
     <Layout>
@@ -60,14 +63,16 @@ export default function PostSlugRoute(
         openGraph={{
           images: [
             {
-              url:
-                urlForImage(post.mainImage)?.url() ??
-                config.openGraph.images[0].url,
+              url: post.mainImage
+                ? urlForImage(post.mainImage)?.url() ??
+                  config.openGraph?.images?.[0].url ??
+                  ''
+                : '',
             },
           ],
           type: 'article',
           title: post.title,
-          description: post.excerpt ?? config.openGraph.description,
+          description: post.excerpt ?? config.openGraph?.description,
           article: {
             publishedTime: post._createdAt,
             modifiedTime: post._updatedAt,
@@ -83,7 +88,7 @@ export default function PostSlugRoute(
       >
         {post.mainImage ? (
           <Image
-            src={urlForImage(post.mainImage)?.url()}
+            src={urlForImage(post.mainImage)?.url() ?? ''}
             height={500}
             width={1000}
             className="object-cover rounded-md w-full h-[50vh]"
@@ -110,7 +115,7 @@ export default function PostSlugRoute(
           {post.hasToc && (
             <>
               <h2 className="text-4xl font-extrabold leading-none tracking-tight py-4 mt-8">
-                Tartalomjegyzék
+                {t('toc')}
               </h2>
               <ul className="mb-8 list-disc list-inside ml-2">
                 <PortableText value={post.body} components={tocSerializer} />

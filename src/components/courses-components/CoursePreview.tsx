@@ -37,7 +37,10 @@ export default function CoursePreview({ course }: { course: Course }) {
           </div>
         ))}
         <div className="mt-4">
-          <PortableText value={course.body} components={commonSerializer} />
+          <PortableText
+            value={course.body ?? []}
+            components={commonSerializer}
+          />
         </div>
       </footer>
     </div>

@@ -4,6 +4,7 @@ import '~/styles/prism-okaidia.css'
 import SEO from '../../next-seo.config'
 
 import { NextUIProvider } from '@nextui-org/react'
+import { NextIntlClientProvider } from 'next-intl'
 import PlausibleProvider from 'next-plausible'
 import { DefaultSeo } from 'next-seo'
 import { ThemeProvider } from 'next-themes'
@@ -33,6 +34,7 @@ import yaml from 'refractor/lang/yaml'
 export interface SharedPageProps {
   draftMode: boolean
   token: string
+  messages: Record<string, string>
 }
 
 const PreviewProvider = lazy(() => import('~/components/PreviewProvider'))
@@ -102,15 +104,21 @@ export default function App({
             selfHosted
             customDomain={process.env.NEXT_PUBLIC_PLAUSIBLE_URL}
           >
-            <main>
-              {draftMode ? (
-                <PreviewProvider token={token}>
-                  <Component {...pageProps} />
-                </PreviewProvider>
-              ) : (
-                <Component className="flex-1 pb-10" {...pageProps} />
-              )}
-            </main>
+            <NextIntlClientProvider
+              locale={router.locale}
+              timeZone="Europe/Budapest"
+              messages={pageProps.messages}
+            >
+              <main>
+                {draftMode ? (
+                  <PreviewProvider token={token}>
+                    <Component {...pageProps} />
+                  </PreviewProvider>
+                ) : (
+                  <Component className="flex-1 pb-10" {...pageProps} />
+                )}
+              </main>
+            </NextIntlClientProvider>
           </PlausibleProvider>
         </ThemeProvider>
       </NextUIProvider>

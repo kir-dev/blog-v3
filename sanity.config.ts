@@ -1,8 +1,9 @@
 import { codeInput } from '@sanity/code-input'
+import { documentInternationalization } from '@sanity/document-internationalization'
 import { visionTool } from '@sanity/vision'
 import { defineConfig, SanityDocument } from 'sanity'
-import { DefaultDocumentNodeResolver, deskTool } from 'sanity/desk'
 import { Iframe, IframeOptions } from 'sanity-plugin-iframe-pane'
+import { DefaultDocumentNodeResolver, deskTool } from 'sanity/desk'
 
 import { apiVersion, dataset, projectId } from '~/lib/sanity.api'
 import { schema } from '~/schemas'
@@ -50,5 +51,13 @@ export default defineConfig({
     }),
     visionTool({ defaultApiVersion: apiVersion }),
     codeInput(),
+    documentInternationalization({
+      // Required configuration
+      supportedLanguages: [
+        { id: 'hu', title: 'Hungarian' },
+        { id: 'en', title: 'English' },
+      ],
+      schemaTypes: ['siteSection', 'techStack'], // todo: project, post, course
+    }),
   ],
 })

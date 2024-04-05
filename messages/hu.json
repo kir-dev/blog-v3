@@ -1,0 +1,108 @@
+{
+  "Index": {
+    "ourName": "Kir-Dev",
+    "mainTitle": "A kollégium webfejlesztői.",
+    "terminalTexts": {
+      "line5": "A Schönherz webfejlesztő köre.",
+      "line6": "Fő technológiáink: Node.js és React."
+    },
+    "joinUs": "Csatlakozz",
+    "mission": {
+      "title": "A Kir-Dev küldetése a Schönherz lakói számára hasznos webappok készítése.",
+      "body": "Webfejlesztés mellett a mobilfejlesztés és az üzemeltetési technológiák terén is képezzük magunkat. Tavasszal tanfolyamokat hirdetünk, amelyek segítik a körbe való csatlakozást.",
+      "action": "Tudj meg rólunk többet"
+    },
+    "blogPromo": {
+      "title": "Legutóbbi bejegyzés blogunkból"
+    },
+    "operations": {
+      "title": "Működésünk"
+    }
+  },
+  "Contact": {
+    "title": "Kapcsolat",
+    "action": {
+      "members": "Ismerd meg tagjaink",
+      "projects": "Ismerd meg munkáink"
+    }
+  },
+  "History": {
+    "title": "Rólunk",
+    "sectionHistory": {
+      "title": "Történelem"
+    },
+    "sectionTechStack": {
+      "title": "Technológiák",
+      "action": "Ismerd meg munkáink"
+    },
+    "sectionTeamwork": {
+      "title": "Csapatmunka"
+    }
+  },
+  "Members": {
+    "title": "Tagjaink",
+    "inactivesTitle": "Korábbi tagjaink",
+    "rank": {
+      "ex-leader": "volt körvezető",
+      "leader": "körvezető",
+      "rookie": "újonc",
+      "member": "tag",
+      "courses-coord": "tanfolyamfelelős",
+      "financial-coord": "gazdaságis",
+      "hr-coord": "HR felelős",
+      "pek-admin": "PéK admin"
+    },
+    "meetingTitle": "Kir-Dev gyűlés",
+    "nonFuncButton": "Nem funkcionáló gomb",
+    "nameFormat": "{lastName} {firstName}",
+    "imageAlt": "{lastName} {firstName} profilképe"
+  },
+  "Projects": {
+    "title": "Projektjeink",
+    "status": {
+      "active": "Aktív",
+      "new": "Új",
+      "done": "Átadva",
+      "discontinued": "Megszakítva"
+    }
+  },
+  "Courses": {
+    "title": "Tanfolyamunk",
+    "body": "A tavaszi félévek folyamán több alkalmas tanfolyamsorozatot tartunk. Megismerkedhettek a HTML-JS-CSS világával, egy-egy webes keretrendszerrel, illetve a webfejlesztés szakkifejezéseivel, eszközeivel.",
+    "action": "Jelentkezés lentebb",
+    "sectionJoiningTitle": "Jelentkezés",
+    "sectionMentoringTitle": "Mentorprogram"
+  },
+  "Post": {
+    "toc": "Tartalomjegyzék"
+  },
+  "Blog": {
+    "title": "Blog",
+    "action": "Archívum megtekintése",
+    "archiveTitle": "Blog archívum"
+  },
+  "common": {
+    "navbar": {
+      "closeMenu": "Menü bezárása",
+      "openMenu": "Menü megnyitása",
+      "langSwitcher": "Nyelv váltása",
+      "themeSwitcher": "Téma váltása",
+      "home": "Kezdőlap",
+      "routes": {
+        "blog": "Blog",
+        "about": "Rólunk",
+        "history": "Történelem",
+        "projects": "Projektjeink",
+        "members": "Csapatunk",
+        "contact": "Kapcsolat",
+        "courses": "Tanfolyam"
+      }
+    },
+    "footer": {
+      "contact": "Kapcsolat",
+      "partOfSimonyi": "A Kir-Dev a <link>Simonyi Károly Szakkollégium</link> tagszervezete.",
+      "sponsors": "Támogatóink",
+      "socials": "Közösségi linkek"
+    }
+  }
+}

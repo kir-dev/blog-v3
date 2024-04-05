@@ -9,6 +9,7 @@ import { getClient } from '~/lib/sanity.client'
 import { commonSerializer } from '~/utils/serializers/common.serializer'
 import { getStackSvg } from '~/utils/tech-stack'
 
+import { useTranslations } from 'next-intl'
 import { NextSeo } from 'next-seo'
 import { getSiteSection, getTechStacks } from '~/lib/queries'
 import { SiteSection, TechStack } from '~/lib/sanity.types'
@@ -18,13 +19,15 @@ export const getStaticProps: GetStaticProps<
   SharedPageProps & {
     sectionHistory?: SiteSection
     sectionTeamwork?: SiteSection
+    sectionTechStack?: SiteSection
     techStacks?: TechStack[]
   }
-> = async ({ draftMode = false }) => {
+> = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
-  const sectionHistory = await getSiteSection(client, 'history')
-  const sectionTeamwork = await getSiteSection(client, 'teamwork')
-  const techStacks = await getTechStacks(client)
+  const sectionHistory = await getSiteSection(client, 'history', locale)
+  const sectionTechStack = await getSiteSection(client, 'techstack', locale)
+  const sectionTeamwork = await getSiteSection(client, 'teamwork', locale)
+  const techStacks = await getTechStacks(client, locale)
 
   return {
     props: {
@@ -32,7 +35,9 @@ export const getStaticProps: GetStaticProps<
       token: draftMode ? readToken : '',
       sectionHistory,
       sectionTeamwork,
+      sectionTechStack,
       techStacks,
+      messages: (await import(`../../../messages/${locale}.json`)).default,
     },
   }
 }
@@ -40,30 +45,32 @@ export const getStaticProps: GetStaticProps<
 export default function HistoryPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
-  const { sectionHistory, sectionTeamwork, techStacks } = props
+  const { sectionHistory, sectionTeamwork, sectionTechStack, techStacks } =
+    props
+  const t = useTranslations('History')
 
   return (
     <Layout>
-      <NextSeo title="Rólunk" />
+      <NextSeo title={t('title')} />
       <Container useCustom>
         <section className="my-8">
           <h2 className="text-4xl font-extrabold leading-none tracking-tight mt-16">
-            Történelem
+            {t('sectionHistory.title')}
           </h2>
           <hr className="my-8" />
           <PortableText
-            value={sectionHistory?.body}
+            value={sectionHistory?.body ?? []}
             components={commonSerializer}
           />
         </section>
         <section className="my-8 mt-24">
           <h2 className="text-4xl font-extrabold leading-none tracking-tight mt-16">
-            Technológiák
+            {t('sectionTechStack.title')}
           </h2>
           <hr className="my-8" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {techStacks
-              ?.sort((a, b) => a.priority - b.priority)
+              ?.sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0))
               .map((item) => (
                 <article
                   key={item.key}
@@ -75,31 +82,24 @@ export default function HistoryPage(
                 </article>
               ))}
           </div>
-          <ActionButton href="/about/projects" className="mt-8">
-            Ismerd meg munkáink
+          <ActionButton href="/about/projects" className="mt-8 mb-4">
+            {t('sectionTechStack.action')}
           </ActionButton>
-          <h3 className="text-2xl font-bold mt-16">Üzemeltetés</h3>
-          <p className="mt-8">
-            Szerveralkalmazásaink a Kollégiumi Számítástechnikai Kör által
-            szolgáltatott VMWare virtuális gépünkre, illetve a fenntartott
-            Kubernetes klaszterbe telepítjük. Nagy figyelmet szentelünk a
-            megfelelő DevOps folyamatok, automatizációk kialakítására, ebben
-            támogat minket a Better Stack is. Kiemelt támogatónk a Vercel,
-            amelynek köszönhetően a Next.js projekteket és egyéb frontend-heavy
-            alkalmazásaink könnyedén élesíthetjük.
-          </p>
-        </section>
-        <section className="my-8 mt-24">
-          <h2 className="text-4xl font-extrabold leading-none tracking-tight mt-16">
-            Csapatmunka
-          </h2>
-          <hr className="my-8" />
           <PortableText
-            value={sectionTeamwork?.body}
+            value={sectionTechStack?.body ?? []}
             components={commonSerializer}
           />
         </section>
-        <div className="mt-12 flex flex-col items-start gap-4"></div>
+        <section className="my-8 mt-24">
+          <h2 className="text-4xl font-extrabold leading-none tracking-tight mt-16">
+            {t('sectionTeamwork.title')}
+          </h2>
+          <hr className="my-8" />
+          <PortableText
+            value={sectionTeamwork?.body ?? []}
+            components={commonSerializer}
+          />
+        </section>
       </Container>
     </Layout>
   )

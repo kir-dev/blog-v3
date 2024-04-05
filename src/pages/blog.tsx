@@ -8,6 +8,7 @@ import PostPreview from '~/components/post-components/PostPreview'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 
+import { useTranslations } from 'next-intl'
 import { NextSeo } from 'next-seo'
 import { getPosts, postsQuery } from '~/lib/queries'
 import { PostWithAuthor } from '~/lib/sanity.types'
@@ -17,7 +18,7 @@ export const getStaticProps: GetStaticProps<
   SharedPageProps & {
     posts: PostWithAuthor[]
   }
-> = async ({ draftMode = false }) => {
+> = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
   const posts = await getPosts(client)
 
@@ -26,6 +27,7 @@ export const getStaticProps: GetStaticProps<
       draftMode,
       token: draftMode ? readToken : '',
       posts,
+      messages: (await import(`../../messages/${locale}.json`)).default,
     },
   }
 }
@@ -34,12 +36,14 @@ export default function BlogPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
   const [posts] = useLiveQuery<PostWithAuthor[]>(props.posts, postsQuery)
+  const t = useTranslations('Blog')
+
   return (
     <Layout>
-      <NextSeo title="Blog" />
+      <NextSeo title={t('title')} />
       <Container>
         <h1 className="text-4xl font-extrabold leading-none tracking-tight mt-16">
-          Blog
+          {t('title')}
         </h1>
         <hr className="my-8" />
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
@@ -53,7 +57,7 @@ export default function BlogPage(
           ))}
         </section>
         <div className="text-end my-12">
-          <ActionButton href="/archive">Archívum megtekintése</ActionButton>
+          <ActionButton href="/archive">{t('action')}</ActionButton>
         </div>
       </Container>
     </Layout>

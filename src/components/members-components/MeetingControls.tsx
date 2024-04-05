@@ -10,6 +10,7 @@ import {
   VideoCameraSlashIcon,
 } from '@heroicons/react/24/solid'
 import { Badge, Button } from '@nextui-org/react'
+import { useTranslations } from 'next-intl'
 import { FC, useState } from 'react'
 
 const classNameGray = 'bg-neutral-500 hover:bg-neutral-800'
@@ -63,6 +64,8 @@ type Props = {
 
 export const MeetingControls: FC<Props> = ({ numberOfActives }) => {
   const [showControls, setShowControls] = useState(true)
+  const t = useTranslations('Members')
+
   return (
     <div
       className={
@@ -74,9 +77,8 @@ export const MeetingControls: FC<Props> = ({ numberOfActives }) => {
       }
     >
       <div className="px-4 text-lg sm:text-2xl font-extrabold tracking-tighter text-center sm:text-start">
-        Kir-Dev gyűlés
+        {t('meetingTitle')}
       </div>
-
       <div className="flex flex-row gap-2 justify-self-center">
         {actionIcons
           .filter((a) => a.align === 'center')
@@ -85,10 +87,12 @@ export const MeetingControls: FC<Props> = ({ numberOfActives }) => {
               key={a.key}
               size="sm"
               isIconOnly
-              aria-label="Non-functional button"
+              aria-label={t('nonFuncButton')}
               className={'rounded-full p-0 h-12 w-12 ' + a.className}
               onClick={
-                a.icon === PhoneXMarkIcon && (() => setShowControls(false))
+                a.icon === PhoneXMarkIcon
+                  ? () => setShowControls(false)
+                  : undefined
               }
             >
               <a.icon className="h-5 w-5 text-gray-50" />
@@ -105,7 +109,7 @@ export const MeetingControls: FC<Props> = ({ numberOfActives }) => {
                 size="sm"
                 variant="light"
                 isIconOnly
-                aria-label="Non-functional button"
+                aria-label={t('nonFuncButton')}
                 className={a.className}
               >
                 <a.icon className="h-5 w-5" />

@@ -1,12 +1,15 @@
 import { ImageAsset, PortableTextBlock, Slug } from 'sanity'
 
-export interface Post {
-  _type: 'post'
+export interface ReducedPost {
   _id: string
   _createdAt: string
-  _updatedAt: string
   title?: string
   slug: Slug
+}
+
+export interface Post extends ReducedPost {
+  _type: 'post'
+  _updatedAt: string
   author?: string
   excerpt?: string
   mainImage?: ImageAsset
@@ -18,7 +21,7 @@ export interface Post {
 
 export type PostWithAuthor = {
   post: Post
-  author?: Member | null
+  author?: Member
 }
 
 export interface SiteSection {
@@ -36,7 +39,8 @@ export interface Member {
   _id: string
   _createdAt: string
   pekUsername: string
-  name: string
+  firstName: string
+  lastName: string
   rank?: string
   isActive?: boolean
   mainImage?: ImageAsset

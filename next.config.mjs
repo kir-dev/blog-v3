@@ -17,6 +17,10 @@ const config = withPlausibleProxy({
       permanent: true,
     },
   ],
+  i18n: {
+    locales: ['hu', 'en'],
+    defaultLocale: 'hu',
+  },
 })
 
 export default config
