@@ -1,9 +1,0 @@
-{
-  "redirects": [
-    {
-      "source": "/ly/:short",
-      "destination": "https://api.shorz.kir-dev.hu/ly/:short",
-      "permanent": true
-    }
-  ]
-}

@@ -16,6 +16,11 @@ const config = withPlausibleProxy({
       destination: '/about/history',
       permanent: true,
     },
+    {
+      source: '/ly/:short',
+      destination: 'https://api.shorz.kir-dev.hu/ly/:short',
+      permanent: true
+    }
   ],
   i18n: {
     locales: ['hu', 'en'],
