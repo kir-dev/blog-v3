@@ -37,6 +37,9 @@
     },
     "sectionTeamwork": {
       "title": "Csapatmunka"
+    },
+    "sectionAFSZ": {
+      "title": "AFSZ"
     }
   },
   "Members": {
@@ -95,7 +98,8 @@
         "projects": "Projektjeink",
         "members": "Csapatunk",
         "contact": "Kapcsolat",
-        "courses": "Tanfolyam"
+        "courses": "Tanfolyam",
+        "afsz": "AFSZ"
       }
     },
     "footer": {
