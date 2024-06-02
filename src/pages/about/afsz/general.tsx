@@ -7,27 +7,29 @@ import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 import { afszSerializer } from '~/utils/serializers/afsz.serializer'
 
-import { useTranslations } from 'next-intl'
 import { NextSeo } from 'next-seo'
 import { getSiteSection } from '~/lib/queries'
 import { SiteSection } from '~/lib/sanity.types'
-import { afszTocSerializer } from '~/utils/serializers/afsz.toc.serializer'
-import { SharedPageProps } from '../_app'
+import { SharedPageProps } from '../../_app'
 
 export const getStaticProps: GetStaticProps<
   SharedPageProps & {
-    sectionAFSZ?: SiteSection
+    sectionGeneral?: SiteSection
   }
 > = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
-  const sectionAFSZ = await getSiteSection(client, 'afsz', locale)
+  const sectionGeneral = await getSiteSection(
+    client,
+    'general_requests',
+    locale,
+  )
 
   return {
     props: {
       draftMode,
       token: draftMode ? readToken : '',
-      sectionAFSZ,
-      messages: (await import(`../../../messages/${locale}.json`)).default,
+      sectionGeneral,
+      messages: (await import(`../../../../messages/${locale}.json`)).default,
     },
   }
 }
@@ -35,10 +37,9 @@ export const getStaticProps: GetStaticProps<
 export default function AFSZPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
-  const { sectionAFSZ } = props
-  const t = useTranslations('History')
+  const { sectionGeneral } = props
   const DatesectionAFSZ = new Date(
-    sectionAFSZ?._updatedAt || '',
+    sectionGeneral?._updatedAt || '',
   ).toLocaleDateString('hu-HU', {
     year: 'numeric',
     month: 'long',
@@ -50,7 +51,7 @@ export default function AFSZPage(
       <Container useCustom>
         <section className="my-8">
           <h2 className="text-4xl font-extrabold leading-none tracking-tight mt-16">
-            Általános Felkérési Szabályzat
+            Általános weboldal felkérések
           </h2>
           <h3 className="text-2xl font-semibold leading-none tracking-tight mt-16">
             Érvényes: 2024. májustól
@@ -59,20 +60,12 @@ export default function AFSZPage(
             Utolsó módosítás: {DatesectionAFSZ}
           </h3>
           <hr className="mb-8 mt-3" />
-          <h2 className="text-4xl font-extrabold leading-none tracking-tight py-4 mt-8">
-            Tartalom
-          </h2>
-          <ul className="mb-8 list-disc list-inside ml-2">
-            <PortableText
-              value={sectionAFSZ?.body ?? []}
-              components={afszTocSerializer}
-            />
-          </ul>
           <PortableText
-            value={sectionAFSZ?.body ?? []}
+            value={sectionGeneral?.body ?? []}
             components={afszSerializer}
           />
         </section>
+        <div></div>
       </Container>
     </Layout>
   )

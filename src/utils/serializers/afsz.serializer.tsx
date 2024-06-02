@@ -37,6 +37,7 @@ export const afszSerializer = {
       </blockquote>
     ),
   },
+
   list: {
     bullet: ({ children }) => (
       <ul className="list-disc list-inside custom-list">{children}</ul>
@@ -56,5 +57,8 @@ export const afszSerializer = {
         </UiLink>
       )
     },
+    strong: ({ children }) => (
+      <span className="text-orange-600 font-bold">{children}</span>
+    ),
   },
 } satisfies Partial<PortableTextReactComponents>
