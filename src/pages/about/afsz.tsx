@@ -5,12 +5,13 @@ import Container from '~/components/Container'
 import Layout from '~/components/Layout'
 import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
-import { commonSerializer } from '~/utils/serializers/common.serializer'
+import { afszSerializer } from '~/utils/serializers/afsz.serializer'
 
 import { useTranslations } from 'next-intl'
 import { NextSeo } from 'next-seo'
 import { getSiteSection } from '~/lib/queries'
 import { SiteSection } from '~/lib/sanity.types'
+import { afszTocSerializer } from '~/utils/serializers/afsz.toc.serializer'
 import { SharedPageProps } from '../_app'
 
 export const getStaticProps: GetStaticProps<
@@ -58,9 +59,18 @@ export default function AFSZPage(
             Utolsó módosítás: {DatesectionAFSZ}
           </h3>
           <hr className="mb-8 mt-3" />
+          <h2 className="text-4xl font-extrabold leading-none tracking-tight py-4 mt-8">
+            Tartalom
+          </h2>
+          <ul className="mb-8 list-disc list-inside ml-2">
+            <PortableText
+              value={sectionAFSZ?.body ?? []}
+              components={afszTocSerializer}
+            />
+          </ul>
           <PortableText
             value={sectionAFSZ?.body ?? []}
-            components={commonSerializer}
+            components={afszSerializer}
           />
         </section>
       </Container>
