@@ -45,11 +45,18 @@ export const afszSerializer = {
   },
   marks: {
     link: ({ value, children }) => {
-      const url = new URL(value?.href)
-      const isInternal = value?.href?.startsWith(config.canonical)
+      let href = ''
+      let isInternal = true
+      if (!value?.href.startsWith('mailto')) {
+        href = value?.href
+      } else {
+        const url = new URL(value?.href)
+        isInternal = value?.href?.startsWith(config.canonical)
+        href = isInternal ? `${url.pathname}${url.hash}` : value?.href
+      }
       return (
         <UiLink
-          href={isInternal ? `${url.pathname}${url.hash}` : value?.href}
+          href={href}
           isExternal={!isInternal}
           showAnchorIcon={!isInternal}
         >
@@ -59,6 +66,11 @@ export const afszSerializer = {
     },
     strong: ({ children }) => (
       <span className="text-orange-600 font-bold">{children}</span>
+    ),
+    em: ({ children }) => (
+      <em className="italic" id={`szukseges`}>
+        {children}
+      </em>
     ),
   },
 } satisfies Partial<PortableTextReactComponents>

@@ -51,6 +51,18 @@ export default defineType({
               {
                 title: 'URL',
                 name: 'href',
+                type: 'url',
+              },
+            ],
+          },
+          {
+            title: 'MAILTO',
+            name: 'mail',
+            type: 'object',
+            fields: [
+              {
+                title: 'URL',
+                name: 'href',
                 type: 'string',
               },
             ],

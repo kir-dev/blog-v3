@@ -7,7 +7,6 @@ import { readToken } from '~/lib/sanity.api'
 import { getClient } from '~/lib/sanity.client'
 import { afszSerializer } from '~/utils/serializers/afsz.serializer'
 
-import { useTranslations } from 'next-intl'
 import { NextSeo } from 'next-seo'
 import { getSiteSection } from '~/lib/queries'
 import { SiteSection } from '~/lib/sanity.types'
@@ -35,7 +34,6 @@ export default function AFSZPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
   const { sectionCMSCH } = props
-  const t = useTranslations('History')
   const DatesectionAFSZ = new Date(
     sectionCMSCH?._updatedAt || '',
   ).toLocaleDateString('hu-HU', {
