@@ -37,6 +37,9 @@
     },
     "sectionTeamwork": {
       "title": "Teamwork"
+    },
+    "sectionAFSZ": {
+      "title": "AFSZ"
     }
   },
   "Members": {
@@ -95,7 +98,8 @@
         "projects": "Projects",
         "members": "Members",
         "contact": "Contact",
-        "courses": "Courses"
+        "courses": "Courses",
+        "afsz": "ÁFSZ"
       }
     },
     "footer": {

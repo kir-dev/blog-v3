@@ -1,6 +1,7 @@
 import {
   BookOpenIcon,
   ChatBubbleOvalLeftEllipsisIcon,
+  DocumentIcon,
   HomeIcon,
   NewspaperIcon,
   RocketLaunchIcon,
@@ -69,6 +70,13 @@ export const allRoutes: { homeRoute: Route; otherRoutes: Route[] } = {
           href: '/about/contact',
           keywords: 'elérhetőségeink, contact, kapcsolat, email, phone',
           icon: ChatBubbleOvalLeftEllipsisIcon,
+        },
+        {
+          key: 'afsz',
+          href: '/about/afsz',
+          keywords:
+            'elérhetőségeink, contact, felkérés, ajánlat, offer, request',
+          icon: DocumentIcon,
         },
       ],
     },
