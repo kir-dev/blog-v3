@@ -2,6 +2,7 @@ import { SchemaTypeDefinition } from 'sanity'
 
 import actionButton from './actionButton'
 import blockContent from './blockContent'
+import cmschFeature from './cmschFeature'
 import course from './course'
 import member from './member'
 import post from './post'
@@ -18,6 +19,7 @@ export const schemaTypes = [
   techStack,
   project,
   course,
+  cmschFeature,
 ]
 
 /**
@@ -40,5 +42,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     course,
     actionButton,
     youtubeEmbed,
+    cmschFeature,
   ],
 }

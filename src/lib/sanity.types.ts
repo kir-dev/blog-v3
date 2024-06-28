@@ -90,3 +90,11 @@ export interface Course {
     place?: string
   }[]
 }
+export interface CMSCHFeature {
+  _type: 'cmschFeat'
+  _id: string
+  _createdAt: string
+  title?: string
+  description?: PortableTextBlock[]
+  mainImage?: ImageAsset
+}

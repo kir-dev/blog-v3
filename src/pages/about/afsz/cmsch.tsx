@@ -8,23 +8,28 @@ import { getClient } from '~/lib/sanity.client'
 import { afszSerializer } from '~/utils/serializers/afsz.serializer'
 
 import { NextSeo } from 'next-seo'
+import CmschFeatureButton from '~/components/cmsch/CmschFeatureCard'
 import { getSiteSection } from '~/lib/queries'
-import { SiteSection } from '~/lib/sanity.types'
+import { getCMSCHFeatures } from '~/lib/queries/cmsch.queries'
+import { CMSCHFeature, SiteSection } from '~/lib/sanity.types'
 import { SharedPageProps } from '../../_app'
 
 export const getStaticProps: GetStaticProps<
   SharedPageProps & {
     sectionCMSCH?: SiteSection
+    features?: CMSCHFeature[]
   }
 > = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
-  const sectionCMSCH = await getSiteSection(client, 'cmsch', 'hu')
+  const sectionCMSCH = await getSiteSection(client, 'cmsch', locale)
+  const features = await getCMSCHFeatures(client)
 
   return {
     props: {
       draftMode,
       token: draftMode ? readToken : '',
       sectionCMSCH,
+      features,
       messages: (await import(`../../../../messages/${locale}.json`)).default,
     },
   }
@@ -41,6 +46,7 @@ export default function AFSZPage(
     month: 'long',
     day: 'numeric',
   })
+  console.log(features && features[0])
   return (
     <Layout>
       <NextSeo title="AFSZ" />
@@ -60,6 +66,12 @@ export default function AFSZPage(
             value={sectionCMSCH?.body ?? []}
             components={afszSerializer}
           />
+          <div className="flex flex-row flex-wrap relative gap-4 items-center justify-center mt-8">
+            {features &&
+              features.map((item) => (
+                <CmschFeatureButton item={item} key={item._id} />
+              ))}
+          </div>
         </section>
         <div></div>
       </Container>
