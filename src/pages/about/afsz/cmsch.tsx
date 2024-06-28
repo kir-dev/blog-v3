@@ -38,7 +38,7 @@ export const getStaticProps: GetStaticProps<
 export default function AFSZPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
-  const { sectionCMSCH } = props
+  const { sectionCMSCH, features } = props
   const DatesectionAFSZ = new Date(
     sectionCMSCH?._updatedAt || '',
   ).toLocaleDateString('hu-HU', {
@@ -46,7 +46,6 @@ export default function AFSZPage(
     month: 'long',
     day: 'numeric',
   })
-  console.log(features && features[0])
   return (
     <Layout>
       <NextSeo title="AFSZ" />
