@@ -53,7 +53,9 @@
       "courses-coord": "tanfolyamfelelős",
       "financial-coord": "gazdaságis",
       "hr-coord": "HR felelős",
-      "pek-admin": "PéK admin"
+      "pek-admin": "PéK admin",
+      "pr-coord": "PR felelős",
+      "deputy-leader": "körvez. helyettes"
     },
     "meetingTitle": "Kir-Dev gyűlés",
     "nonFuncButton": "Nem funkcionáló gomb",
