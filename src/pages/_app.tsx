@@ -10,6 +10,7 @@ import { DefaultSeo } from 'next-seo'
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
 import { lazy } from 'react'
@@ -109,6 +110,13 @@ export default function App({
               timeZone="Europe/Budapest"
               messages={pageProps.messages}
             >
+              <Head>
+                <script
+                  dangerouslySetInnerHTML={{
+                    __html: `<!-- Én lehet körbenéznék a tagok oldalon is! -->`,
+                  }}
+                />
+              </Head>
               <main>
                 {draftMode ? (
                   <PreviewProvider token={token}>

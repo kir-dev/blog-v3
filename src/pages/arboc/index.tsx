@@ -68,7 +68,7 @@ export default function Component() {
             className="flex items-center space-x-2 cursor-pointer"
             onClick={() =>
               console.log(
-                'https://kir-dev.hu/about/members\nItt talán megtalálod a titkos kódot!',
+                'A HTML headben lehet van valami információ komment formájában',
               )
             }
           >
@@ -149,9 +149,7 @@ export default function Component() {
                   <b>Kir-Dev</b>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>
-                    Jobbklikk -{'>'} Inspect -{'>'} Console
-                  </p>
+                  <p>Jobbklikk -{'>'} Inspect</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
