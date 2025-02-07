@@ -18,6 +18,14 @@ export default function CoursePreview({ course }: { course: Course }) {
             <div className="flex items-center gap-2">
               <ClockIcon className="w-4 h-4 fill-current" />
               <div>{lecture.dateTimeInterval}</div>
+              {lecture.getIconName && (
+                <img
+                  src={`https://github.com/get-icon/geticon/raw/master/icons/${lecture.getIconName}.svg`}
+                  alt={lecture.getIconName}
+                  width="22px"
+                  height="22px"
+                />
+              )}
             </div>
             <div className="flex items-center gap-2">
               <MapPinIcon className="w-4 h-4 fill-current" />

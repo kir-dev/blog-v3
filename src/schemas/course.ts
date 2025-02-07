@@ -49,6 +49,13 @@ export default defineType({
               title: 'Place',
               type: 'string',
             },
+            {
+              name: 'getIconName',
+              description:
+                'https://github.com/get-icon/geticon/raw/master/icons/<Icon name>.svg - Can leave blank',
+              title: 'Icon name',
+              type: 'string',
+            },
           ],
         },
       ],
