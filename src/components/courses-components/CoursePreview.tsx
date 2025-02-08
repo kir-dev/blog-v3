@@ -11,17 +11,45 @@ export default function CoursePreview({ course }: { course: Course }) {
           {course.title}
         </h4>
         {course.lectures?.map((lecture) => (
-          <div
-            key={lecture.dateTimeInterval}
-            className="flex flex-row flex-wrap justify-between text-foreground border-b border-foreground border-opacity-20 py-2"
-          >
-            <div className="flex items-center gap-2">
-              <ClockIcon className="w-4 h-4 fill-current" />
-              <div>{lecture.dateTimeInterval}</div>
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPinIcon className="w-4 h-4 fill-current" />
-              <div>{lecture.place}</div>
+          <div className="border-b border-foreground border-opacity-20">
+            {lecture.description && (
+              <div className="flex items-center gap-2 pt-2">
+                {lecture.getIconName ? (
+                  <img
+                    src={`https://github.com/get-icon/geticon/raw/master/icons/${lecture.getIconName}.svg`}
+                    alt={lecture.getIconName}
+                    width="20px"
+                    height="20px"
+                  />
+                ) : (
+                  <ClockIcon className="w-5 h-5 fill-current" />
+                )}
+                <div>{lecture.description}</div>
+              </div>
+            )}
+            <div
+              key={lecture.dateTimeInterval}
+              className="flex flex-row flex-wrap justify-between text-foreground py-2 gap-2"
+            >
+              <div className="flex items-center gap-2">
+                {lecture.description ? (
+                  <div className="w-5"></div>
+                ) : lecture.getIconName ? (
+                  <img
+                    src={`https://github.com/get-icon/geticon/raw/master/icons/${lecture.getIconName}.svg`}
+                    alt={lecture.getIconName}
+                    width="20px"
+                    height="20px"
+                  />
+                ) : (
+                  <ClockIcon className="w-5 h-5 fill-current" />
+                )}
+                <div>{lecture.dateTimeInterval}</div>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPinIcon className="w-5 h-5 fill-current" />
+                <div>{lecture.place}</div>
+              </div>
             </div>
           </div>
         ))}
