@@ -89,5 +89,6 @@ export interface Course {
     dateTimeInterval?: string
     place?: string
     getIconName?: string
+    description?: string
   }[]
 }

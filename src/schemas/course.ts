@@ -50,6 +50,12 @@ export default defineType({
               type: 'string',
             },
             {
+              name: 'description',
+              title: 'Description',
+              type: 'string',
+              description: 'Can leave blank, will be displayed under',
+            },
+            {
               name: 'getIconName',
               description:
                 'https://github.com/get-icon/geticon/raw/master/icons/<Icon name>.svg - Can leave blank',
