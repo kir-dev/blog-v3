@@ -12,6 +12,8 @@ import ActionButton from '~/components/ActionButton'
 import { Project } from '~/lib/sanity.types'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { GitHubSvg } from '~/components/svg-components/GitHubSvg'
+import { LinkIcon } from '@heroicons/react/24/solid'
 
 export default function ProjectCarousel({ items }: { items?: Project[] }) {
   const t = useTranslations('Index')
@@ -35,12 +37,12 @@ export default function ProjectCarousel({ items }: { items?: Project[] }) {
         }),
       ]}
     >
-      <CarouselContent className="w-full flex space-x-4 m-0">
+      <CarouselContent className="w-full flex space-x-4">
         {items &&
           items.map((project, index) => (
             <CarouselItem
               key={project._id}
-              className={`max-w-64 sm:max-w-5xl max-sm:aspect-[9/16] sm:aspect-[16/9] rounded-2xl cursor-pointer relative box-content border-1`}
+              className={`max-w-64 sm:max-w-5xl max-sm:aspect-[9/16] sm:aspect-[16/9] rounded-2xl cursor-pointer relative box-content border-1 ${index === 0 ? '-mr-2' : ''}`}
             >
               <Image
                 alt={`Image for ${project.title}`}
@@ -59,12 +61,26 @@ export default function ProjectCarousel({ items }: { items?: Project[] }) {
               {/* Gradient Overlay */}
               <div className="absolute left-0 bottom-0 w-full bg-gradient-to-b from-transparent to-60% to-[#ffffffaa] dark:to-[#000000aa] p-4 sm:px-6 sm:pb-4 pt-16 rounded-b-2xl flex max-sm:flex-col justify-between sm:items-end">
                 <div>
-                  <h1 className="text-3xl sm:text-5xl font-extrabold leading-none tracking-tight">
+                  <h1 className="text-3xl sm:text-6xl font-extrabold leading-none tracking-tight">
                     {project.title}
                   </h1>
+
+                  {project.githubRepos && (
+                    <div className="flex gap-2 items-center">
+                      <GitHubSvg className="w-4 h-4 fill-current" />
+                      <a
+                        className="hover:underline"
+                        href={`https://github.com/${project.githubRepos![0]}`}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {project.githubRepos![0]}
+                      </a>
+                    </div>
+                  )}
                   <p>{project.shortDesc}</p>
                 </div>
-                <ActionButton href={`/projects/${project.slug}`}>
+                <ActionButton href={`/about/contact`}>
                   {t('projectsPromo.action')}
                 </ActionButton>
               </div>

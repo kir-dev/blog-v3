@@ -19,7 +19,12 @@ import { useTranslations } from 'next-intl'
 import config from 'next-seo.config'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { getLatestPost, getProjects, getSiteSection } from '~/lib/queries'
+import {
+  getHomescrenProjects,
+  getLatestPost,
+  getProjects,
+  getSiteSection,
+} from '~/lib/queries'
 import { Member, Post, Project, SiteSection } from '~/lib/sanity.types'
 import { commonSerializer } from '~/utils/serializers/common.serializer'
 import LaptopSuite from '../components/svg/laptop-suite.svg'
@@ -47,7 +52,7 @@ export const getStaticProps: GetStaticProps<
     await getSiteSection(client, 'frontpage2', locale),
   ]
   const frontAlert = await getSiteSection(client, 'frontAlert', locale)
-  const highlightedProjects = await getProjects(client)
+  const highlightedProjects = await getHomescrenProjects(client)
 
   return {
     props: {
@@ -141,7 +146,7 @@ export default function IndexPage(
           </Button>
         </div>
       </section>
-      <section className="mb-16">
+      <section className="mb-16 py-8 bg-gradient-to-r from-zinc-400 dark:from-zinc-800 to-background">
         <Container id="about-us-in-short" className="relative">
           <div className="max-w-3xl sm:h-96">
             <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
