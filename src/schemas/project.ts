@@ -88,11 +88,6 @@ export default defineType({
       type: 'boolean',
     }),
     defineField({
-      name: 'extract',
-      title: 'Extract',
-      type: 'blockContent',
-    }),
-    defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',
