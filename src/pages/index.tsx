@@ -19,10 +19,16 @@ import { useTranslations } from 'next-intl'
 import config from 'next-seo.config'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { getLatestPost, getSiteSection } from '~/lib/queries'
-import { Member, Post, SiteSection } from '~/lib/sanity.types'
+import { getLatestPost, getProjects, getSiteSection } from '~/lib/queries'
+import { Member, Post, Project, SiteSection } from '~/lib/sanity.types'
 import { commonSerializer } from '~/utils/serializers/common.serializer'
 import LaptopSuite from '../components/svg/laptop-suite.svg'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from '~/components/carousel/carousel'
+import { urlForImage } from '~/lib/sanity.image'
 
 export const getStaticProps: GetStaticProps<
   SharedPageProps & {
@@ -30,6 +36,7 @@ export const getStaticProps: GetStaticProps<
     author?: Member
     frontSections?: (SiteSection | undefined)[]
     frontAlert?: SiteSection
+    highlightedProjects?: Project[]
   }
 > = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
@@ -39,6 +46,7 @@ export const getStaticProps: GetStaticProps<
     await getSiteSection(client, 'frontpage2', locale),
   ]
   const frontAlert = await getSiteSection(client, 'frontAlert', locale)
+  const highlightedProjects = await getProjects(client)
 
   return {
     props: {
@@ -48,6 +56,7 @@ export const getStaticProps: GetStaticProps<
       author,
       frontSections,
       frontAlert,
+      highlightedProjects,
       messages: (await import(`../../messages/${locale}.json`)).default,
     },
   }
@@ -56,8 +65,8 @@ export const getStaticProps: GetStaticProps<
 export default function IndexPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
-  const { post, author, frontSections, frontAlert } = props
-
+  const { post, author, frontSections, frontAlert, highlightedProjects } = props
+  const client = getClient()
   const [alertShown, setAlertShown] = useState(false)
   const closeAlert = () => {
     localStorage.setItem(
@@ -130,6 +139,87 @@ export default function IndexPage(
             GitHub
           </Button>
         </div>
+      </section>
+      <section className="w-full flex justify-center">
+        <Carousel className="py-8 h-96">
+          <CarouselContent className="bg-red-500">
+            {highlightedProjects &&
+              highlightedProjects.map((project, index) => (
+                <CarouselItem
+                  key={project._id}
+                  className={`border-2 border-white rounded-2xl cursor-pointer h-96 w-min`}
+                >
+                  <Image
+                    alt={`Image for ${project.title}`}
+                    className={`z-0 h-full w-auto object-contain rounded-lg bg-green-200`}
+                    src={
+                      project.mainImage
+                        ? (urlForImage(project.mainImage)
+                            ?.width(1920)
+                            .height(1080)
+                            .url() ?? LaptopSuite)
+                        : LaptopSuite
+                    }
+                    height={540}
+                    width={1280}
+                    onClick={() =>
+                      router.push(`/project/${project.slug.current}`)
+                    }
+                  />
+                  <div className="absolute bottom-0 bg-gradient-to-b from-transparent to-black z-10 p-8 rounded-2xl">
+                    <h1 className="text-4xl font-extrabold leading-none tracking-tight">
+                      {project.title}
+                    </h1>
+                    <ActionButton href={`/projects/${project.slug}`}>
+                      Fejleszteni akarok!
+                    </ActionButton>
+                  </div>
+                </CarouselItem>
+              ))}
+          </CarouselContent>
+        </Carousel>
+      </section>
+      <section className="w-full flex justify-center">
+        <Carousel className="py-8 h-96 w-full max-w-5xl">
+          <CarouselContent className="flex justify-center items-center bg-red-500 space-x-4">
+            {highlightedProjects &&
+              highlightedProjects.map((project) => (
+                <CarouselItem
+                  key={project._id}
+                  className="border-2 border-white rounded-2xl cursor-pointer h-96 w-auto flex justify-center items-center"
+                >
+                  <div className="relative h-full w-[calc(100%*16/9)]">
+                    <Image
+                      alt={`Image for ${project.title}`}
+                      className="h-full w-auto max-h-full object-contain rounded-lg bg-green-200"
+                      src={
+                        project.mainImage
+                          ? (urlForImage(project.mainImage)
+                              ?.width(1920)
+                              .height(1080)
+                              .url() ?? LaptopSuite)
+                          : LaptopSuite
+                      }
+                      height={540}
+                      width={960}
+                      onClick={() =>
+                        router.push(`/project/${project.slug.current}`)
+                      }
+                    />
+                    {/* Gradient Overlay */}
+                    <div className="absolute bottom-0 w-full bg-gradient-to-b from-transparent to-black p-4 rounded-b-2xl">
+                      <h1 className="text-2xl font-extrabold leading-none tracking-tight text-white">
+                        {project.title}
+                      </h1>
+                      <ActionButton href={`/projects/${project.slug}`}>
+                        Fejleszteni akarok!
+                      </ActionButton>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+          </CarouselContent>
+        </Carousel>
       </section>
       <section className="bg-gradient-to-r from-foreground-50 to-foreground-200 border-gray-300 border-y-1 py-24">
         <Container id="about-us-in-short" className="relative">
