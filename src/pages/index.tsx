@@ -146,7 +146,7 @@ export default function IndexPage(
           </Button>
         </div>
       </section>
-      <section className="mb-16 py-8 bg-gradient-to-r from-zinc-400 dark:from-zinc-800 to-background">
+      <section className="py-8 bg-gradient-to-r from-zinc-400 dark:from-zinc-800 to-background">
         <Container id="about-us-in-short" className="relative">
           <div className="max-w-3xl sm:h-96">
             <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
@@ -168,7 +168,7 @@ export default function IndexPage(
           </div>
         </Container>
       </section>
-      <section>
+      <section className={'mt-36'}>
         <Container>
           <div className="max-w-3xl">
             <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
