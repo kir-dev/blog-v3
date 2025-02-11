@@ -74,7 +74,6 @@ export interface Project {
   mainImage?: ImageAsset
   mobileMainImage?: ImageAsset
   isShownOnHomePage?: boolean
-  extract?: string
   body?: PortableTextBlock[]
   priority?: number
 }
