@@ -29,6 +29,7 @@ import {
   CarouselItem,
 } from '~/components/carousel/carousel'
 import { urlForImage } from '~/lib/sanity.image'
+import ProjectCarousel from '~/components/carousel/ProjectCarousel'
 
 export const getStaticProps: GetStaticProps<
   SharedPageProps & {
@@ -140,88 +141,7 @@ export default function IndexPage(
           </Button>
         </div>
       </section>
-      <section className="w-full flex justify-center">
-        <Carousel className="py-8 h-96">
-          <CarouselContent className="bg-red-500">
-            {highlightedProjects &&
-              highlightedProjects.map((project, index) => (
-                <CarouselItem
-                  key={project._id}
-                  className={`border-2 border-white rounded-2xl cursor-pointer h-96 w-min`}
-                >
-                  <Image
-                    alt={`Image for ${project.title}`}
-                    className={`z-0 h-full w-auto object-contain rounded-lg bg-green-200`}
-                    src={
-                      project.mainImage
-                        ? (urlForImage(project.mainImage)
-                            ?.width(1920)
-                            .height(1080)
-                            .url() ?? LaptopSuite)
-                        : LaptopSuite
-                    }
-                    height={540}
-                    width={1280}
-                    onClick={() =>
-                      router.push(`/project/${project.slug.current}`)
-                    }
-                  />
-                  <div className="absolute bottom-0 bg-gradient-to-b from-transparent to-black z-10 p-8 rounded-2xl">
-                    <h1 className="text-4xl font-extrabold leading-none tracking-tight">
-                      {project.title}
-                    </h1>
-                    <ActionButton href={`/projects/${project.slug}`}>
-                      Fejleszteni akarok!
-                    </ActionButton>
-                  </div>
-                </CarouselItem>
-              ))}
-          </CarouselContent>
-        </Carousel>
-      </section>
-      <section className="w-full flex justify-center">
-        <Carousel className="py-8 h-96 w-full max-w-5xl">
-          <CarouselContent className="flex justify-center items-center bg-red-500 space-x-4">
-            {highlightedProjects &&
-              highlightedProjects.map((project) => (
-                <CarouselItem
-                  key={project._id}
-                  className="border-2 border-white rounded-2xl cursor-pointer h-96 w-auto flex justify-center items-center"
-                >
-                  <div className="relative h-full w-[calc(100%*16/9)]">
-                    <Image
-                      alt={`Image for ${project.title}`}
-                      className="h-full w-auto max-h-full object-contain rounded-lg bg-green-200"
-                      src={
-                        project.mainImage
-                          ? (urlForImage(project.mainImage)
-                              ?.width(1920)
-                              .height(1080)
-                              .url() ?? LaptopSuite)
-                          : LaptopSuite
-                      }
-                      height={540}
-                      width={960}
-                      onClick={() =>
-                        router.push(`/project/${project.slug.current}`)
-                      }
-                    />
-                    {/* Gradient Overlay */}
-                    <div className="absolute bottom-0 w-full bg-gradient-to-b from-transparent to-black p-4 rounded-b-2xl">
-                      <h1 className="text-2xl font-extrabold leading-none tracking-tight text-white">
-                        {project.title}
-                      </h1>
-                      <ActionButton href={`/projects/${project.slug}`}>
-                        Fejleszteni akarok!
-                      </ActionButton>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-          </CarouselContent>
-        </Carousel>
-      </section>
-      <section className="bg-gradient-to-r from-foreground-50 to-foreground-200 border-gray-300 border-y-1 py-24">
+      <section className="mb-16">
         <Container id="about-us-in-short" className="relative">
           <div className="max-w-3xl sm:h-96">
             <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
@@ -243,6 +163,17 @@ export default function IndexPage(
           </div>
         </Container>
       </section>
+      <section>
+        <Container>
+          <div className="max-w-3xl">
+            <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
+              {t('projectsPromo.title')}
+            </h2>
+          </div>
+        </Container>
+        <ProjectCarousel items={highlightedProjects} />
+      </section>
+
       {post && (
         <section className="py-24">
           <Container>

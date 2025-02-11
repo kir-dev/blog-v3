@@ -8857,6 +8857,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"embla-carousel-auto-scroll@npm:^8.5.2":
+  version: 8.5.2
+  resolution: "embla-carousel-auto-scroll@npm:8.5.2"
+  peerDependencies:
+    embla-carousel: 8.5.2
+  checksum: 10c0/91a62f3d56b2c530ed110d0e408b9e69de2ee43a35e9794bab489a8677986b7e0f06e01639573f3d3f7a252ce80336f3869eaa2d75e24e7a169ab0222db7d240
+  languageName: node
+  linkType: hard
+
+"embla-carousel-autoplay@npm:^8.5.2":
+  version: 8.5.2
+  resolution: "embla-carousel-autoplay@npm:8.5.2"
+  peerDependencies:
+    embla-carousel: 8.5.2
+  checksum: 10c0/e98d83ed1e0ceab0b8adb19b04146eb4b1cda0bd745db1ec76507c16d062b58261e0ba719211fe80c5a9c6e09a00577de7766388c9b1ab9b2f140012151fd085
+  languageName: node
+  linkType: hard
+
 "embla-carousel-react@npm:^8.5.2":
   version: 8.5.2
   resolution: "embla-carousel-react@npm:8.5.2"
@@ -13909,6 +13927,8 @@ __metadata:
     "@types/react": "npm:18.3.5"
     "@types/refractor": "npm:3.4.1"
     autoprefixer: "npm:10.4.20"
+    embla-carousel-auto-scroll: "npm:^8.5.2"
+    embla-carousel-autoplay: "npm:^8.5.2"
     embla-carousel-react: "npm:^8.5.2"
     eslint: "npm:9.10.0"
     eslint-config-next: "npm:14.2.8"
