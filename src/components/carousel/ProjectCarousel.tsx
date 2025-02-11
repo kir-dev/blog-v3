@@ -31,7 +31,7 @@ export default function ProjectCarousel({ items }: { items?: Project[] }) {
       plugins={[
         Autoscroll({
           startDelay: 0,
-          speed: 2,
+          speed: 1.5,
           stopOnFocusIn: true,
           stopOnInteraction: false,
         }),
@@ -72,9 +72,9 @@ export default function ProjectCarousel({ items }: { items?: Project[] }) {
                 height={960}
                 width={540}
               />
-              <div className="absolute border left-0 bottom-0 w-full bg-gradient-to-b from-transparent via-[#ffffff99] dark:via-[#00000099] via-50% to-[#ffffffcc] dark:to-[#000000cc] p-4 sm:px-6 sm:pb-4 pt-16 rounded-b-2xl flex max-sm:flex-col justify-between sm:items-end">
+              <div className="absolute left-0 bottom-0 w-full bg-gradient-to-b from-transparent via-[#ffffff99] dark:via-[#00000099] via-35% sm:via-50% to-[#ffffffcc] dark:to-[#000000cc] p-4 sm:px-6 sm:pb-4 pt-24 sm:pt-16 rounded-b-2xl flex max-sm:flex-col justify-between sm:items-end">
                 <div>
-                  <h1 className="text-3xl sm:text-6xl font-extrabold leading-none tracking-tight">
+                  <h1 className="text-2xl sm:text-6xl font-extrabold leading-none tracking-tight">
                     {project.title}
                   </h1>
 
@@ -82,7 +82,7 @@ export default function ProjectCarousel({ items }: { items?: Project[] }) {
                     <div className="flex gap-2 items-center">
                       <GitHubSvg className="w-4 h-4 fill-current" />
                       <a
-                        className="hover:underline text-red"
+                        className="hover:underline max-sm:text-xs max-sm:mt-1"
                         href={`https://github.com/${project.githubRepos![0]}`}
                         rel="noopener noreferrer"
                         target="_blank"
@@ -91,7 +91,9 @@ export default function ProjectCarousel({ items }: { items?: Project[] }) {
                       </a>
                     </div>
                   )}
-                  <p>{project.shortDesc}</p>
+                  <p className="max-sm:text-sm max-sm:mt-4">
+                    {project.shortDesc}
+                  </p>
                 </div>
                 <div className="max-md:hidden">
                   <ActionButton href={`/about/contact`}>

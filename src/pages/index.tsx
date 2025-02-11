@@ -146,7 +146,7 @@ export default function IndexPage(
           </Button>
         </div>
       </section>
-      <section className="from-foreground-50 to-foreground-200 border-gray-300 border-y-1 py-24">
+      <section className="bg-gradient-to-r from-foreground-50 to-foreground-200 border-gray-300 border-y-1 py-24">
         <Container id="about-us-in-short" className="relative">
           <div className="max-w-3xl sm:h-96">
             <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
@@ -168,7 +168,7 @@ export default function IndexPage(
           </div>
         </Container>
       </section>
-      <section className="border-b-1 py-24">
+      <section className="py-24">
         <Container>
           <div className="max-w-3xl">
             <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
@@ -180,7 +180,7 @@ export default function IndexPage(
       </section>
 
       {post && (
-        <section className="py-24 border-b-1">
+        <section className="py-24">
           <Container>
             <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
               {t('blogPromo.title')}
