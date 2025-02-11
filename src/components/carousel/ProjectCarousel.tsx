@@ -46,7 +46,7 @@ export default function ProjectCarousel({ items }: { items?: Project[] }) {
             >
               <Image
                 alt={`Image for ${project.title}`}
-                className="h-full w-full object-cover rounded-2xl absolute left-0 top-0"
+                className="max-sm:hidden h-full w-full object-cover rounded-2xl absolute left-0 top-0"
                 src={
                   project.mainImage
                     ? (urlForImage(project.mainImage)
@@ -57,6 +57,20 @@ export default function ProjectCarousel({ items }: { items?: Project[] }) {
                 }
                 height={540}
                 width={960}
+              />
+              <Image
+                alt={`Image for ${project.title}`}
+                className="sm:hidden h-full w-full object-cover rounded-2xl absolute left-0 top-0"
+                src={
+                  project.mobileMainImage
+                    ? (urlForImage(project.mobileMainImage)
+                        ?.width(1080)
+                        .height(1920)
+                        .url() ?? LaptopSuite)
+                    : LaptopSuite
+                }
+                height={960}
+                width={540}
               />
               {/* Gradient Overlay */}
               <div className="absolute left-0 bottom-0 w-full bg-gradient-to-b from-transparent to-60% to-[#ffffffaa] dark:to-[#000000aa] p-4 sm:px-6 sm:pb-4 pt-16 rounded-b-2xl flex max-sm:flex-col justify-between sm:items-end">
