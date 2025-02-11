@@ -18,6 +18,13 @@ export async function getProject(
   })
 }
 
+export async function getHomescrenProjects(
+  client: SanityClient,
+): Promise<Project[]> {
+  return await client.fetch(groq`
+    *[_type == "project" && defined(slug.current) && isShownOnHomePage == true]
+  `)
+}
 export const projectSlugsQuery = groq`
 *[_type == "project" && defined(slug.current)][].slug.current
 `
