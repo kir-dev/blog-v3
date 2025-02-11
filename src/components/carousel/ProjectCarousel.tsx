@@ -72,8 +72,7 @@ export default function ProjectCarousel({ items }: { items?: Project[] }) {
                 height={960}
                 width={540}
               />
-              {/* Gradient Overlay */}
-              <div className="absolute left-0 bottom-0 w-full bg-gradient-to-b from-transparent to-60% to-[#ffffffaa] dark:to-[#000000aa] p-4 sm:px-6 sm:pb-4 pt-16 rounded-b-2xl flex max-sm:flex-col justify-between sm:items-end">
+              <div className="absolute border left-0 bottom-0 w-full bg-gradient-to-b from-transparent via-[#ffffff99] dark:via-[#00000099] via-50% to-[#ffffffcc] dark:to-[#000000cc] p-4 sm:px-6 sm:pb-4 pt-16 rounded-b-2xl flex max-sm:flex-col justify-between sm:items-end">
                 <div>
                   <h1 className="text-3xl sm:text-6xl font-extrabold leading-none tracking-tight">
                     {project.title}
@@ -83,7 +82,7 @@ export default function ProjectCarousel({ items }: { items?: Project[] }) {
                     <div className="flex gap-2 items-center">
                       <GitHubSvg className="w-4 h-4 fill-current" />
                       <a
-                        className="hover:underline"
+                        className="hover:underline text-red"
                         href={`https://github.com/${project.githubRepos![0]}`}
                         rel="noopener noreferrer"
                         target="_blank"
@@ -94,9 +93,11 @@ export default function ProjectCarousel({ items }: { items?: Project[] }) {
                   )}
                   <p>{project.shortDesc}</p>
                 </div>
-                <ActionButton href={`/about/contact`}>
-                  {t('projectsPromo.action')}
-                </ActionButton>
+                <div className="max-md:hidden">
+                  <ActionButton href={`/about/contact`}>
+                    {t('projectsPromo.action')}
+                  </ActionButton>
+                </div>
               </div>
             </CarouselItem>
           ))}

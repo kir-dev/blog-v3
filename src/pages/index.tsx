@@ -20,7 +20,7 @@ import config from 'next-seo.config'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import {
-  getHomescrenProjects,
+  getHomescreenProjects,
   getLatestPost,
   getProjects,
   getSiteSection,
@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps<
     await getSiteSection(client, 'frontpage2', locale),
   ]
   const frontAlert = await getSiteSection(client, 'frontAlert', locale)
-  const highlightedProjects = await getHomescrenProjects(client)
+  const highlightedProjects = await getHomescreenProjects(client)
 
   return {
     props: {
@@ -146,7 +146,7 @@ export default function IndexPage(
           </Button>
         </div>
       </section>
-      <section className="py-8 bg-gradient-to-r from-zinc-400 dark:from-zinc-800 to-background">
+      <section className="from-foreground-50 to-foreground-200 border-gray-300 border-y-1 py-24">
         <Container id="about-us-in-short" className="relative">
           <div className="max-w-3xl sm:h-96">
             <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
@@ -168,7 +168,7 @@ export default function IndexPage(
           </div>
         </Container>
       </section>
-      <section className={'mt-36'}>
+      <section className="border-b-1 py-24">
         <Container>
           <div className="max-w-3xl">
             <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
@@ -180,7 +180,7 @@ export default function IndexPage(
       </section>
 
       {post && (
-        <section className="py-24">
+        <section className="py-24 border-b-1">
           <Container>
             <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
               {t('blogPromo.title')}

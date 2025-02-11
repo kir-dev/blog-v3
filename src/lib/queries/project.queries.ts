@@ -18,7 +18,7 @@ export async function getProject(
   })
 }
 
-export async function getHomescrenProjects(
+export async function getHomescreenProjects(
   client: SanityClient,
 ): Promise<Project[]> {
   return await client.fetch(groq`
