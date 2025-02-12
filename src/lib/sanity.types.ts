@@ -72,6 +72,8 @@ export interface Project {
   techStacks?: string[]
   homePageUrls?: string[]
   mainImage?: ImageAsset
+  mobileMainImage?: ImageAsset
+  isShownOnHomePage?: boolean
   body?: PortableTextBlock[]
   priority?: number
 }

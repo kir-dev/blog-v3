@@ -65,7 +65,10 @@ const config = {
           colors: {
             primary: {
               DEFAULT: '#f97316',
-              foreground: '#000000',
+              foreground: '#0a0a0a',
+            },
+            background: {
+              DEFAULT: '#f9f9f9',
             },
           },
         },
@@ -73,7 +76,10 @@ const config = {
           colors: {
             primary: {
               DEFAULT: '#ea580c',
-              foreground: '#ffffff',
+              foreground: '#f9f9f9',
+            },
+            background: {
+              DEFAULT: '#0a0a0a',
             },
           },
         },

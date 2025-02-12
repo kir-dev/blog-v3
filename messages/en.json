@@ -15,6 +15,10 @@
     "blogPromo": {
       "title": "Latest post from our blog"
     },
+    "projectsPromo" : {
+      "title": "Work on important projects like ...",
+      "action" : "How can I join?"
+    },
     "operations": {
       "title": "Way of working"
     }
