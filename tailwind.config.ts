@@ -6,9 +6,7 @@ const config = {
     './src/**/*.{js,ts,jsx,tsx,mdx}',
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
-  theme: {
-    extend: {},
-  },
+  theme: {},
   darkMode: 'class',
   plugins: [
     nextui({
@@ -17,7 +15,10 @@ const config = {
           colors: {
             primary: {
               DEFAULT: '#f97316',
-              foreground: '#000000',
+              foreground: '#0a0a0a',
+            },
+            background: {
+              DEFAULT: '#f9f9f9',
             },
           },
         },
@@ -25,7 +26,10 @@ const config = {
           colors: {
             primary: {
               DEFAULT: '#ea580c',
-              foreground: '#ffffff',
+              foreground: '#f9f9f9',
+            },
+            background: {
+              DEFAULT: '#0a0a0a',
             },
           },
         },

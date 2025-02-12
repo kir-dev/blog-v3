@@ -53,7 +53,7 @@ export const NavbarSitewide: FC<PropsWithChildren<Props>> = ({ routes }) => {
   }
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
+    <Navbar maxWidth="2xl" onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? t('closeMenu') : t('openMenu')}

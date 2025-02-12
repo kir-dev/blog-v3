@@ -75,6 +75,19 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'mobileMainImage',
+      title: 'Mobile main image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({
+      name: 'isShownOnHomePage',
+      title: 'Show on home page',
+      type: 'boolean',
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',

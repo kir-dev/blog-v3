@@ -19,10 +19,22 @@ import { useTranslations } from 'next-intl'
 import config from 'next-seo.config'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { getLatestPost, getSiteSection } from '~/lib/queries'
-import { Member, Post, SiteSection } from '~/lib/sanity.types'
+import {
+  getHomescreenProjects,
+  getLatestPost,
+  getProjects,
+  getSiteSection,
+} from '~/lib/queries'
+import { Member, Post, Project, SiteSection } from '~/lib/sanity.types'
 import { commonSerializer } from '~/utils/serializers/common.serializer'
 import LaptopSuite from '../components/svg/laptop-suite.svg'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from '~/components/carousel/carousel'
+import { urlForImage } from '~/lib/sanity.image'
+import ProjectCarousel from '~/components/carousel/ProjectCarousel'
 
 export const getStaticProps: GetStaticProps<
   SharedPageProps & {
@@ -30,6 +42,7 @@ export const getStaticProps: GetStaticProps<
     author?: Member
     frontSections?: (SiteSection | undefined)[]
     frontAlert?: SiteSection
+    highlightedProjects?: Project[]
   }
 > = async ({ draftMode = false, locale }) => {
   const client = getClient(draftMode ? { token: readToken } : undefined)
@@ -39,6 +52,7 @@ export const getStaticProps: GetStaticProps<
     await getSiteSection(client, 'frontpage2', locale),
   ]
   const frontAlert = await getSiteSection(client, 'frontAlert', locale)
+  const highlightedProjects = await getHomescreenProjects(client)
 
   return {
     props: {
@@ -48,6 +62,7 @@ export const getStaticProps: GetStaticProps<
       author,
       frontSections,
       frontAlert,
+      highlightedProjects,
       messages: (await import(`../../messages/${locale}.json`)).default,
     },
   }
@@ -56,8 +71,8 @@ export const getStaticProps: GetStaticProps<
 export default function IndexPage(
   props: InferGetStaticPropsType<typeof getStaticProps>,
 ) {
-  const { post, author, frontSections, frontAlert } = props
-
+  const { post, author, frontSections, frontAlert, highlightedProjects } = props
+  const client = getClient()
   const [alertShown, setAlertShown] = useState(false)
   const closeAlert = () => {
     localStorage.setItem(
@@ -153,6 +168,17 @@ export default function IndexPage(
           </div>
         </Container>
       </section>
+      <section className="py-24">
+        <Container>
+          <div className="max-w-3xl">
+            <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
+              {t('projectsPromo.title')}
+            </h2>
+          </div>
+        </Container>
+        <ProjectCarousel items={highlightedProjects} />
+      </section>
+
       {post && (
         <section className="py-24">
           <Container>
