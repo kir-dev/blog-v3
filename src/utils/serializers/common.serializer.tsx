@@ -49,6 +49,7 @@ export const commonSerializer = {
       return (
         <Link
           href={isInternal ? `${url.pathname}${url.hash}` : value?.href}
+          target={isInternal ? undefined : '_blank'}
           className="relative inline-flex items-center tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 text-primary no-underline hover:opacity-80 active:opacity-disabled transition-opacity"
         >
           {children}

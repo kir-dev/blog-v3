@@ -47,7 +47,7 @@ export const afszSerializer = {
     link: ({ value, children }) => {
       let href = ''
       let isInternal = true
-      if (!value?.href.startsWith('mailto')) {
+      if (value?.href.startsWith('mailto')) {
         href = value?.href
       } else {
         const url = new URL(value?.href)
@@ -57,6 +57,7 @@ export const afszSerializer = {
       return (
         <Link
           href={href}
+          target={isInternal ? undefined : '_blank'}
           className="relative inline-flex items-center tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 text-primary no-underline hover:opacity-80 active:opacity-disabled transition-opacity"
         >
           {children}
