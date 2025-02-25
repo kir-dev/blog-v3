@@ -1,5 +1,5 @@
-import { Link } from '@nextui-org/react'
 import { PortableTextReactComponents } from '@portabletext/react'
+import Link from 'next/link'
 
 export const paddingCalculator = (style: 'h2' | 'h3' | 'h4') => {
   switch (style) {
@@ -20,7 +20,10 @@ export const tocSerializer = {
       const { style, _key, children } = value
       return /^h\d/.test(style ?? 'normal') ? (
         <li className={paddingCalculator(style)}>
-          <Link href={`#h${_key}`}>
+          <Link
+            href={`#h${_key}`}
+            className="relative inline-flex items-center tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 text-primary no-underline hover:opacity-80 active:opacity-disabled transition-opacity"
+          >
             {children.map((child) => child.text).join('')}
           </Link>
         </li>
