@@ -1,6 +1,6 @@
-import { Link as UiLink } from '@nextui-org/react'
 import { PortableTextReactComponents } from '@portabletext/react'
 import config from 'next-seo.config'
+import Link from 'next/link'
 import { PortableActionButton } from '~/components/ActionButton'
 import PostCodeBlock from '~/components/post-components/PostCodeBlock'
 import PostImage from '~/components/post-components/PostImage'
@@ -47,7 +47,7 @@ export const afszSerializer = {
     link: ({ value, children }) => {
       let href = ''
       let isInternal = true
-      if (!value?.href.startsWith('mailto')) {
+      if (value?.href.startsWith('mailto')) {
         href = value?.href
       } else {
         const url = new URL(value?.href)
@@ -55,13 +55,13 @@ export const afszSerializer = {
         href = isInternal ? `${url.pathname}${url.hash}` : value?.href
       }
       return (
-        <UiLink
+        <Link
           href={href}
-          isExternal={!isInternal}
-          showAnchorIcon={!isInternal}
+          target={isInternal ? undefined : '_blank'}
+          className="relative inline-flex items-center tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 text-primary no-underline hover:opacity-80 active:opacity-disabled transition-opacity"
         >
           {children}
-        </UiLink>
+        </Link>
       )
     },
     strong: ({ children }) => (
