@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { environment } from '~/utils/environment'
 
 import { useTranslations } from 'next-intl'
+import NextLink from 'next/link'
 import Container from './Container'
 import { FacebookSvg } from './svg-components/FacebookSvg'
 import { GitHubSvg } from './svg-components/GitHubSvg'
@@ -103,9 +104,12 @@ export default function Footer() {
                 })}
               </p>
               <p>
-                <Link className="text-sm" href="/about/contact">
+                <NextLink
+                  href="/about/contact"
+                  className="relative inline-flex items-center tap-highlight-transparent outline-none data-[focus-visible=true]:z-10 data-[focus-visible=true]:outline-2 data-[focus-visible=true]:outline-focus data-[focus-visible=true]:outline-offset-2 text-primary no-underline hover:opacity-80 active:opacity-disabled transition-opacity text-sm"
+                >
                   {t('contact')}
-                </Link>
+                </NextLink>
               </p>
               <p>Kir-Dev &copy; {new Date().getFullYear()}</p>
             </div>
