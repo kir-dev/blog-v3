@@ -8974,20 +8974,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron-to-chromium@npm:^1.4.668":
-  version: 1.4.715
-  resolution: "electron-to-chromium@npm:1.4.715"
-  checksum: 10c0/6c49b7f3ad41b9f0ecd36cc564333d238a4b7ab51c4928d6e19f25d1e3d2aa9311428fb6e45f02823eb05792acc584513f7cea0dbd27b0758de5f21c2142126b
-  languageName: node
-  linkType: hard
-
-"electron-to-chromium@npm:^1.5.4":
-  version: 1.5.18
-  resolution: "electron-to-chromium@npm:1.5.18"
-  checksum: 10c0/2c553c4e7618e887398af0fb7ddd8055beb69d37a810ad73fcea0f3e9027f1fc879ef280151fb6bae8e5b961f5597452eafc1ae5a0adca5bd49211545a34afe7
-  languageName: node
-  linkType: hard
-
 "embla-carousel-auto-scroll@npm:^8.5.2":
   version: 8.5.2
   resolution: "embla-carousel-auto-scroll@npm:8.5.2"
@@ -14352,6 +14338,8 @@ __metadata:
     "@types/react": "npm:18.3.5"
     "@types/refractor": "npm:3.4.1"
     autoprefixer: "npm:10.4.20"
+    class-variance-authority: "npm:^0.7.0"
+    clsx: "npm:^2.1.1"
     embla-carousel-auto-scroll: "npm:^8.5.2"
     embla-carousel-autoplay: "npm:^8.5.2"
     embla-carousel-react: "npm:^8.5.2"
