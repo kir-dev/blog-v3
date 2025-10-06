@@ -33,7 +33,7 @@ const sillyButtonMessages = [
 ]
 
 function getFlintstoneMessage(counter: number) {
-  const index = Math.floor(counter / 20) % sillyButtonMessages.length
+  const index = Math.floor(counter / 10) % sillyButtonMessages.length
   return sillyButtonMessages[index]
 }
 
@@ -70,7 +70,7 @@ export default function Component() {
             className="flex items-center space-x-2 cursor-pointer"
             onClick={() =>
               console.log(
-                'https://kir-dev.hu/members ritka. Talán ott rejlik a kőkód titka...',
+                'https://kir-dev.hu/hu/about/members ritka. Talán ott rejlik a kőkód titka...',
               )
             }
           >
