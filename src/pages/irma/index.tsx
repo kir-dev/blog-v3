@@ -44,7 +44,7 @@ export default function Component() {
   const [counter, setCounter] = useState<number>(0)
 
   useEffect(() => {
-    console.log('Yabba-dabba-doo! Nézz csak a konzolba, kőkorszaki barátom!')
+    console.log('Pattints a magasba, ne legyél mihaszna!')
   }, [])
 
   function onSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -58,7 +58,7 @@ export default function Component() {
       setCode('')
       return
     } else {
-      router.push('/bedrock/kodfejto')
+      router.push('/irma/qo3tefjbw9')
     }
   }
 
