@@ -58,7 +58,7 @@ export default function Component() {
       setCode('')
       return
     } else {
-      router.push('/irma/qo3tefjbw9')
+      router.push('/medvemut/qo3tefjbw9')
     }
   }
 
