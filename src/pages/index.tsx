@@ -149,7 +149,7 @@ export default function IndexPage(
             variant="bordered"
             startContent={<GitHubSvg className="h-3 w-3 fill-current" />}
           >
-            GitHub
+            GitHub portfolio
           </Button>
         </div>
       </section>
