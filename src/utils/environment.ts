@@ -11,4 +11,5 @@ export const environment = {
     publicEmail: 'hello [kukac] kir-dev.hu',
   },
   rickrollUrl: 'https://youtu.be/HtaZuzmDHuI',
+  coursesSiteUrl: 'https://tanfolyam.kir-dev.hu',
 }

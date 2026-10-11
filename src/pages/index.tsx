@@ -133,6 +133,13 @@ export default function IndexPage(
         </h1>
         <Terminal />
         <div className="flex flex-row gap-4 mt-6">
+          <Button
+            as="a"
+            href={environment.socials.coursesSiteUrl}
+            variant="bordered"
+          >
+            {environment.socials.coursesSiteUrl.replace(/^https?\:\/\//i, "")}
+          </Button>
           <Button color="primary" onClick={() => router.push('/about/contact')}>
             {t('joinUs')}
           </Button>
