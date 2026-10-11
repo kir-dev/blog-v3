@@ -132,7 +132,7 @@ export default function IndexPage(
           {t('mainTitle')}
         </h1>
         <Terminal />
-        <div className="flex flex-row gap-4 mt-6">
+        <div className="flex flex-row flex-wrap justify-center gap-4 mt-6">
           <Button
             as="a"
             href={environment.coursesSiteUrl}
