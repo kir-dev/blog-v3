@@ -132,7 +132,14 @@ export default function IndexPage(
           {t('mainTitle')}
         </h1>
         <Terminal />
-        <div className="flex flex-row gap-4 mt-6">
+        <div className="flex flex-row flex-wrap justify-center gap-4 mt-6">
+          <Button
+            as="a"
+            href={environment.coursesSiteUrl}
+            variant="bordered"
+          >
+            {environment.coursesSiteUrl.replace(/^https?\:\/\//i, "")}
+          </Button>
           <Button color="primary" onClick={() => router.push('/about/contact')}>
             {t('joinUs')}
           </Button>
@@ -142,7 +149,7 @@ export default function IndexPage(
             variant="bordered"
             startContent={<GitHubSvg className="h-3 w-3 fill-current" />}
           >
-            GitHub
+            GitHub portfolio
           </Button>
         </div>
       </section>
