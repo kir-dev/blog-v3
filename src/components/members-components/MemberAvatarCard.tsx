@@ -40,7 +40,7 @@ export const MemberAvatarCard: FC<Props> = ({ member }) => {
       onMouseEnter={onOverlayEnter}
       onMouseLeave={onOverlayLeave}
     >
-      {showAvatar ? (
+      {showAvatar || !avatarUrl ? (
         <div className="w-full h-[180px] sm:h-[300px] justify-center items-center flex">
           <Avatar
             size="lg"
