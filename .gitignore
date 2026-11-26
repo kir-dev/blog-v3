@@ -27,6 +27,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
+# local uploads (when S3 is not configured)
+/media
+
 # local env files
 .env*.local
 
