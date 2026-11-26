@@ -6,7 +6,7 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: blog
+      POSTGRES_DB: kir-dev-hu
     volumes:
       - postgres:/var/lib/postgresql/data
 

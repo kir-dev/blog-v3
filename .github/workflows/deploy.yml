@@ -20,7 +20,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository_owner }}/blog-v3
+          images: ghcr.io/${{ github.repository_owner }}/kir-dev.hu
           tags: |
             # Tag the Docker image using a version created from the GitHub action run number.
             # Using the Git hash as the tag does not work because Renovate does not know how to find the latest version.
@@ -78,6 +78,6 @@ jobs:
         with:
           node-version: "24"
 
-      - run: bun run renovate blog
+      - run: bun run renovate kir-dev.hu
         env:
           RENOVATE_TOKEN: ${{ secrets.KIR_DEV_BOT_PAT }}
