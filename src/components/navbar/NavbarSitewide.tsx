@@ -110,7 +110,7 @@ export const NavbarSitewide: FC = () => {
                         className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm hover:bg-default/60 transition-colors"
                       >
                         {subRoute.icon ? (
-                          <subRoute.icon className="h-4 w-4 text-primary shrink-0" />
+                          <subRoute.icon className="h-4 w-4 shrink-0" />
                         ) : (
                           <ChevronRightIcon className="h-4 w-4 shrink-0" />
                         )}
@@ -169,7 +169,7 @@ export const NavbarSitewide: FC = () => {
                 className="flex items-center gap-3 py-1.5 text-lg hover:text-primary transition-colors"
               >
                 {item.icon ? (
-                  <item.icon className="h-5 w-5 text-primary" />
+                  <item.icon className="h-5 w-5" />
                 ) : (
                   <ChevronRightIcon className="h-5 w-5" />
                 )}

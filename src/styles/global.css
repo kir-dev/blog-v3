@@ -15,6 +15,9 @@
   --color-foreground-500: 113 113 122;
   --color-primary: 249 115 22;
   --color-primary-foreground: 10 10 10;
+  --color-primary-300: 212.24 92.45% 68.82%;
+  --color-primary-400: 212.14 92.45% 58.43%;
+  --color-primary-500: 212.02 100% 46.67%;
   --color-default: 228 228 231;
 }
 
@@ -29,6 +32,9 @@
   --color-foreground-500: 161 161 170;
   --color-primary: 234 88 12;
   --color-primary-foreground: 249 249 249;
+  --color-primary-300: 212.14 100% 38.43%;
+  --color-primary-400: 212.02 100% 46.67%;
+  --color-primary-500: 212.14 92.45% 58.43%;
   --color-default: 63 63 70;
 }
 

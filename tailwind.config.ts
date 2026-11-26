@@ -24,9 +24,9 @@ const config: Config = {
         primary: {
           DEFAULT: 'rgb(var(--color-primary) / <alpha-value>)',
           foreground: 'rgb(var(--color-primary-foreground) / <alpha-value>)',
-          300: '#fdba74',
-          400: '#fb923c',
-          500: '#f97316',
+          300: 'hsl(var(--color-primary-300) / <alpha-value>)',
+          400: 'hsl(var(--color-primary-400) / <alpha-value>)',
+          500: 'hsl(var(--color-primary-500) / <alpha-value>)',
         },
         secondary: {
           DEFAULT: '#9353d3',
