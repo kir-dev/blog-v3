@@ -1,3 +1,5 @@
+'use client'
+
 import {
   ChatBubbleBottomCenterTextIcon,
   ComputerDesktopIcon,
@@ -9,9 +11,9 @@ import {
   UsersIcon,
   VideoCameraSlashIcon,
 } from '@heroicons/react/24/solid'
-import { Badge, Button } from '@nextui-org/react'
 import { useTranslations } from 'next-intl'
 import { FC, useState } from 'react'
+import { Badge } from '~/components/ui/Badge'
 
 const classNameGray = 'bg-neutral-500 hover:bg-neutral-800'
 const classNameRed = 'bg-red-500 hover:bg-red-600'
@@ -69,9 +71,7 @@ export const MeetingControls: FC<Props> = ({ numberOfActives }) => {
   return (
     <div
       className={
-        `${
-          showControls ? 'grid' : 'hidden'
-        } md:grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ` +
+        `${showControls ? 'grid' : 'hidden'} md:grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ` +
         `z-20 bottom-0 left-0 fixed items-center sm:relative w-full ` +
         `bg-background sm:bg-none py-4 px-1 md:px-10 sm:my-10 sm:rounded-lg`
       }
@@ -83,12 +83,11 @@ export const MeetingControls: FC<Props> = ({ numberOfActives }) => {
         {actionIcons
           .filter((a) => a.align === 'center')
           .map((a) => (
-            <Button
+            <button
               key={a.key}
-              size="sm"
-              isIconOnly
+              type="button"
               aria-label={t('nonFuncButton')}
-              className={'rounded-full p-0 h-12 w-12 ' + a.className}
+              className={`inline-flex items-center justify-center rounded-full p-0 h-12 w-12 transition-colors ${a.className}`}
               onClick={
                 a.icon === PhoneXMarkIcon
                   ? () => setShowControls(false)
@@ -96,7 +95,7 @@ export const MeetingControls: FC<Props> = ({ numberOfActives }) => {
               }
             >
               <a.icon className="h-5 w-5 text-gray-50" />
-            </Button>
+            </button>
           ))}
       </div>
       <div className="flex-row gap-2 justify-self-end hidden md:flex">
@@ -104,16 +103,14 @@ export const MeetingControls: FC<Props> = ({ numberOfActives }) => {
           .filter((a) => a.align === 'right')
           .map((a) => {
             const button = (
-              <Button
+              <button
                 key={a.showBadge ? undefined : a.key}
-                size="sm"
-                variant="light"
-                isIconOnly
+                type="button"
                 aria-label={t('nonFuncButton')}
-                className={a.className}
+                className={`inline-flex items-center justify-center h-9 w-9 rounded-lg hover:bg-default/50 transition-colors ${a.className ?? ''}`}
               >
                 <a.icon className="h-5 w-5" />
-              </Button>
+              </button>
             )
             return a.showBadge ? (
               <Badge color="default" content={numberOfActives} key={a.key}>

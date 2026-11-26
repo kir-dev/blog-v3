@@ -1,28 +1,27 @@
-import { PortableTextComponent } from '@portabletext/react'
 import Image from 'next/image'
-import { Image as SanityImage } from 'sanity'
+import React from 'react'
+import { getMediaDimensions, getMediaUrl, type MediaLike } from '~/lib/media'
 
-import { urlForImage } from '~/lib/sanity.image'
-
-interface ImageBlock extends SanityImage {
-  preferredWidth?: number
-  preferredHeight?: number
+interface Props {
+  media: MediaLike | number | string | null | undefined
+  alt?: string
 }
 
-const PostImage: PortableTextComponent<ImageBlock> = ({ value }) => {
-  const { preferredHeight, preferredWidth } = value
-  const [, , dimensions] =
-    /^image-([a-f\d]+)-(\d+x\d+)-(\w+)$/.exec(value.asset?._ref ?? '') ?? []
-  const [width, height] = dimensions?.split('x').map((v) => parseInt(v, 10))
-  const calculatedHeight = preferredHeight ?? height
-  const calculatedWidth = preferredWidth ?? width
+const PostImage: React.FC<Props> = ({ media, alt }) => {
+  const src = getMediaUrl(media)
+  if (!src) return null
+  const { width, height } = getMediaDimensions(media)
+  const resolvedAlt =
+    alt ??
+    (typeof media === 'object' && media?.alt ? media.alt : '')
+
   return (
     <Image
-      src={urlForImage(value)?.url() ?? ''}
-      height={calculatedHeight ?? 500}
-      width={calculatedWidth ?? 1000}
-      alt=""
-      className="object-contain max-w-full max-h-[75vh] py-4 mx-auto"
+      src={src}
+      height={height}
+      width={width}
+      alt={resolvedAlt}
+      className="object-contain max-w-full max-h-[75vh] py-4 mx-auto h-auto w-auto"
     />
   )
 }

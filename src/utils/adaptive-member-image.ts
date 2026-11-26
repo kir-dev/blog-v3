@@ -1,22 +1,22 @@
-import { urlForImage } from '~/lib/sanity.image'
-import { Member } from '~/lib/sanity.types'
+import { getMediaUrl } from '~/lib/media'
+import type { Member } from '~/payload-types'
 
 export const getAdaptiveImageUrl = (
   member: Member,
   overlayShown: boolean,
   theme?: string,
-) => {
+): string | undefined => {
   if (theme === 'dark') {
     return overlayShown && member.darkHoverImage
-      ? urlForImage(member.darkHoverImage)?.url()
-      : member.darkImage && urlForImage(member.darkImage)?.url()
+      ? getMediaUrl(member.darkHoverImage)
+      : getMediaUrl(member.darkImage) ?? getMediaUrl(member.mainImage)
   } else {
     return overlayShown
       ? member.hoverImage
-        ? urlForImage(member.hoverImage)?.url()
-        : member.darkHoverImage && urlForImage(member.darkHoverImage)?.url()
+        ? getMediaUrl(member.hoverImage)
+        : getMediaUrl(member.darkHoverImage)
       : member.mainImage
-        ? urlForImage(member.mainImage)?.url()
-        : member.darkImage && urlForImage(member.darkImage)?.url()
+        ? getMediaUrl(member.mainImage)
+        : getMediaUrl(member.darkImage)
   }
 }

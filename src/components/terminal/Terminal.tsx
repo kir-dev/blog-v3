@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-
-import { environment } from '~/utils/environment'
+'use client'
 
 import { useTranslations } from 'next-intl'
+import React, { useEffect, useMemo, useState } from 'react'
+import { environment } from '~/utils/environment'
 import { LogoNoText } from '../svg-components/LogoNoText'
 import { Line } from './helpers/Line'
 import { Frame, Keyframes } from './react-keyframes'
@@ -12,10 +12,25 @@ const getTypingDuration = () => 80 + 80 * (Math.random() - 0.5)
 
 export const Terminal: React.FC = () => {
   const [lineCount, setLineCount] = useState(0)
+  const [opacity, setOpacity] = useState(0)
   const t = useTranslations('Index')
 
+  const rand = useMemo(
+    () => ({
+      ms: 542,
+      modules: 148,
+    }),
+    [],
+  )
+
+  useEffect(() => {
+    if (lineCount >= 3) {
+      setOpacity(0.2)
+    }
+  }, [lineCount])
+
   const showLine = (text: string, name?: string) => {
-    const frames: JSX.Element[] = [
+    const frames: React.ReactElement[] = [
       <Frame key={`${text}-last`}>
         <Line name={name} text={text} noCaret noPrompt />
       </Frame>,
@@ -29,9 +44,8 @@ export const Terminal: React.FC = () => {
   }
 
   const emptyLine = () => {
-    const frames: JSX.Element[] = []
+    const frames: React.ReactElement[] = []
 
-    // cursor animation 10 times
     for (let i = 0; i < 10; i += 1) {
       frames.push(
         <Frame duration={sleepDuration} key={`${i}`}>
@@ -48,16 +62,14 @@ export const Terminal: React.FC = () => {
   }
 
   const renderLine = (text: string) => {
-    const frames: JSX.Element[] = []
+    const frames: React.ReactElement[] = []
 
-    // starting frame
     frames.push(
       <Frame duration={sleepDuration} key={`${text}-first`}>
         <Line />
       </Frame>,
     )
 
-    // typing out the line
     for (let i = 0; i < text.length; i += 1) {
       const isLastLetter = i === text.length - 1
       const duration = isLastLetter ? sleepDuration : getTypingDuration()
@@ -68,7 +80,6 @@ export const Terminal: React.FC = () => {
       )
     }
 
-    // ending frame
     frames.push(
       <Frame key={`${text}-last`}>
         <Line text={text} noCaret />
@@ -82,29 +93,16 @@ export const Terminal: React.FC = () => {
     )
   }
 
-  const rand = {
-    ms: Math.floor(Math.random() * 80) + 510,
-    modules: Math.floor(Math.random() * 80) + 110,
-  }
-  useEffect(() => {
-    if (lineCount >= 3) {
-      setOpacity(0.2)
-    }
-  }, [lineCount])
-  const [opacity, setOpacity] = useState(0)
-
   return (
     <div className="text-xs sm:text-sm md:text-base lg:text-md h-64 sm:h-80 lg:h-96 w-full max-w-md sm:max-w-full sm:w-[28rem] md:w-[32rem] lg:w-[36rem]">
       <div className='h-full border-1 rounded-lg border-foreground border-opacity-20 flex flex-col relative before:rounded-lg before:z-0 before:block before:absolute before:w-full before:h-full before:content-[""] before:bg-foreground before:opacity-5'>
-        <div
-          className={
-            'flex flex-row items-center z-10 rounded-t-lg' /* + "border-b-1 border-foreground border-opacity-20 bg-foreground bg-opacity-5" */
-          }
-        >
+        <div className="flex flex-row items-center z-10 rounded-t-lg">
           <div className="flex flex-row flex-1 ml-1 py-3">
             <a
               href={environment.rickrollUrl}
               target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Terminal close button"
               className="w-2 sm:w-3 lg:w-4 h-2 sm:h-3 lg:h-4 ml-1 sm:ml-1.5 lg:ml-2 rounded-full bg-orange-600"
             />
             <div className="w-2 sm:w-3 lg:w-4 h-2 sm:h-3 lg:h-4 ml-1 sm:ml-1.5 lg:ml-2 rounded-full bg-yellow-400" />
@@ -130,7 +128,7 @@ export const Terminal: React.FC = () => {
         </div>
         {opacity > 0 && (
           <div
-            className={`h-48 absolute end-1 bottom-1 transition-opacity`}
+            className="h-48 absolute end-1 bottom-1 transition-opacity"
             style={{ opacity }}
           >
             <LogoNoText className="h-full" />
