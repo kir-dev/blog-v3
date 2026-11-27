@@ -41,7 +41,7 @@ jobs:
             # Tag the Docker image using a version created from the GitHub action run number.
             # Using the Git hash as the tag does not work because Renovate does not know how to find the latest version.
             # Using just :latest with a @sha256:IMAGE_HASH does not work as digest updates do not add a GitHub diff link to the Renovate PR.
-            type=raw,value=v0.0.${{ github.run_number }}
+            type=raw,value=v4.0.${{ github.run_number }}
             type=raw,value=latest
             type=sha,format=long
 
@@ -68,7 +68,7 @@ jobs:
       # Renovate needs a Git tag to show a GitHub diff link
       - name: Create Git tag
         run: |
-          TAG_NAME="v0.0.${{ github.run_number }}"
+          TAG_NAME="v4.0.${{ github.run_number }}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git tag "$TAG_NAME"
