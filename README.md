@@ -58,7 +58,3 @@ yarn migrate:from-sanity --file /path/to/production.ndjson
 ## Deployment
 
 Pushing to `main` builds and pushes `ghcr.io/kir-dev/kir-dev.hu` via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) and triggers Renovate in [`kir-dev/k8s`](https://github.com/kir-dev/k8s) to update the `kir-dev.hu` deployment.
-
-## Attributions
-
-- Frontpage laptop illustration by [Fili Santillán](https://unsplash.com/@filisantillan) on Unsplash
