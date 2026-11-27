@@ -1,6 +1,6 @@
-# Kir-Dev blog v3
+# kir-dev.hu
 
-The website and blog of [Kir-Dev](https://kir-dev.hu/), the web development group at the Schönherz Dormitory BME VIK. Built with [Next.js](https://nextjs.org/) and [PayloadCMS](https://payloadcms.com/).
+The website of [Kir-Dev](https://kir-dev.hu/), a web development group at the Schönherz Dormitory of BME VIK. Built with [Next.js](https://nextjs.org/) and [PayloadCMS](https://payloadcms.com/).
 
 ## Local development
 
