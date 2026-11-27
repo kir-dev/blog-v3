@@ -1,6 +1,6 @@
 # Kir-Dev blog v3
 
-The website and blog of [Kir-Dev](https://kir-dev.hu/), the web development student organization at BME VIK Schönherz Dormitory. Built with [Next.js 15](https://nextjs.org/) (App Router) and [PayloadCMS v3](https://payloadcms.com/) backed by PostgreSQL and S3/Garage media storage, deployed on Kir-Dev's Kubernetes cluster (`kir-dev/k8s`).
+The website and blog of [Kir-Dev](https://kir-dev.hu/), the web development group at the Schönherz Dormitory BME VIK. Built with [Next.js](https://nextjs.org/) and [PayloadCMS](https://payloadcms.com/).
 
 ## Local development
 
