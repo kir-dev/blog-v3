@@ -2,8 +2,7 @@ name: Deploy
 
 on:
   push:
-    # TODO: remove feature/migrate-sanity-to-payloadcms before merging to main
-    branches: [ main, feature/migrate-sanity-to-payloadcms ]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
