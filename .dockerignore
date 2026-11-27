@@ -1,0 +1,11 @@
+.git
+.gitignore
+.next
+node_modules
+media
+.env
+.env.*
+!.env.example
+README.md
+docker-compose.yml
+*.tsbuildinfo

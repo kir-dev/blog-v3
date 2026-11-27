@@ -4,9 +4,43 @@
 
 @import './custom-container.css';
 
+:root {
+  --color-background: 249 249 249;
+  --color-foreground: 17 24 28;
+  --color-foreground-50: 250 250 250;
+  --color-foreground-100: 244 244 245;
+  --color-foreground-200: 228 228 231;
+  --color-foreground-300: 212 212 216;
+  --color-foreground-400: 161 161 170;
+  --color-foreground-500: 113 113 122;
+  --color-primary: 249 115 22;
+  --color-primary-foreground: 10 10 10;
+  --color-primary-300: 212.24 92.45% 68.82%;
+  --color-primary-400: 212.14 92.45% 58.43%;
+  --color-primary-500: 212.02 100% 46.67%;
+  --color-default: 228 228 231;
+}
+
+.dark {
+  --color-background: 10 10 10;
+  --color-foreground: 236 237 238;
+  --color-foreground-50: 24 24 27;
+  --color-foreground-100: 39 39 42;
+  --color-foreground-200: 63 63 70;
+  --color-foreground-300: 82 82 91;
+  --color-foreground-400: 113 113 122;
+  --color-foreground-500: 161 161 170;
+  --color-primary: 234 88 12;
+  --color-primary-foreground: 249 249 249;
+  --color-primary-300: 212.14 100% 38.43%;
+  --color-primary-400: 212.02 100% 46.67%;
+  --color-primary-500: 212.14 92.45% 58.43%;
+  --color-default: 63 63 70;
+}
+
 @layer base {
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
   }
 
   svg.kir-dev-svg path {
@@ -59,6 +93,7 @@ html {
     }
   }
 }
+
 .custom-list ul {
   padding-left: 10px;
 }

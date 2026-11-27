@@ -1,13 +1,13 @@
 import { ArrowRightIcon } from '@heroicons/react/24/solid'
-import { PortableTextComponent } from '@portabletext/react'
-import Link from 'next/link'
-import { FC, PropsWithChildren } from 'react'
+import React, { FC, PropsWithChildren } from 'react'
+import { Link } from '~/i18n/navigation'
+import { cn } from '~/lib/cn'
 
 interface Props {
   href: string
   newTab?: boolean
   className?: string
-  icon?: JSX.Element
+  icon?: React.ReactNode
 }
 
 const ActionButton: FC<PropsWithChildren<Props>> = ({
@@ -16,39 +16,45 @@ const ActionButton: FC<PropsWithChildren<Props>> = ({
   newTab,
   className,
   icon,
-}) => (
-  <Link href={href} target={newTab ? '_blank' : '_self'}>
+}) => {
+  const isExternal =
+    href.startsWith('http://') ||
+    href.startsWith('https://') ||
+    href.startsWith('mailto:') ||
+    href.startsWith('#')
+
+  const inner = (
     <div
-      className={
-        `h-14 w-auto cursor-pointer ` +
-        `inline-flex flex-row gap-3 items-center font-bold text-decoration-none relative ` +
-        `after:content-[""] after:block after:absolute after:h-1 after:left-0 after:right-0 after:bottom-2 after:bg-primary after:transition-left ` +
-        `hover:text-primary hover:after:left-full duration-100 hover:duration-100` +
-        className
-      }
+      className={cn(
+        'h-14 w-auto cursor-pointer',
+        'inline-flex flex-row gap-3 items-center font-bold no-underline relative',
+        'after:content-[""] after:block after:absolute after:h-1 after:left-0 after:right-0 after:bottom-2 after:bg-primary after:transition-left',
+        'hover:text-primary hover:after:left-full duration-100 hover:duration-100',
+        className,
+      )}
     >
       {children}
       {icon ?? <ArrowRightIcon className="h-4 w-4" />}
     </div>
-  </Link>
-)
+  )
+
+  if (isExternal) {
+    return (
+      <a
+        href={href}
+        target={newTab ? '_blank' : undefined}
+        rel={newTab ? 'noopener noreferrer' : undefined}
+      >
+        {inner}
+      </a>
+    )
+  }
+
+  return (
+    <Link href={href} target={newTab ? '_blank' : undefined}>
+      {inner}
+    </Link>
+  )
+}
 
 export default ActionButton
-
-interface PortableProps {
-  text: string
-  href: string
-}
-
-export const PortableActionButton: PortableTextComponent<PortableProps> = ({
-  value,
-}) => {
-  const { text, href } = value
-  return href ? (
-    <div>
-      <ActionButton href={href} newTab={href.startsWith('http')}>
-        {text}
-      </ActionButton>
-    </div>
-  ) : null
-}
