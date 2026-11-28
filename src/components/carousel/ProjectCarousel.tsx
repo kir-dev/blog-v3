@@ -21,7 +21,7 @@ export default function ProjectCarousel({ items }: { items?: Project[] }) {
 
   return (
     <Carousel
-      className="max-sm:px-4 max-lg:px-12 my-8 w-full"
+      className="max-sm:px-4 max-lg:px-12 my-4 w-full"
       opts={{
         loop: true,
         dragFree: false,

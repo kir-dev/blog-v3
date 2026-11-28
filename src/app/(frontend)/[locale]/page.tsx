@@ -103,7 +103,7 @@ export default async function IndexPage({
       <section className="py-24">
         <Container>
           <div className="max-w-3xl">
-            <h2 className="mb-8 text-3xl font-extrabold leading-none tracking-tight">
+            <h2 className="mb-4 text-3xl font-extrabold leading-none tracking-tight">
               {t('projectsPromo.title')}
             </h2>
           </div>
