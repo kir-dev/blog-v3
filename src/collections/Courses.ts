@@ -74,15 +74,5 @@ export const Courses: CollectionConfig = {
         },
       ],
     },
-    {
-      name: 'sanityId',
-      type: 'text',
-      unique: true,
-      index: true,
-      admin: {
-        hidden: true,
-        readOnly: true,
-      },
-    },
   ],
 }
