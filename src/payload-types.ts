@@ -160,7 +160,6 @@ export interface User {
 export interface Media {
   id: number;
   alt?: string | null;
-  sanityAssetId?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -212,7 +211,6 @@ export interface Post {
     };
     [k: string]: unknown;
   } | null;
-  sanityId?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -245,7 +243,6 @@ export interface Member {
   hoverImage?: (number | null) | Media;
   darkImage?: (number | null) | Media;
   darkHoverImage?: (number | null) | Media;
-  sanityId?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -299,7 +296,6 @@ export interface Project {
     };
     [k: string]: unknown;
   } | null;
-  sanityId?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -348,7 +344,6 @@ export interface Course {
         id?: string | null;
       }[]
     | null;
-  sanityId?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -522,7 +517,6 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
-  sanityAssetId?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -550,7 +544,6 @@ export interface PostsSelect<T extends boolean = true> {
   mainImage?: T;
   hasToc?: T;
   body?: T;
-  sanityId?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -586,7 +579,6 @@ export interface ProjectsSelect<T extends boolean = true> {
   mobileMainImage?: T;
   isShownOnHomePage?: T;
   body?: T;
-  sanityId?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -605,7 +597,6 @@ export interface MembersSelect<T extends boolean = true> {
   hoverImage?: T;
   darkImage?: T;
   darkHoverImage?: T;
-  sanityId?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -633,7 +624,6 @@ export interface CoursesSelect<T extends boolean = true> {
         getIconName?: T;
         id?: T;
       };
-  sanityId?: T;
   updatedAt?: T;
   createdAt?: T;
 }

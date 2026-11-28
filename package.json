@@ -10,7 +10,6 @@
     "lint": "next lint",
     "migrate": "payload migrate --yes",
     "migrate:create": "payload migrate:create",
-    "migrate:from-sanity": "tsx scripts/migrate-from-sanity.ts",
     "migrate:status": "payload migrate:status",
     "payload": "payload",
     "start": "next start",
@@ -46,7 +45,6 @@
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
     "autoprefixer": "^10.4.20",
-    "cross-env": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "15.5.9",
     "postcss": "^8.4.49",
@@ -54,7 +52,6 @@
     "prettier-plugin-packagejson": "^2.5.10",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^3.4.17",
-    "tsx": "^4.19.3",
     "typescript": "^5.8.2"
   },
   "engines": {

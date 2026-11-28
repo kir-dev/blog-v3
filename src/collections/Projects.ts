@@ -118,15 +118,5 @@ export const Projects: CollectionConfig = {
       name: 'body',
       type: 'richText',
     },
-    {
-      name: 'sanityId',
-      type: 'text',
-      unique: true,
-      index: true,
-      admin: {
-        hidden: true,
-        readOnly: true,
-      },
-    },
   ],
 }

@@ -19,15 +19,5 @@ export const Media: CollectionConfig = {
       name: 'alt',
       type: 'text',
     },
-    {
-      name: 'sanityAssetId',
-      type: 'text',
-      unique: true,
-      index: true,
-      admin: {
-        hidden: true,
-        readOnly: true,
-      },
-    },
   ],
 }

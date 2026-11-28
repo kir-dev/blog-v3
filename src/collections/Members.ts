@@ -82,15 +82,5 @@ export const Members: CollectionConfig = {
       relationTo: 'media',
       label: 'Dark mode hover image',
     },
-    {
-      name: 'sanityId',
-      type: 'text',
-      unique: true,
-      index: true,
-      admin: {
-        hidden: true,
-        readOnly: true,
-      },
-    },
   ],
 }
