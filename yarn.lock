@@ -4493,15 +4493,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"embla-carousel-autoplay@npm:^8.5.2":
-  version: 8.5.2
-  resolution: "embla-carousel-autoplay@npm:8.5.2"
-  peerDependencies:
-    embla-carousel: 8.5.2
-  checksum: 10c0/e98d83ed1e0ceab0b8adb19b04146eb4b1cda0bd745db1ec76507c16d062b58261e0ba719211fe80c5a9c6e09a00577de7766388c9b1ab9b2f140012151fd085
-  languageName: node
-  linkType: hard
-
 "embla-carousel-react@npm:^8.5.2":
   version: 8.5.2
   resolution: "embla-carousel-react@npm:8.5.2"
@@ -6930,9 +6921,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kir-dev-blog-v3@workspace:.":
+"kir-dev.hu@workspace:.":
   version: 0.0.0-use.local
-  resolution: "kir-dev-blog-v3@workspace:."
+  resolution: "kir-dev.hu@workspace:."
   dependencies:
     "@heroicons/react": "npm:^2.2.0"
     "@payloadcms/db-postgres": "npm:3.67.0"
@@ -6947,7 +6938,6 @@ __metadata:
     autoprefixer: "npm:^10.4.20"
     clsx: "npm:^2.1.1"
     embla-carousel-auto-scroll: "npm:^8.5.2"
-    embla-carousel-autoplay: "npm:^8.5.2"
     embla-carousel-react: "npm:^8.5.2"
     eslint: "npm:^9"
     eslint-config-next: "npm:15.5.9"

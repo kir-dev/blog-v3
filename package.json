@@ -1,5 +1,5 @@
 {
-  "name": "kir-dev-blog-v3",
+  "name": "kir-dev.hu",
   "version": "0.1.0",
   "type": "module",
   "private": true,
@@ -26,7 +26,6 @@
     "@tailwindcss/typography": "^0.5.16",
     "clsx": "^2.1.1",
     "embla-carousel-auto-scroll": "^8.5.2",
-    "embla-carousel-autoplay": "^8.5.2",
     "embla-carousel-react": "^8.5.2",
     "graphql": "^16.8.1",
     "next": "15.5.9",
