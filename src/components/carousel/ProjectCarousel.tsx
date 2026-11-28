@@ -58,6 +58,7 @@ export default function ProjectCarousel({ items }: { items?: Project[] }) {
                     src={desktopSrc}
                     height={540}
                     width={960}
+                    sizes="(max-width: 1040px) 100vw, 1040px"
                   />
                   <Image
                     alt={`Image for ${project.title}`}
@@ -65,6 +66,7 @@ export default function ProjectCarousel({ items }: { items?: Project[] }) {
                     src={mobileSrc}
                     height={960}
                     width={540}
+                    sizes="272px"
                   />
                 </Link>
                 <div className="absolute left-0 bottom-0 w-full bg-gradient-to-b from-transparent via-[#ffffff99] dark:via-[#00000099] via-35% sm:via-50% to-[#ffffffcc] dark:to-[#000000cc] p-4 sm:px-6 sm:pb-4 pt-24 sm:pt-16 rounded-b-2xl flex max-sm:flex-col justify-between sm:items-end pointer-events-none">

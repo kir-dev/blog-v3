@@ -69,6 +69,7 @@ export default function PostPreviewFrontpage({ post, author }: Props) {
               src={imageSrc}
               height={700}
               width={1000}
+              sizes="(max-width: 640px) 100vw, 576px"
             />
           </Link>
           <div className="flex flex-row justify-between items-center mt-2">

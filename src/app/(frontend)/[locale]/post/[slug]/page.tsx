@@ -75,6 +75,7 @@ export default async function PostSlugPage({
             src={mainImageUrl}
             height={500}
             width={1000}
+            sizes="(max-width: 1280px) 100vw, 1280px"
             className="object-cover rounded-md w-full h-[50vh] mt-4"
             alt={post.title}
           />

@@ -35,6 +35,7 @@ const PostPreview: FC<
             src={imageSrc}
             height={300}
             width={500}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </Link>
         <div className="text-tiny text-foreground-500 text-end flex flex-row justify-between mt-2">

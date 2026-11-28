@@ -20,6 +20,7 @@ const PostImage: React.FC<Props> = ({ media, alt }) => {
       src={src}
       height={height}
       width={width}
+      sizes="(max-width: 1024px) 100vw, 960px"
       alt={resolvedAlt}
       className="object-contain max-w-full max-h-[75vh] py-4 mx-auto h-auto w-auto"
     />

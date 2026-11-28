@@ -1,5 +1,5 @@
+import Image from 'next/image'
 import React from 'react'
-import { cn } from '~/lib/cn'
 
 interface UserCardProps {
   name: string
@@ -18,10 +18,12 @@ export function UserCard({
     <div className="inline-flex items-center gap-2.5">
       <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full bg-default flex items-center justify-center text-xs font-semibold text-foreground">
         {avatarSrc ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             src={avatarSrc}
             alt={name}
+            width={32}
+            height={32}
+            sizes="32px"
             className="h-full w-full object-cover"
           />
         ) : (
