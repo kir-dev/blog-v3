@@ -76,6 +76,7 @@ export default function Footer() {
                 src={item.src}
                 width={item.w}
                 height={item.h}
+                sizes="160px"
                 alt={item.alt}
                 className="h-auto w-full"
               />

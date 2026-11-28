@@ -10,7 +10,8 @@ import LaptopSuite from '../svg/laptop-suite.svg'
 
 export default function ProjectPreview({ project }: { project: Project }) {
   const t = useTranslations()
-  const imageSrc = getMediaUrl(project.mainImage) ?? LaptopSuite
+  const mediaUrl = getMediaUrl(project.mainImage)
+  const imageSrc = mediaUrl ?? LaptopSuite
   const statusLabel = project.status
     ? t(`Projects.status.${project.status}`)
     : undefined
@@ -34,10 +35,11 @@ export default function ProjectPreview({ project }: { project: Project }) {
           <Link href={`/project/${project.slug}`} className="block w-full h-full">
             <Image
               alt={`Image for ${project.title}`}
-              className="z-0 w-full h-full object-contain rounded-lg cursor-pointer"
+              className={`z-0 w-full h-full ${mediaUrl ? 'object-cover' : 'object-contain'} rounded-lg cursor-pointer`}
               src={imageSrc}
               height={540}
               width={1280}
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             />
           </Link>
         </Badge>

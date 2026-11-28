@@ -15,7 +15,7 @@ const nextConfig: NextConfig = {
   output: 'standalone',
   outputFileTracingRoot: path.resolve(dirname),
   images: {
-    unoptimized: true,
+    minimumCacheTTL: 60 * 60 * 24 * 7,
     remotePatterns: [
       { hostname: 'betteruptime.com' },
       ...(mediaEndpoint

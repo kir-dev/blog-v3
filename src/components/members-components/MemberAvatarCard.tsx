@@ -54,6 +54,7 @@ export const MemberAvatarCard: FC<Props> = ({ member }) => {
           className="object-cover w-full h-full"
           height={500}
           width={500}
+          sizes="(max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 320px"
           src={avatarUrl}
           onError={onError}
         />
